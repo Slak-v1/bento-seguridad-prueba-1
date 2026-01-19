@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cámaras de Seguridad | BENTO</title>
+    <style>
+        :root { --primary: #2563eb; --dark: #0f172a; --card-bg: #1e293b; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--dark); color: white; }
+        
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: #020617; border-bottom: 1px solid #1e293b; }
+        .logo { font-size: 24px; font-weight: 800; color: white; text-decoration: none; }
+        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 14px; }
+
+        .header-section { text-align: center; padding: 60px 20px; background: linear-gradient(to bottom, #020617, #0f172a); }
+        
+        .container { padding: 40px 5%; max-width: 1200px; margin: auto; }
+        
+        /* Estilo de Marcas */
+        .brand-section { margin-bottom: 60px; }
+        .brand-title { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 30px; font-size: 28px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        
+        .product-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid #334155; transition: 0.3s; }
+        .product-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .product-info { padding: 20px; }
+        .product-info h4 { margin: 0 0 10px 0; color: var(--primary); }
+        .product-info p { font-size: 14px; color: #94a3b8; margin-bottom: 20px; }
+        
+        .btn-wpp { display: block; text-align: center; background: #25d366; color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">BENTO</a>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="alarmas.html">Alarmas</a>
+            <a href="camaras.html" style="color: white;">Cámaras</a>
+        </div>
+    </nav>
+
+    <header class="header-section">
+        <h1>Sistemas de Videovigilancia</h1>
+        <p>Elegí la tecnología que mejor se adapte a tu necesidad.</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="brand-section">
+            <h2 class="brand-title">Hikvision</h2>
+            <div class="grid">
+                <div class="product-card">
+                    <div class="product-info">
+                        <h4>Kit 4 Cámaras 1080p</h4>
+                        <p>Ideal para hogares. Incluye DVR, disco rígido y visión nocturna.</p>
+                        <a href="https://wa.me/549XXXXXXXXXX?text=Hola! Quiero consultar por el Kit Hikvision" class="btn-wpp">Consultar Precio</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-info">
+                        <h4>Cámaras IP Profesionales</h4>
+                        <p>Máxima resolución 4K y analíticas de inteligencia artificial.</p>
+                        <a href="https://wa.me/549XXXXXXXXXX" class="btn-wpp">Consultar Precio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="brand-section">
+            <h2 class="brand-title">Dahua</h2>
+            <div class="grid">
+                <div class="product-card">
+                    <div class="product-info">
+                        <h4>Domo Full Color</h4>
+                        <p>Imágenes a color incluso en total oscuridad. Full HD.</p>
+                        <a href="https://wa.me/549XXXXXXXXXX" class="btn-wpp">Consultar Precio</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-info">
+                        <h4>Sistemas Inalámbricos</h4>
+                        <p>Cámaras Dahua sin cables, fáciles de instalar y configurar.</p>
+                        <a href="https://wa.me/549XXXXXXXXXX" class="btn-wpp">Consultar Precio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="brand-section">
+            <h2 class="brand-title">EZVIZ (Cámaras WiFi)</h2>
+            <div class="grid">
+                <div class="product-card">
+                    <div class="product-info">
+                        <h4>Cámara Exterior 360°</h4>
+                        <p>Controlá todo desde el celular. Seguimiento inteligente.</p>
+                        <a href="https://wa.me/549XXXXXXXXXX" class="btn-wpp">Consultar Precio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 40px; color: #64748b;">
+        <p>© 2026 BENTO Seguridad | Cámaras y Alarmas</p>
+    </footer>
+
+</body>
+</html>
