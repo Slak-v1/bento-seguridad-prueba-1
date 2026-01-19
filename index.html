@@ -37,7 +37,7 @@
         }
 
         .logo img { 
-            height: 85px; /* Tamaño grande para que se lea bien el logo */
+            height: 85px; /* Tamaño ideal para que se lea todo el logo */
             width: auto; 
             transition: 0.3s;
             display: block;
@@ -98,7 +98,6 @@
             border: 1px solid var(--border); 
             overflow: hidden; 
             transition: 0.4s; 
-            display: block; /* Importante para el filtro */
         }
 
         .product-card:hover { 
@@ -139,7 +138,7 @@
 
         .btn-consultar:hover { background: var(--naranja); color: white; }
 
-        /* --- SECCIÓN SERVICIOS (FOOTER) --- */
+        /* --- SECCIÓN SERVICIOS / FOOTER --- */
         .footer-services {
             background: #0a0d12;
             padding: 60px 5%;
@@ -177,9 +176,11 @@
         }
         .wpp-fixed:hover { transform: scale(1.1); }
 
+        /* Adaptación para celulares */
         @media (max-width: 600px) {
-            .logo img { height: 60px; }
+            .logo img { height: 65px; }
             .nav-phone { font-size: 13px; }
+            .filter-container { justify-content: flex-start; }
         }
     </style>
 </head>
@@ -187,7 +188,7 @@
 
     <nav>
         <div class="logo">
-            <img src="logo.jpg.png" alt="BENTO Seguridad">
+            <img src="logo.jpg" alt="BENTO Seguridad">
         </div>
         <div class="nav-phone">CEL: 221 617-2384</div>
     </nav>
@@ -200,14 +201,14 @@
         <button class="cat-btn" data-filter="accesorios">Accesorios</button>
     </div>
 
-    <div class="grid">
+    <div class="grid" id="product-grid">
         <div class="product-card" data-category="camaras">
             <div class="img-placeholder">📷</div>
             <div class="info">
                 <span class="tag">Hikvision</span>
                 <h3>Bullet 2MP 1080p</h3>
                 <p>Cámara exterior con visión nocturna infrarroja de alta definición.</p>
-                <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar</a>
+                <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
             </div>
         </div>
 
@@ -216,8 +217,8 @@
             <div class="info">
                 <span class="tag">Alonso / Marshall</span>
                 <h3>Kit Central WiFi</h3>
-                <p>Sistema de alarma inteligente con notificaciones al celular.</p>
-                <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar</a>
+                <p>Sistema de alarma inteligente con notificaciones al celular en tiempo real.</p>
+                <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
             </div>
         </div>
 
@@ -227,7 +228,7 @@
                 <span class="tag">Dahua</span>
                 <h3>DVR 4 Canales</h3>
                 <p>Grabador digital con acceso remoto desde la App móvil.</p>
-                <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar</a>
+                <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
             </div>
         </div>
 
@@ -236,8 +237,8 @@
             <div class="info">
                 <span class="tag">Accesorios</span>
                 <h3>Fuente 12V 2A</h3>
-                <p>Fuente reforzada para cámaras de seguridad y tiras LED.</p>
-                <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar</a>
+                <p>Fuente reforzada ideal para cámaras de seguridad.</p>
+                <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
             </div>
         </div>
     </div>
@@ -246,15 +247,15 @@
         <div class="services-grid">
             <div class="service-item">
                 <h4>📍 Cobertura</h4>
-                <p>Instalaciones profesionales en La Plata, Berisso y Ensenada.</p>
+                <p>Servicio técnico e instalaciones en La Plata, Berisso y Ensenada.</p>
             </div>
             <div class="service-item">
                 <h4>🛡️ Garantía</h4>
-                <p>Todos nuestros equipos cuentan con garantía oficial y soporte técnico.</p>
+                <p>Todos nuestros equipos cuentan con garantía oficial.</p>
             </div>
             <div class="service-item">
                 <h4>📩 Contacto</h4>
-                <p>electronica091@gmail.com<br>Lunes a Sábado: 9:00 - 19:00</p>
+                <p>electronica091@gmail.com<br>WhatsApp: 221 617-2384</p>
             </div>
         </div>
         <p style="color: #475569; font-size: 12px; margin-top: 20px;">© 2026 BENTO Seguridad Electrónica</p>
@@ -270,11 +271,11 @@
 
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Cambiar botón activo
+                // Quitar clase active de otros y poner en el actual
                 buttons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Filtrar productos
+                // Filtrar según data-category
                 const filter = btn.getAttribute('data-filter');
                 cards.forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
