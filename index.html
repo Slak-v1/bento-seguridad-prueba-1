@@ -8,73 +8,76 @@
     <style>
         :root { 
             --naranja: #ff6600; 
-            --bg: #ffffff; /* FONDO BLANCO */
-            --card: #f8f9fa; /* GRIS MUY CLARITO PARA LAS TARJETAS */
-            --text: #05070a; /* TEXTO OSCURO */
-            --border: rgba(0,0,0,.08); 
+            --bg: #fdfdfd; 
+            --card: #ffffff; 
+            --text-principal: #334155; 
+            --text-secundario: #64748b;
+            --border-suave: #f1f5f9;
         }
         
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
         
         body { 
             margin: 0; 
             font-family: 'Lexend', sans-serif; 
             background: var(--bg); 
-            color: var(--text); 
+            color: var(--text-principal); 
         }
 
-        /* --- NAV --- */
+        /* --- NAV SUAVE --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 10px 5%; background: rgba(255,255,255,.95); 
-            border-bottom: 1px solid var(--border); 
-            backdrop-filter: blur(10px);
+            align-items: center; padding: 10px 5%; background: rgba(255,255,255,0.8); 
+            backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-suave); 
         }
-        .logo img { height: 60px; }
-        .nav-phone { color: var(--naranja); font-weight: 800; }
+        .logo img { height: 55px; filter: grayscale(0.2); }
+        .logo img:hover { filter: grayscale(0); }
+        .nav-phone { color: var(--text-secundario); font-weight: 600; font-size: 14px; }
 
-        /* --- FILTROS --- */
-        .filter-container { display: flex; gap: 10px; padding: 15px 5%; overflow-x: auto; }
+        /* --- FILTROS APAGADOS --- */
+        .filter-container { display: flex; gap: 8px; padding: 20px 5%; overflow-x: auto; scrollbar-width: none; }
+        .filter-container::-webkit-scrollbar { display: none; }
+        
         .cat-btn { 
-            flex: 0 0 auto; background: #eee; border: 1px solid transparent; 
-            color: #666; padding: 10px 16px; border-radius: 10px; font-weight: 600; cursor: pointer;
+            flex: 0 0 auto; background: #f8fafc; border: 1px solid var(--border-suave); 
+            color: var(--text-secundario); padding: 8px 18px; border-radius: 20px; 
+            font-weight: 300; cursor: pointer; font-size: 14px;
         }
-        .cat-btn.active { border-color: var(--naranja); color: var(--naranja); background: #fff; }
+        .cat-btn.active { background: var(--naranja); color: #fff; border-color: var(--naranja); font-weight: 600; }
 
         /* --- GRID --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; padding: 25px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 10px 5% 80px; }
         
         .product-card { 
             background: var(--card); 
-            border: 1px solid var(--border); 
-            border-radius: 18px; 
-            padding: 15px; 
+            border-radius: 24px; 
+            padding: 20px; 
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03); /* Sombra muy suave */
+            border: 1px solid var(--border-suave);
         }
-        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; background: #fff; margin-bottom: 10px; }
-        .product-card h3 { margin: 10px 0; color: #000; }
-        .product-card p { color: #555; font-size: 14px; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
         
+        .product-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 18px; margin-bottom: 15px; }
+        .product-card h3 { margin: 10px 0 5px; font-size: 18px; font-weight: 600; color: var(--text-principal); }
+        .product-card p { color: var(--text-secundario); font-size: 13px; margin-bottom: 20px; font-weight: 300; }
+        
+        /* BOTÓN MÁS DISCRETO */
         .btn-consultar { 
-            display: block; margin-top: 12px; background: #000; color: #fff; 
-            text-decoration: none; padding: 12px; border-radius: 10px; font-weight: 800; 
+            display: block; background: #f1f5f9; color: var(--text-principal); 
+            text-decoration: none; padding: 12px; border-radius: 15px; font-weight: 600; font-size: 14px;
         }
+        .btn-consultar:hover { background: var(--naranja); color: #fff; }
 
-        /* --- BOTÓN FLOTANTE WHATSAPP --- */
+        /* --- WSP FLOTANTE --- */
         .wsp-flotante {
-            position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px;
-            background-color: #25d366; color: #FFF; border-radius: 50px;
-            text-align: center; font-size: 35px; box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-            z-index: 2000; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; transition: transform 0.3s;
+            position: fixed; width: 55px; height: 55px; bottom: 30px; right: 30px;
+            background-color: #25d366; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); z-index: 2000;
         }
-        .wsp-flotante:hover { transform: scale(1.1); }
-        .wsp-flotante img { width: 35px; height: 35px; }
+        .wsp-flotante img { width: 28px; height: 28px; }
 
-        @media (max-width: 600px) {
-            .wsp-flotante { width: 55px; height: 55px; bottom: 15px; right: 15px; }
-        }
     </style>
 </head>
 <body>
@@ -87,7 +90,7 @@
   <div class="logo">
     <img src="logo.jpg" alt="BENTO">
   </div>
-  <div class="nav-phone">221 617-2384</div>
+  <div class="nav-phone">TEL: 221 617-2384</div>
 </nav>
 
 <div class="filter-container">
@@ -102,42 +105,35 @@
   <div class="product-card" data-category="alarmas">
     <img src="alarma-ajax-kit.jpg" alt="Alarma Ajax">
     <h3>Kit Alarma Ajax</h3>
-    <p>Alarma inteligente WiFi</p>
+    <p>Seguridad inteligente de alta gama</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="camaras">
     <img src="bullet2mp.jpg" alt="Camara">
     <h3>Cámara Bullet 2MP</h3>
-    <p>Visión nocturna HD</p>
+    <p>Visión nocturna optimizada</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="camaras">
     <img src="fullcolorbullet2mp.jpg" alt="Camara">
     <h3>Cámara Full Color</h3>
-    <p>Visión nocturna HD 24/7</p>
+    <p>Detalle cromático en total oscuridad</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="dvr">
     <img src="dvr8ch.jpg" alt="DVR">
     <h3>DVR 8 Canales</h3>
-    <p>Visión remota por App</p>
-    <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
-  </div>
-
-  <div class="product-card" data-category="dvr">
-    <img src="dvr.jpg" alt="DVR">
-    <h3>DVR 4 Canales</h3>
-    <p>Grabación Full HD</p>
+    <p>Monitoreo remoto en tiempo real</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="accesorios">
     <img src="disco.jpg" alt="Disco">
     <h3>Disco Rígido 1TB</h3>
-    <p>Especial para cámaras</p>
+    <p>Almacenamiento continuo grado CCTV</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 </div>
