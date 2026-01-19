@@ -6,42 +6,190 @@
     <title>BENTO | Seguridad Electrónica</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --naranja: #ff6600; --azul: #1a4f9c; --bg: #05070a; --card: #0f1217; --border: rgba(255,255,255,0.05); }
-        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg); color: white; }
+        :root { 
+            --naranja: #ff6600; 
+            --azul: #1a4f9c; 
+            --bg: #05070a; 
+            --card: #0f1217; 
+            --border: rgba(255,255,255,0.05); 
+        }
+
+        body { 
+            margin: 0; 
+            font-family: 'Lexend', sans-serif; 
+            background: var(--bg); 
+            color: white; 
+            line-height: 1.6;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 10px 5%; 
+            background: rgba(5,7,10,0.9); 
+            backdrop-filter: blur(15px); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            border-bottom: 1px solid var(--border); 
+        }
+
+        .logo img { 
+            height: 85px; /* Tamaño grande para que se lea bien el logo */
+            width: auto; 
+            transition: 0.3s;
+            display: block;
+        }
         
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: rgba(5,7,10,0.9); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
-        .logo img { height: 50px; }
-        
-        .filter-container { display: flex; justify-content: center; gap: 10px; padding: 30px 5%; overflow-x: auto; background: #0a0d12; border-bottom: 1px solid var(--border); }
-        
-        /* Ajuste para que los botones funcionen bien */
-        .cat-btn { background: var(--card); border: 1px solid var(--border); color: #94a3b8; padding: 12px 25px; border-radius: 12px; font-weight: 600; font-size: 14px; transition: 0.3s; cursor: pointer; font-family: 'Lexend', sans-serif; }
-        .cat-btn:hover, .cat-btn.active { border-color: var(--naranja); color: white; background: rgba(255,102,0,0.1); }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 40px 5%; max-width: 1400px; margin: auto; }
-        
-        .product-card { background: var(--card); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; transition: 0.4s; }
-        .product-card:hover { transform: translateY(-10px); border-color: var(--naranja); box-shadow: 0 10px 30px rgba(255,102,0,0.1); }
-        
-        .img-placeholder { width: 100%; aspect-ratio: 1/1; background: #111; display: flex; align-items: center; justify-content: center; font-size: 40px; }
-        
+        .logo img:hover { transform: scale(1.05); }
+
+        .nav-phone {
+            font-size: 16px; 
+            font-weight: 800; 
+            color: var(--naranja);
+            letter-spacing: 0.5px;
+        }
+
+        /* --- FILTROS --- */
+        .filter-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 12px; 
+            padding: 30px 5%; 
+            background: #0a0d12; 
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .cat-btn { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            color: #94a3b8; 
+            padding: 12px 25px; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            font-size: 14px; 
+            cursor: pointer; 
+            transition: 0.3s;
+            font-family: 'Lexend', sans-serif;
+        }
+
+        .cat-btn:hover, .cat-btn.active { 
+            border-color: var(--naranja); 
+            color: white; 
+            background: rgba(255,102,0,0.1); 
+        }
+
+        /* --- GRID DE PRODUCTOS --- */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
+            padding: 40px 5%; 
+            max-width: 1400px; 
+            margin: auto; 
+        }
+
+        .product-card { 
+            background: var(--card); 
+            border-radius: 24px; 
+            border: 1px solid var(--border); 
+            overflow: hidden; 
+            transition: 0.4s; 
+            display: block; /* Importante para el filtro */
+        }
+
+        .product-card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--naranja); 
+            box-shadow: 0 10px 30px rgba(255,102,0,0.1);
+        }
+
+        .img-placeholder { 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            background: #111; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 45px; 
+        }
+
         .info { padding: 25px; }
-        .tag { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--naranja); margin-bottom: 10px; display: block; }
-        .info h3 { margin: 0; font-size: 20px; }
-        .info p { color: #64748b; font-size: 14px; margin: 12px 0 20px; min-height: 40px; }
-        
-        .btn-consultar { display: block; width: 100%; text-align: center; background: white; color: black; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 13px; transition: 0.3s; box-sizing: border-box; }
+        .tag { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--naranja); margin-bottom: 8px; display: block; }
+        .info h3 { margin: 0; font-size: 20px; font-weight: 600; }
+        .info p { color: #64748b; font-size: 14px; margin: 12px 0 20px; min-height: 42px; }
+
+        .btn-consultar { 
+            display: block; 
+            width: 100%; 
+            text-align: center; 
+            background: white; 
+            color: black; 
+            padding: 14px; 
+            border-radius: 14px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            font-size: 13px; 
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
         .btn-consultar:hover { background: var(--naranja); color: white; }
-        
-        .wpp-fixed { position: fixed; bottom: 30px; right: 30px; background: #25d366; width: 60px; height: 60px; border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(37,211,102,0.3); z-index: 1000; transition: 0.3s; }
+
+        /* --- SECCIÓN SERVICIOS (FOOTER) --- */
+        .footer-services {
+            background: #0a0d12;
+            padding: 60px 5%;
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .service-item h4 { color: var(--naranja); font-size: 18px; margin-bottom: 10px; }
+        .service-item p { color: #94a3b8; font-size: 14px; }
+
+        /* --- BOTÓN WHATSAPP --- */
+        .wpp-fixed { 
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            background: #25d366; 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 10px 20px rgba(37,211,102,0.3); 
+            z-index: 1000; 
+            transition: 0.3s;
+        }
         .wpp-fixed:hover { transform: scale(1.1); }
+
+        @media (max-width: 600px) {
+            .logo img { height: 60px; }
+            .nav-phone { font-size: 13px; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo"><img src="logo.jpg" alt="BENTO"></div>
-        <div style="font-size: 20px; font-weight: 600; color: var(--naranja);">CEL: 221 617-2384</div>
+        <div class="logo">
+            <img src="logo.jpg.png" alt="BENTO Seguridad">
+        </div>
+        <div class="nav-phone">CEL: 221 617-2384</div>
     </nav>
 
     <div class="filter-container">
@@ -52,13 +200,13 @@
         <button class="cat-btn" data-filter="accesorios">Accesorios</button>
     </div>
 
-    <div class="grid" id="product-grid">
+    <div class="grid">
         <div class="product-card" data-category="camaras">
             <div class="img-placeholder">📷</div>
             <div class="info">
                 <span class="tag">Hikvision</span>
                 <h3>Bullet 2MP 1080p</h3>
-                <p>Cámara exterior con visión nocturna infrarroja.</p>
+                <p>Cámara exterior con visión nocturna infrarroja de alta definición.</p>
                 <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar</a>
             </div>
         </div>
@@ -66,9 +214,9 @@
         <div class="product-card" data-category="alarmas">
             <div class="img-placeholder">🚨</div>
             <div class="info">
-                <span class="tag">Alarma</span>
+                <span class="tag">Alonso / Marshall</span>
                 <h3>Kit Central WiFi</h3>
-                <p>Notificaciones al celular en tiempo real.</p>
+                <p>Sistema de alarma inteligente con notificaciones al celular.</p>
                 <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar</a>
             </div>
         </div>
@@ -78,14 +226,42 @@
             <div class="info">
                 <span class="tag">Dahua</span>
                 <h3>DVR 4 Canales</h3>
-                <p>Grabación Full HD y acceso remoto.</p>
+                <p>Grabador digital con acceso remoto desde la App móvil.</p>
+                <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar</a>
+            </div>
+        </div>
+
+        <div class="product-card" data-category="accesorios">
+            <div class="img-placeholder">🔌</div>
+            <div class="info">
+                <span class="tag">Accesorios</span>
+                <h3>Fuente 12V 2A</h3>
+                <p>Fuente reforzada para cámaras de seguridad y tiras LED.</p>
                 <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar</a>
             </div>
         </div>
     </div>
 
+    <div class="footer-services">
+        <div class="services-grid">
+            <div class="service-item">
+                <h4>📍 Cobertura</h4>
+                <p>Instalaciones profesionales en La Plata, Berisso y Ensenada.</p>
+            </div>
+            <div class="service-item">
+                <h4>🛡️ Garantía</h4>
+                <p>Todos nuestros equipos cuentan con garantía oficial y soporte técnico.</p>
+            </div>
+            <div class="service-item">
+                <h4>📩 Contacto</h4>
+                <p>electronica091@gmail.com<br>Lunes a Sábado: 9:00 - 19:00</p>
+            </div>
+        </div>
+        <p style="color: #475569; font-size: 12px; margin-top: 20px;">© 2026 BENTO Seguridad Electrónica</p>
+    </div>
+
     <a href="https://wa.me/5492216172384" class="wpp-fixed" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30" alt="WhatsApp">
     </a>
 
     <script>
@@ -94,11 +270,11 @@
 
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Manejar clases de botones
+                // Cambiar botón activo
                 buttons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Filtrar tarjetas
+                // Filtrar productos
                 const filter = btn.getAttribute('data-filter');
                 cards.forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
