@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesorios | BENTO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --naranja: #ff6600; --azul: #1a4f9c; --bg: #05070a; --card: #0f1217; --border: rgba(255,255,255,0.05); }
+        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg); color: white; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #020617; border-bottom: 1px solid var(--border); }
+        .logo img { height: 45px; }
+        .section-title { padding: 40px 5% 10px; border-left: 4px solid var(--azul); margin-left: 5%; margin-top: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 20px 5%; }
+        .product-card { background: var(--card); border-radius: 20px; border: 1px solid var(--border); padding: 20px; }
+        .brand { color: var(--azul); font-weight: 800; font-size: 11px; }
+        .btn-wa { display: block; text-align: center; background: white; color: black; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 800; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo"><a href="index.html"><img src="logo.jpg" alt="BENTO"></a></div>
+        <a href="index.html" style="color:#94a3b8; text-decoration:none; font-size:13px;">← Volver</a>
+    </nav>
+
+    <h2 class="section-title">Grabadores Dahua</h2>
+    <div class="grid">
+        <div class="product-card">
+            <span class="brand">DAHUA</span>
+            <h3>DVR 8 Canales 1080p</h3>
+            <p>Tecnología WizSense con Inteligencia Artificial.</p>
+            <a href="https://wa.me/5492216172384" class="btn-wa">Consultar</a>
+        </div>
+    </div>
+
+    <h2 class="section-title">Accesorios</h2>
+    <div class="grid">
+        <div class="product-card">
+            <h3>Disco Rígido 1TB</h3>
+            <p>Especial para videovigilancia (WD Purple).</p>
+            <a href="https://wa.me/5492216172384" class="btn-wa">Consultar</a>
+        </div>
+        <div class="product-card">
+            <h3>Balun HD</h3>
+            <p>Par de balunes para transmisión de video.</p>
+            <a href="https://wa.me/5492216172384" class="btn-wa">Consultar</a>
+        </div>
+    </div>
+</body>
+</html>
