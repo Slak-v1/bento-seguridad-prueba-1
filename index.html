@@ -3,86 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENTO | Seguridad Electrónica</title>
+    <title>BENTO | Catálogo de Seguridad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --accent: #3b82f6;
+            --primary: #3b82f6;
+            --bg: #050505;
+            --card-bg: #111111;
+            --text-main: #ffffff;
+            --text-dim: #a1a1aa;
+            --border: rgba(255,255,255,0.08);
         }
-        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--dark); color: white; line-height: 1.6; }
+
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); color: var(--text-main); 
+        }
+
+        /* Navegación Minimalista */
+        nav { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 5%; background: rgba(5, 5, 5, 0.8); 
+            backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        .logo-container img { height: 40px; } /* Aquí irá tu logo */
+        .logo-text { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+
+        /* Categorías / Filtros */
+        .filter-bar { 
+            display: flex; justify-content: center; gap: 15px; 
+            padding: 40px 20px 20px; overflow-x: auto;
+        }
+        .filter-btn { 
+            background: var(--card-bg); border: 1px solid var(--border); 
+            color: var(--text-dim); padding: 10px 25px; border-radius: 100px;
+            cursor: pointer; font-weight: 600; text-decoration: none; transition: 0.3s;
+            white-space: nowrap;
+        }
+        .filter-btn:hover, .filter-btn.active { 
+            background: var(--primary); color: white; border-color: var(--primary);
+        }
+
+        /* Sección de Catálogo */
+        .catalog-container { padding: 20px 5% 80px; max-width: 1400px; margin: auto; }
+        .section-header { margin-bottom: 30px; }
+        .section-header h2 { font-size: 32px; font-weight: 800; margin: 0; }
+        .section-header p { color: var(--text-dim); margin: 5px 0 0; }
+
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
+        }
+
+        /* Tarjeta de Producto Estilo Apple */
+        .product-card { 
+            background: var(--card-bg); border-radius: 20px; 
+            border: 1px solid var(--border); overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            text-decoration: none; color: inherit;
+            display: flex; flex-direction: column;
+        }
+        .product-card:hover { 
+            transform: translateY(-5px); border-color: rgba(59, 130, 246, 0.5); 
+        }
+        .product-img { 
+            aspect-ratio: 1/1; background: #1a1a1a; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 50px; /* Temporal hasta tener fotos */
+        }
+        .product-info { padding: 20px; flex-grow: 1; }
+        .brand-tag { 
+            font-size: 11px; font-weight: 700; text-transform: uppercase; 
+            color: var(--primary); letter-spacing: 1px; margin-bottom: 8px; display: block;
+        }
+        .product-info h3 { margin: 0; font-size: 18px; font-weight: 700; }
+        .product-info p { color: var(--text-dim); font-size: 14px; margin: 10px 0 20px; }
         
-        /* Navegación */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: rgba(2, 6, 23, 0.9); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
-        .logo { font-size: 24px; font-weight: 800; letter-spacing: 2px; color: white; text-decoration: none; }
-        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
+        .buy-btn { 
+            display: block; width: 100%; text-align: center; 
+            background: #ffffff; color: #000; padding: 12px; 
+            border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 14px;
+        }
 
-        /* Hero Section */
-        .hero { text-align: center; padding: 100px 20px; background: radial-gradient(circle at center, #1e293b 0%, #020617 100%); }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
-        .hero p { color: #94a3b8; font-size: 1.2rem; max-width: 600px; margin: 20px auto; }
-        
-        .btn-main { background: var(--primary); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
-        .btn-main:hover { transform: translateY(-3px); background: var(--accent); }
-
-        /* Secciones */
-        .container { padding: 80px 5%; max-width: 1200px; margin: auto; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: #1e293b; padding: 40px; border-radius: 20px; border: 1px solid #334155; transition: 0.3s; text-decoration: none; color: white; }
-        .card:hover { border-color: var(--primary); transform: scale(1.02); }
-        .card h3 { font-size: 24px; margin-bottom: 15px; color: var(--primary); }
-
-        /* WhatsApp Flotante */
-        .wpp { position: fixed; bottom: 20px; right: 20px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
-
-        footer { text-align: center; padding: 40px; border-top: 1px solid #1e293b; color: #64748b; }
+        footer { text-align: center; padding: 60px; color: #444; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="logo">BENTO</a>
+        <div class="logo-container">
+            <div class="logo-text">BENTO</div>
+        </div>
         <div class="nav-links">
-            <a href="alarmas.html">Alarmas</a>
-            <a href="camaras.html">Cámaras</a>
-            <a href="#contacto">Contacto</a>
+            <a href="https://wa.me/tu-numero" class="filter-btn active" style="background:none; border:none; padding:0;">WhatsApp</a>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>BENTO</h1>
-        <p>Soluciones avanzadas en seguridad electrónica. Protegemos lo que más te importa en La Plata y alrededores.</p>
-        <a href="https://wa.me/549XXXXXXXXXX" class="btn-main">Solicitar Presupuesto Gratis</a>
-    </header>
-
-    <div class="container">
-        <div class="grid">
-            <a href="alarmas.html" class="card">
-                <h3>🚨 Sistemas de Alarma</h3>
-                <p>Monitoreo inteligente, sensores de movimiento y control desde tu celular.</p>
-                <span>Ver más →</span>
-            </a>
-            <a href="camaras.html" class="card">
-                <h3>📷 Cámaras CCTV</h3>
-                <p>Sistemas de alta definición Hikvision, Dahua y cámaras WiFi autoinstalables.</p>
-                <span>Ver más →</span>
-            </a>
-            <div class="card">
-                <h3>🛠️ Soporte Técnico</h3>
-                <p>Mantenimiento preventivo y reparación de sistemas existentes.</p>
-            </div>
-        </div>
+    <div class="filter-bar">
+        <a href="index.html" class="filter-btn active">Todo</a>
+        <a href="camaras.html" class="filter-btn">Cámaras</a>
+        <a href="alarmas.html" class="filter-btn">Alarmas</a>
+        <a href="accesorios.html" class="filter-btn">DVR</a>
+        <a href="accesorios.html" class="filter-btn">Accesorios</a>
     </div>
 
-    <footer id="contacto">
-        <p>© 2026 BENTO Seguridad | Especialistas en Prevención</p>
-    </footer>
+    <main class="catalog-container">
+        <div class="section-header">
+            <h2>Catálogo Destacado</h2>
+            <p>Los equipos más solicitados en seguridad electrónica.</p>
+        </div>
 
-    <a href="https://wa.me/549221" class="wpp">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35" alt="WhatsApp">
-    </a>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img">📷</div>
+                <div class="product-info">
+                    <span class="brand-tag">Hikvision</span>
+                    <h3>Cámara Exterior Bullet HD</h3>
+                    <p>Visión nocturna avanzada y resistencia a la intemperie.</p>
+                    <a href="#" class="buy-btn">Consultar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">🚨</div>
+                <div class="product-info">
+                    <span class="brand-tag">Alonso / Marshall</span>
+                    <h3>Kit Alarma Inalámbrica</h3>
+                    <p>Central inteligente con aviso al celular y 2 sensores.</p>
+                    <a href="#" class="buy-btn">Consultar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">📼</div>
+                <div class="product-info">
+                    <span class="brand-tag">Dahua</span>
+                    <h3>DVR 8 Canales 1080p</h3>
+                    <p>Grabación continua y acceso remoto P2P.</p>
+                    <a href="#" class="buy-btn">Consultar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">🔌</div>
+                <div class="product-info">
+                    <span class="brand-tag">Genérico Pro</span>
+                    <h3>Fuente de Alimentación 12V</h3>
+                    <p>Fuente reforzada para múltiples cámaras.</p>
+                    <a href="#" class="buy-btn">Consultar</a>
+                </div>
+            </div>
+            
+            </div>
+    </main>
+
+    <footer>
+        <p>© 2026 BENTO | Seguridad de Alta Gama</p>
+    </footer>
 
 </body>
 </html>
