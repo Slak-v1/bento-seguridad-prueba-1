@@ -1,99 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>BENTO Seguridad</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0b1220;
-      color: #e5e7eb;
-    }
-    header {
-      padding: 60px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #020617, #1e293b);
-    }
-    header h1 {
-      font-size: 52px;
-      margin: 0;
-      letter-spacing: 2px;
-    }
-    header p {
-      font-size: 18px;
-      color: #94a3b8;
-      margin-top: 10px;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 35px;
-      background: #2563eb;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: 600;
-    }
-    section {
-      padding: 70px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-    }
-    .card {
-      background: #020617;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 15px 40px rgba(0,0,0,.45);
-    }
-    footer {
-      background: #020617;
-      text-align: center;
-      padding: 25px;
-      color: #64748b;
-      font-size: 14px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BENTO | Seguridad Electrónica</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #3b82f6;
+        }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--dark); color: white; line-height: 1.6; }
+        
+        /* Navegación */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: rgba(2, 6, 23, 0.9); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: 2px; color: white; text-decoration: none; }
+        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        .hero { text-align: center; padding: 100px 20px; background: radial-gradient(circle at center, #1e293b 0%, #020617 100%); }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        .hero p { color: #94a3b8; font-size: 1.2rem; max-width: 600px; margin: 20px auto; }
+        
+        .btn-main { background: var(--primary); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
+        .btn-main:hover { transform: translateY(-3px); background: var(--accent); }
+
+        /* Secciones */
+        .container { padding: 80px 5%; max-width: 1200px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: #1e293b; padding: 40px; border-radius: 20px; border: 1px solid #334155; transition: 0.3s; text-decoration: none; color: white; }
+        .card:hover { border-color: var(--primary); transform: scale(1.02); }
+        .card h3 { font-size: 24px; margin-bottom: 15px; color: var(--primary); }
+
+        /* WhatsApp Flotante */
+        .wpp { position: fixed; bottom: 20px; right: 20px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+
+        footer { text-align: center; padding: 40px; border-top: 1px solid #1e293b; color: #64748b; }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>BENTO</h1>
-  <p>Alarmas & Cámaras de Seguridad</p>
-  <a class="btn" href="https://wa.me/549XXXXXXXXXX">Consultar por WhatsApp</a>
-</header>
+    <nav>
+        <a href="index.html" class="logo">BENTO</a>
+        <div class="nav-links">
+            <a href="alarmas.html">Alarmas</a>
+            <a href="camaras.html">Cámaras</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
 
-<section>
-  <h2>Soluciones en seguridad</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>🚨 Alarmas</h3>
-      <p>Sistemas de alarma para hogares y comercios, con sensores inteligentes.</p>
-    </div>
-    <div class="card">
-      <h3>📷 Cámaras</h3>
-      <p>Cámaras de seguridad organizadas por marca y tipo de uso.</p>
-    </div>
-    <div class="card">
-      <h3>🛠️ Instalación</h3>
-      <p>Instalación profesional, mantenimiento y soporte técnico.</p>
-    </div>
-  </div>
-</section>
+    <header class="hero">
+        <h1>BENTO</h1>
+        <p>Soluciones avanzadas en seguridad electrónica. Protegemos lo que más te importa en La Plata y alrededores.</p>
+        <a href="https://wa.me/549XXXXXXXXXX" class="btn-main">Solicitar Presupuesto Gratis</a>
+    </header>
 
-<footer>
-  © 2026 BENTO Seguridad · La Plata y alrededores
-</footer>
+    <div class="container">
+        <div class="grid">
+            <a href="alarmas.html" class="card">
+                <h3>🚨 Sistemas de Alarma</h3>
+                <p>Monitoreo inteligente, sensores de movimiento y control desde tu celular.</p>
+                <span>Ver más →</span>
+            </a>
+            <a href="camaras.html" class="card">
+                <h3>📷 Cámaras CCTV</h3>
+                <p>Sistemas de alta definición Hikvision, Dahua y cámaras WiFi autoinstalables.</p>
+                <span>Ver más →</span>
+            </a>
+            <div class="card">
+                <h3>🛠️ Soporte Técnico</h3>
+                <p>Mantenimiento preventivo y reparación de sistemas existentes.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contacto">
+        <p>© 2026 BENTO Seguridad | Especialistas en Prevención</p>
+    </footer>
+
+    <a href="https://wa.me/5492216172384" class="wpp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35" alt="WhatsApp">
+    </a>
 
 </body>
 </html>
