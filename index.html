@@ -37,7 +37,7 @@
         }
 
         .logo img { 
-            height: 85px; /* Tamaño ideal para que se lea todo el logo */
+            height: 85px; /* Tamaño optimizado para tu logo */
             width: auto; 
             transition: 0.3s;
             display: block;
@@ -180,7 +180,6 @@
         @media (max-width: 600px) {
             .logo img { height: 65px; }
             .nav-phone { font-size: 13px; }
-            .filter-container { justify-content: flex-start; }
         }
     </style>
 </head>
@@ -201,7 +200,7 @@
         <button class="cat-btn" data-filter="accesorios">Accesorios</button>
     </div>
 
-    <div class="grid" id="product-grid">
+    <div class="grid">
         <div class="product-card" data-category="camaras">
             <div class="img-placeholder">📷</div>
             <div class="info">
@@ -217,7 +216,7 @@
             <div class="info">
                 <span class="tag">Alonso / Marshall</span>
                 <h3>Kit Central WiFi</h3>
-                <p>Sistema de alarma inteligente con notificaciones al celular en tiempo real.</p>
+                <p>Sistema de alarma inteligente con notificaciones al celular.</p>
                 <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
             </div>
         </div>
@@ -247,11 +246,11 @@
         <div class="services-grid">
             <div class="service-item">
                 <h4>📍 Cobertura</h4>
-                <p>Servicio técnico e instalaciones en La Plata, Berisso y Ensenada.</p>
+                <p>Instalaciones en La Plata, Berisso y Ensenada.</p>
             </div>
             <div class="service-item">
                 <h4>🛡️ Garantía</h4>
-                <p>Todos nuestros equipos cuentan con garantía oficial.</p>
+                <p>Equipos con garantía oficial y soporte técnico.</p>
             </div>
             <div class="service-item">
                 <h4>📩 Contacto</h4>
@@ -262,7 +261,7 @@
     </div>
 
     <a href="https://wa.me/5492216172384" class="wpp-fixed" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30" alt="WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30">
     </a>
 
     <script>
@@ -271,11 +270,9 @@
 
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Quitar clase active de otros y poner en el actual
                 buttons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Filtrar según data-category
                 const filter = btn.getAttribute('data-filter');
                 cards.forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
