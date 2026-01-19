@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BENTO | Seguridad Electrónica</title>
+
+    <!-- FUENTE -->
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;600;800&display=swap" rel="stylesheet">
+
     <style>
         :root { 
             --naranja: #ff6600; 
-            --azul: #1a4f9c; 
             --bg: #05070a; 
             --card: #0f1217; 
             --border: rgba(255,255,255,0.05); 
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body { 
@@ -19,7 +25,6 @@
             font-family: 'Lexend', sans-serif; 
             background: var(--bg); 
             color: white; 
-            line-height: 1.6;
         }
 
         /* --- NAVEGACIÓN --- */
@@ -36,21 +41,17 @@
             border-bottom: 1px solid var(--border); 
         }
 
-        /* CORRECCIÓN: Tamaño de logo agrandado */
+        /* LOGO */
         .logo img { 
             height: 90px; 
             width: auto; 
-            transition: 0.3s;
             display: block;
         }
-        
-        .logo img:hover { transform: scale(1.05); }
 
         .nav-phone {
-            font-size: 16px; 
+            font-size: 18px; 
             font-weight: 800; 
             color: var(--naranja);
-            letter-spacing: 0.5px;
         }
 
         /* --- FILTROS --- */
@@ -59,210 +60,115 @@
             justify-content: center; 
             gap: 12px; 
             padding: 30px 5%; 
-            background: #0a0d12; 
-            overflow-x: auto;
-            white-space: nowrap;
+            flex-wrap: wrap;
         }
 
         .cat-btn { 
             background: var(--card); 
             border: 1px solid var(--border); 
             color: #94a3b8; 
-            padding: 12px 25px; 
-            border-radius: 12px; 
-            font-weight: 600; 
-            font-size: 14px; 
+            padding: 10px 20px; 
+            border-radius: 10px; 
             cursor: pointer; 
-            transition: 0.3s;
             font-family: 'Lexend', sans-serif;
+            transition: all 0.2s ease;
         }
 
-        .cat-btn:hover, .cat-btn.active { 
+        .cat-btn:hover {
+            color: white;
+        }
+
+        .cat-btn.active { 
             border-color: var(--naranja); 
             color: white; 
-            background: rgba(255,102,0,0.1); 
         }
 
-        /* --- GRID DE PRODUCTOS --- */
+        /* --- PRODUCTOS --- */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
             gap: 25px; 
             padding: 40px 5%; 
-            max-width: 1400px; 
-            margin: auto; 
         }
 
         .product-card { 
             background: var(--card); 
-            border-radius: 24px; 
+            border-radius: 20px; 
             border: 1px solid var(--border); 
-            overflow: hidden; 
-            transition: 0.4s; 
-        }
-
-        .product-card:hover { 
-            transform: translateY(-10px); 
-            border-color: var(--naranja); 
-            box-shadow: 0 10px 30px rgba(255,102,0,0.1);
-        }
-
-        .img-placeholder { 
-            width: 100%; 
-            aspect-ratio: 1/1; 
-            background: #111; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 45px; 
-        }
-
-        .info { padding: 25px; }
-        .tag { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--naranja); margin-bottom: 8px; display: block; }
-        .info h3 { margin: 0; font-size: 20px; font-weight: 600; }
-        .info p { color: #64748b; font-size: 14px; margin: 12px 0 20px; min-height: 42px; }
-
-        .btn-consultar { 
-            display: block; 
-            width: 100%; 
-            text-align: center; 
-            background: white; 
-            color: black; 
-            padding: 14px; 
-            border-radius: 14px; 
-            text-decoration: none; 
-            font-weight: 800; 
-            font-size: 13px; 
-            transition: 0.3s;
-            box-sizing: border-box;
-        }
-
-        .btn-consultar:hover { background: var(--naranja); color: white; }
-
-        /* --- SECCIÓN SERVICIOS / FOOTER --- */
-        .footer-services {
-            background: #0a0d12;
-            padding: 60px 5%;
-            margin-top: 40px;
-            border-top: 1px solid var(--border);
+            padding: 20px;
             text-align: center;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto 40px;
+        .product-card h3 {
+            margin: 10px 0 5px;
         }
 
-        .service-item h4 { color: var(--naranja); font-size: 18px; margin-bottom: 10px; }
-        .service-item p { color: #94a3b8; font-size: 14px; }
-
-        /* --- BOTÓN WHATSAPP --- */
-        .wpp-fixed { 
-            position: fixed; 
-            bottom: 30px; 
-            right: 30px; 
-            background: #25d366; 
-            width: 60px; 
-            height: 60px; 
-            border-radius: 20px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            box-shadow: 0 10px 20px rgba(37,211,102,0.3); 
-            z-index: 1000; 
-            transition: 0.3s;
+        .product-card p {
+            color: #94a3b8;
         }
-        .wpp-fixed:hover { transform: scale(1.1); }
 
+        .btn-consultar { 
+            display: block; 
+            background: white; 
+            color: black; 
+            padding: 10px; 
+            text-decoration: none; 
+            border-radius: 10px; 
+            font-weight: 800; 
+            margin-top: 15px;
+        }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 600px) {
-            .logo img { height: 70px; }
-            .nav-phone { font-size: 13px; }
+            .logo img {
+                height: 60px;
+            }
+
+            .nav-phone {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAV -->
     <nav>
         <div class="logo">
-            <img src="logo.jpg" alt="BENTO Seguridad">
+            <img src="logo.jpg" alt="BENTO Seguridad Electrónica">
         </div>
         <div class="nav-phone">CEL: 221 617-2384</div>
     </nav>
 
+    <!-- FILTROS -->
     <div class="filter-container">
         <button class="cat-btn active" data-filter="all">Todo</button>
         <button class="cat-btn" data-filter="camaras">Cámaras</button>
         <button class="cat-btn" data-filter="alarmas">Alarmas</button>
-        <button class="cat-btn" data-filter="dvr">DVR / NVR</button>
-        <button class="cat-btn" data-filter="accesorios">Accesorios</button>
     </div>
 
-    <div class="grid" id="product-grid">
+    <!-- PRODUCTOS -->
+    <div class="grid">
         <div class="product-card" data-category="camaras">
-            <div class="img-placeholder">📷</div>
-            <div class="info">
-                <span class="tag">Hikvision</span>
-                <h3>Bullet 2MP 1080p</h3>
-                <p>Cámara exterior con visión nocturna infrarroja de alta definición.</p>
-                <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
-            </div>
+            <div style="font-size: 50px;">📷</div>
+            <h3>Bullet 2MP</h3>
+            <p>Hikvision Full HD</p>
+            <a href="https://wa.me/5492216172384" class="btn-consultar" target="_blank">
+                Consultar
+            </a>
         </div>
-
+        
         <div class="product-card" data-category="alarmas">
-            <div class="img-placeholder">🚨</div>
-            <div class="info">
-                <span class="tag">Alonso / Marshall</span>
-                <h3>Kit Central WiFi</h3>
-                <p>Sistema de alarma inteligente con notificaciones al celular.</p>
-                <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
-            </div>
-        </div>
-
-        <div class="product-card" data-category="dvr">
-            <div class="img-placeholder">📼</div>
-            <div class="info">
-                <span class="tag">Dahua</span>
-                <h3>DVR 4 Canales</h3>
-                <p>Grabador digital con acceso remoto desde la App móvil.</p>
-                <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
-            </div>
-        </div>
-
-        <div class="product-card" data-category="accesorios">
-            <div class="img-placeholder">🔌</div>
-            <div class="info">
-                <span class="tag">Accesorios</span>
-                <h3>Fuente 12V 2A</h3>
-                <p>Fuente reforzada ideal para cámaras de seguridad.</p>
-                <a href="https://wa.me/5492216172384" target="_blank" class="btn-consultar">Consultar</a>
-            </div>
+            <div style="font-size: 50px;">🚨</div>
+            <h3>Kit Marshall</h3>
+            <p>Alarma Inteligente WiFi</p>
+            <a href="https://wa.me/5492216172384" class="btn-consultar" target="_blank">
+                Consultar
+            </a>
         </div>
     </div>
 
-    <div class="footer-services">
-        <div class="services-grid">
-            <div class="service-item">
-                <h4>📍 Cobertura</h4>
-                <p>La Plata, Berisso y Ensenada.</p>
-            </div>
-            <div class="service-item">
-                <h4>🛡️ Garantía</h4>
-                <p>Todos nuestros productos cuentan con garantía oficial.</p>
-            </div>
-            <div class="service-item">
-                <h4>📩 Contacto</h4>
-                <p>electronica091@gmail.com<br>Cel: 221 617-2384</p>
-            </div>
-        </div>
-    </div>
-
-    <a href="https://wa.me/5492216172384" class="wpp-fixed" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30" alt="WhatsApp">
-    </a>
-
+    <!-- JS FILTROS -->
     <script>
         const buttons = document.querySelectorAll('.cat-btn');
         const cards = document.querySelectorAll('.product-card');
@@ -273,6 +179,7 @@
                 btn.classList.add('active');
 
                 const filter = btn.getAttribute('data-filter');
+
                 cards.forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
                         card.style.display = 'block';
@@ -283,5 +190,6 @@
             });
         });
     </script>
+
 </body>
 </html>
