@@ -36,8 +36,9 @@
             border-bottom: 1px solid var(--border); 
         }
 
+        /* CORRECCIÓN: Tamaño de logo agrandado */
         .logo img { 
-            height: 85px; /* Tamaño optimizado para tu logo */
+            height: 90px; 
             width: auto; 
             transition: 0.3s;
             display: block;
@@ -176,9 +177,8 @@
         }
         .wpp-fixed:hover { transform: scale(1.1); }
 
-        /* Adaptación para celulares */
         @media (max-width: 600px) {
-            .logo img { height: 65px; }
+            .logo img { height: 70px; }
             .nav-phone { font-size: 13px; }
         }
     </style>
@@ -200,7 +200,7 @@
         <button class="cat-btn" data-filter="accesorios">Accesorios</button>
     </div>
 
-    <div class="grid">
+    <div class="grid" id="product-grid">
         <div class="product-card" data-category="camaras">
             <div class="img-placeholder">📷</div>
             <div class="info">
@@ -246,22 +246,21 @@
         <div class="services-grid">
             <div class="service-item">
                 <h4>📍 Cobertura</h4>
-                <p>Instalaciones en La Plata, Berisso y Ensenada.</p>
+                <p>La Plata, Berisso y Ensenada.</p>
             </div>
             <div class="service-item">
                 <h4>🛡️ Garantía</h4>
-                <p>Equipos con garantía oficial y soporte técnico.</p>
+                <p>Todos nuestros productos cuentan con garantía oficial.</p>
             </div>
             <div class="service-item">
                 <h4>📩 Contacto</h4>
-                <p>electronica091@gmail.com<br>WhatsApp: 221 617-2384</p>
+                <p>electronica091@gmail.com<br>Cel: 221 617-2384</p>
             </div>
         </div>
-        <p style="color: #475569; font-size: 12px; margin-top: 20px;">© 2026 BENTO Seguridad Electrónica</p>
     </div>
 
     <a href="https://wa.me/5492216172384" class="wpp-fixed" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30" alt="WhatsApp">
     </a>
 
     <script>
