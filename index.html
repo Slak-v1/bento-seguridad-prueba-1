@@ -6,67 +6,74 @@
     <title>BENTO | Seguridad Electrónica</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --naranja: #ff6600; --bg: #05070a; --card: #0f1217; --border: rgba(255,255,255,.08); }
+        :root { 
+            --naranja: #ff6600; 
+            --bg: #ffffff; /* FONDO BLANCO */
+            --card: #f8f9fa; /* GRIS MUY CLARITO PARA LAS TARJETAS */
+            --text: #05070a; /* TEXTO OSCURO */
+            --border: rgba(0,0,0,.08); 
+        }
+        
         * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg); color: #fff; }
+        
+        body { 
+            margin: 0; 
+            font-family: 'Lexend', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+        }
 
+        /* --- NAV --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 10px 5%; background: rgba(5,7,10,.95); border-bottom: 1px solid var(--border); 
+            align-items: center; padding: 10px 5%; background: rgba(255,255,255,.95); 
+            border-bottom: 1px solid var(--border); 
+            backdrop-filter: blur(10px);
         }
         .logo img { height: 60px; }
         .nav-phone { color: var(--naranja); font-weight: 800; }
 
+        /* --- FILTROS --- */
         .filter-container { display: flex; gap: 10px; padding: 15px 5%; overflow-x: auto; }
         .cat-btn { 
-            flex: 0 0 auto; background: var(--card); border: 1px solid var(--border); 
-            color: #94a3b8; padding: 10px 16px; border-radius: 10px; font-weight: 600; cursor: pointer;
+            flex: 0 0 auto; background: #eee; border: 1px solid transparent; 
+            color: #666; padding: 10px 16px; border-radius: 10px; font-weight: 600; cursor: pointer;
         }
-        .cat-btn.active { border-color: var(--naranja); color: #fff; }
+        .cat-btn.active { border-color: var(--naranja); color: var(--naranja); background: #fff; }
 
+        /* --- GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; padding: 25px 5%; }
-        .product-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 15px; text-align: center; }
-        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; background: #111; margin-bottom: 10px; }
+        
+        .product-card { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            border-radius: 18px; 
+            padding: 15px; 
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; background: #fff; margin-bottom: 10px; }
+        .product-card h3 { margin: 10px 0; color: #000; }
+        .product-card p { color: #555; font-size: 14px; }
         
         .btn-consultar { 
-            display: block; margin-top: 12px; background: #fff; color: #000; 
-            text-decoration: none; padding: 10px; border-radius: 10px; font-weight: 800; 
+            display: block; margin-top: 12px; background: #000; color: #fff; 
+            text-decoration: none; padding: 12px; border-radius: 10px; font-weight: 800; 
         }
 
         /* --- BOTÓN FLOTANTE WHATSAPP --- */
         .wsp-flotante {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 25px;
-            right: 25px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 35px;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s;
+            position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px;
+            background-color: #25d366; color: #FFF; border-radius: 50px;
+            text-align: center; font-size: 35px; box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+            z-index: 2000; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: transform 0.3s;
         }
-
-        .wsp-flotante:hover {
-            transform: scale(1.1);
-            background-color: #20ba5a;
-        }
-
-        .wsp-flotante img {
-            width: 35px;
-            height: 35px;
-        }
+        .wsp-flotante:hover { transform: scale(1.1); }
+        .wsp-flotante img { width: 35px; height: 35px; }
 
         @media (max-width: 600px) {
-            .wsp-flotante { width: 50px; height: 50px; bottom: 20px; right: 20px; }
-            .wsp-flotante img { width: 30px; height: 30px; }
+            .wsp-flotante { width: 55px; height: 55px; bottom: 15px; right: 15px; }
         }
     </style>
 </head>
@@ -108,15 +115,15 @@
 
   <div class="product-card" data-category="camaras">
     <img src="fullcolorbullet2mp.jpg" alt="Camara">
-    <h3>Cámara Bullet 2MP full color</h3>
-    <p>Visión nocturna HD</p>
+    <h3>Cámara Full Color</h3>
+    <p>Visión nocturna HD 24/7</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="dvr">
     <img src="dvr8ch.jpg" alt="DVR">
     <h3>DVR 8 Canales</h3>
-    <p>Visión nocturna HD</p>
+    <p>Visión remota por App</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
@@ -128,9 +135,9 @@
   </div>
 
   <div class="product-card" data-category="accesorios">
-    <img src="disco.jpg" alt="Accesorio">
+    <img src="disco.jpg" alt="Disco">
     <h3>Disco Rígido 1TB</h3>
-    <p>Especial seguridad</p>
+    <p>Especial para cámaras</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 </div>
