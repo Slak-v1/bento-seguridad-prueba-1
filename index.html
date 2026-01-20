@@ -11,78 +11,75 @@
             --naranja-glow: rgba(255, 102, 0, 0.4);
             --negro-pro: #020305;
             --tarjeta: #0a0c11;
-            --borde-glass: rgba(255, 255, 255, 0.06);
         }
         
-        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        * { box-sizing: border-box; transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); }
         
         body { 
-            margin: 0; 
-            font-family: 'Lexend', sans-serif; 
+            margin: 0; font-family: 'Lexend', sans-serif; 
             background-color: var(--negro-pro);
-            background-image: radial-gradient(circle at 50% -10%, rgba(255, 102, 0, 0.05) 0%, transparent 50%);
+            background-image: radial-gradient(circle at 50% -10%, rgba(255, 102, 0, 0.1) 0%, transparent 50%);
             background-attachment: fixed;
-            color: #ffffff;
-            overflow-x: hidden;
+            color: #ffffff; overflow-x: hidden;
         }
 
         /* --- NAV --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 15px 8%; background: rgba(0, 0, 0, 0.95); 
+            align-items: center; padding: 15px 8%; background: rgba(0, 0, 0, 0.9); 
             backdrop-filter: blur(15px); border-bottom: 2px solid var(--naranja);
         }
         .logo-box img { height: 50px; filter: drop-shadow(0 0 10px var(--naranja-glow)); }
-        .status-online { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; font-weight: 600; }
-        .dot { width: 7px; height: 7px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px #00ff88; animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* --- FILTROS (CORREGIDOS) --- */
-        .filter-container { display: flex; gap: 12px; padding: 40px 5% 15px; overflow-x: auto; justify-content: center; }
+        /* --- HERO SECTION --- */
+        .hero { padding: 80px 8% 20px; text-align: center; }
+        .hero h1 {
+            font-size: clamp(30px, 5vw, 55px); font-weight: 800; margin-bottom: 10px; letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff 50%, #888);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: #666; max-width: 650px; margin: 0 auto 40px; font-size: 16px; font-weight: 300; }
+
+        /* --- SECCIÓN DE MARCAS PROFESIONAL --- */
+        .brands-section { padding: 0 8% 40px; text-align: center; }
+        .brands-section small { color: var(--naranja); letter-spacing: 3px; font-weight: 800; font-size: 10px; text-transform: uppercase; display: block; margin-bottom: 20px; opacity: 0.7; }
+        
+        .brands-grid {
+            display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap;
+        }
+        .brand-item {
+            font-size: 20px; font-weight: 800; color: #333; letter-spacing: 1px;
+            cursor: default; transition: 0.3s;
+        }
+        .brand-item:hover { color: #fff; text-shadow: 0 0 15px var(--naranja); transform: scale(1.1); }
+
+        /* --- FILTROS --- */
+        .filter-container { display: flex; gap: 12px; padding: 20px 5%; overflow-x: auto; justify-content: center; }
         .cat-btn { 
-            background: transparent; border: 1px solid var(--borde-glass); 
-            color: #666; padding: 10px 24px; border-radius: 30px; cursor: pointer; 
-            font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            background: transparent; border: 1px solid rgba(255,255,255,0.05); 
+            color: #555; padding: 10px 24px; border-radius: 30px; cursor: pointer; 
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
         }
         .cat-btn.active { border-color: var(--naranja); color: var(--naranja); background: rgba(255, 102, 0, 0.05); }
 
-        /* --- GRID --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 20px 8% 100px; }
-        
+        /* --- GRID DE PRODUCTOS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 40px 8% 100px; }
         .product-card { 
             background: var(--tarjeta); border-radius: 25px; padding: 35px; 
-            border: 1px solid var(--borde-glass); position: relative;
-            display: block; /* Aseguramos que sea visible por defecto */
+            border: 1px solid rgba(255,255,255,0.05); position: relative;
         }
-
         .product-card:hover { 
             transform: translateY(-12px); border-color: var(--naranja);
             background: linear-gradient(145deg, rgba(255, 102, 0, 0.08) 0%, var(--tarjeta) 60%);
             box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 25px rgba(255, 102, 0, 0.15);
         }
-
-        .badge {
-            position: absolute; top: 25px; left: 25px; background: rgba(0,0,0,0.7);
-            padding: 4px 12px; border-radius: 5px; font-size: 9px; font-weight: 800;
-            color: var(--naranja); border: 1px solid var(--naranja); letter-spacing: 1px;
-        }
-
+        .badge { position: absolute; top: 25px; left: 25px; background: rgba(0,0,0,0.7); padding: 4px 12px; border-radius: 5px; font-size: 9px; font-weight: 800; color: var(--naranja); border: 1px solid var(--naranja); }
         .product-card img { width: 100%; height: 230px; object-fit: contain; margin-bottom: 25px; }
-        .product-card h3 { margin: 10px 0; font-size: 20px; }
-        .product-card p { color: #777; font-size: 14px; margin-bottom: 30px; }
-
-        .btn-consultar { 
-            display: block; background: transparent; color: #fff; text-decoration: none; 
-            padding: 14px; border-radius: 12px; font-weight: 600; border: 1px solid #222;
-            font-size: 11px; text-transform: uppercase; text-align: center;
-        }
-        .btn-consultar:hover { background: linear-gradient(90deg, #ff6600, #ff8c00); color: #000; border-color: transparent; }
-
-        footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--borde-glass); }
-        .footer-logo { font-size: 13px; letter-spacing: 5px; color: #333; }
-        .corporation { font-weight: 800; color: #444; }
+        .btn-consultar { display: block; background: transparent; color: #fff; text-decoration: none; padding: 14px; border-radius: 12px; font-weight: 600; border: 1px solid #222; font-size: 11px; text-transform: uppercase; text-align: center; }
+        .btn-consultar:hover { background: linear-gradient(90deg, #ff6600, #ff8c00); color: #000; }
 
         .wsp-flotante { position: fixed; width: 65px; height: 65px; bottom: 35px; right: 35px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; }
+        footer { text-align: center; padding: 60px; border-top: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
 <body>
@@ -92,14 +89,27 @@
 </a>
 
 <nav>
-  <div class="logo-box">
-    <img src="logo.jpg" alt="BENTO">
-  </div>
-  <div class="status-online"><div class="dot"></div> ATENCIÓN PROFESIONAL</div>
+  <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
+  <div style="font-size: 11px; font-weight: 800; color: var(--naranja);">VENTA E INSTALACIÓN PROFESIONAL</div>
 </nav>
 
+<section class="hero">
+    <h1>Soluciones de Seguridad</h1>
+    <p>Tecnología avanzada para el control y monitoreo de sus activos más valiosos. Trabajamos con los estándares más altos del mercado.</p>
+    
+    <div class="brands-section">
+        <small>Partners Tecnológicos</small>
+        <div class="brands-grid">
+            <div class="brand-item">DAHUA</div>
+            <div class="brand-item">HIKVISION</div>
+            <div class="brand-item">AJAX</div>
+            <div class="brand-item">INTELBRAS</div>
+        </div>
+    </div>
+</section>
+
 <div class="filter-container">
-  <button class="cat-btn active" data-filter="all">Todas</button>
+  <button class="cat-btn active" data-filter="all">Todas las categorías</button>
   <button class="cat-btn" data-filter="alarmas">Alarmas</button>
   <button class="cat-btn" data-filter="camaras">Cámaras</button>
   <button class="cat-btn" data-filter="grabacion">Grabación</button>
@@ -107,61 +117,54 @@
 
 <div class="grid">
   <div class="product-card" data-category="alarmas">
-    <div class="badge">GARANTÍA OFICIAL</div>
+    <div class="badge">SISTEMA PREMIUM</div>
     <img src="alarma-ajax-kit.jpg" alt="Ajax">
     <h3>Kit Ajax Hub 2</h3>
-    <p>Seguridad inteligente con fotoverificación de intrusos.</p>
-    <a href="https://wa.me/5492216172384" class="btn-consultar" target="_blank">Consultar Presupuesto</a>
+    <p>Inteligencia inalámbrica con fotoverificación de intrusos inmediata.</p>
+    <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar ahora</a>
   </div>
 
   <div class="product-card" data-category="camaras">
-    <div class="badge">FULL COLOR</div>
+    <div class="badge">ALTA DEFINICIÓN</div>
     <img src="bullet2mp.jpg" alt="Dahua">
-    <h3>Dahua Bullet 2MP</h3>
-    <p>Cámara con visión nocturna a color y disuasión activa.</p>
-    <a href="https://wa.me/5492216172384" class="btn-consultar" target="_blank">Consultar Presupuesto</a>
+    <h3>Bullet Dahua 2MP</h3>
+    <p>Visión nocturna optimizada y disuasión activa para exterior.</p>
+    <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar ahora</a>
   </div>
 
   <div class="product-card" data-category="grabacion">
-    <div class="badge">4K ULTRA HD</div>
-    <img src="dvr8ch.jpg" alt="NVR">
-    <h3>NVR Inteligente 8 Ch</h3>
-    <p>Grabador de red profesional con detección de humanos.</p>
-    <a href="https://wa.me/5492216172384" class="btn-consultar" target="_blank">Consultar Presupuesto</a>
+    <div class="badge">CONTINUIDAD 24/7</div>
+    <img src="dvr8ch.jpg" alt="Grabador">
+    <h3>NVR Inteligente 8CH</h3>
+    <p>Grabación de alto rendimiento con analíticas de detección humana.</p>
+    <a href="https://wa.me/5492216172384" class="btn-consultar">Consultar ahora</a>
   </div>
 </div>
 
 <footer>
-    <div class="footer-logo">BENTO <span class="corporation">CORPORATION</span></div>
+    <div style="font-size: 11px; letter-spacing: 5px; color: #333;">BENTO <span style="color:var(--naranja)">CORPORATION</span></div>
+    <div style="font-size: 9px; color: #222; margin-top: 15px; letter-spacing: 2px;">LA PLATA, BUENOS AIRES | ARGENTINA</div>
 </footer>
 
 <script>
-    // LÓGICA DE FILTRADO CONECTADA
     const buttons = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.product-card');
 
     buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Cambiar clase activa en botones
+        btn.onclick = () => {
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            const filtro = btn.getAttribute('data-filter');
-
-            cards.forEach(card => {
-                const categoria = card.getAttribute('data-category');
-                
-                if (filtro === 'all' || filtro === categoria) {
-                    card.style.display = 'block';
-                    // Pequeño timeout para que la animación de opacidad se note
-                    setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 10);
+            const f = btn.dataset.filter;
+            cards.forEach(c => {
+                if (f === 'all' || c.dataset.category === f) {
+                    c.style.display = 'block';
+                    setTimeout(() => c.style.opacity = '1', 10);
                 } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => { card.style.display = 'none'; }, 400);
+                    c.style.opacity = '0';
+                    setTimeout(() => c.style.display = 'none', 400);
                 }
             });
-        });
+        }
     });
 </script>
 
