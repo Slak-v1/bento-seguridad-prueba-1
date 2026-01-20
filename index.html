@@ -49,7 +49,7 @@
         .brands-grid { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; opacity: 0.2; margin-top: 20px; }
         .brand-item { font-size: 16px; font-weight: 300; letter-spacing: 4px; }
 
-        /* --- FILTROS --- */
+        /* --- FILTROS (SCROLLABLE) --- */
         .filter-wrapper { padding: 40px 5% 10px; width: 100%; display: flex; justify-content: center; }
         .filter-container { display: flex; gap: 15px; overflow-x: auto; padding: 10px 20px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
         .filter-container::-webkit-scrollbar { display: none; }
@@ -67,7 +67,6 @@
         .product-card h3 { font-size: 24px; font-weight: 300; letter-spacing: -1px; margin-bottom: 15px; }
         .product-card p { color: #555; font-size: 14px; margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
 
-        /* BOTÓN DE CONSULTA DINÁMICO */
         .btn-consultar { display: inline-block; width: 100%; padding: 18px; border: 1px solid #222; color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; text-align: center; cursor: pointer; }
         .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
 
@@ -116,6 +115,7 @@
       <button class="cat-btn" data-filter="alarmas">Alarmas</button>
       <button class="cat-btn" data-filter="camaras">Cámaras</button>
       <button class="cat-btn" data-filter="grabacion">Grabación</button>
+      <button class="cat-btn" data-filter="accesorios">Accesorios</button>
     </div>
 </div>
 
@@ -141,6 +141,22 @@
     <img src="dvr8ch.jpg" alt="NVR">
     <h3>Smart NVR 8CH</h3>
     <p>Gestión de datos masiva con inteligencia artificial avanzada.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+  </div>
+
+  <div class="product-card" data-category="accesorios">
+    <div class="badge">Essential</div>
+    <img src="balun.jpg" alt="Balun">
+    <h3>Balun Pasivo HD</h3>
+    <p>Transmisión de video de alta calidad sin interferencias para sistemas CCTV.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+  </div>
+
+  <div class="product-card" data-category="accesorios">
+    <div class="badge">Power</div>
+    <img src="fuente12v.jpg" alt="Fuente">
+    <h3>Fuente Switching 12V 2A</h3>
+    <p>Alimentación estable y protegida para cámaras y sensores profesionales.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 </div>
@@ -174,12 +190,9 @@
     // LÓGICA DE WHATSAPP DINÁMICO
     function consultarWSP(elemento) {
         const numero = "5492216172384";
-        // Buscamos el H3 (nombre del producto) dentro del mismo product-card
         const nombreProducto = elemento.parentElement.querySelector('h3').innerText;
         const mensaje = encodeURIComponent("Hola! Me interesa obtener más información sobre el producto: " + nombreProducto);
         const url = "https://wa.me/" + numero + "?text=" + mensaje;
-        
-        // Abrir en nueva pestaña
         window.open(url, '_blank');
     }
 </script>
