@@ -17,11 +17,7 @@
     --radius:20px; 
 }
 
-*{
-    box-sizing:border-box;
-    transition:all .3s cubic-bezier(.16,1,.3,1);
-    user-select:none;
-}
+*{ box-sizing:border-box; transition:all .3s cubic-bezier(.16,1,.3,1); user-select:none; }
 
 body{
     margin:0;
@@ -66,7 +62,7 @@ nav::after{
 
 .logo-box img{height:100px}
 
-/* RELOJ VISIBLE */
+/* RELOJ REFORZADO */
 .status-container{ text-align: right; }
 .status-live{
     color: var(--verde-neon);
@@ -74,17 +70,18 @@ nav::after{
     font-size: 11px;
     letter-spacing: 2px;
     margin-bottom: 5px;
+    text-shadow: 0 0 8px rgba(0,255,136,0.4);
 }
 #reloj-box {
-    background: #111;
-    color: #fff;
-    padding: 6px 15px;
+    background: #fff; /* Fondo blanco para máximo contraste */
+    color: #000;      /* Texto negro para que se lea perfecto */
+    padding: 8px 18px;
     border-radius: 5px;
-    font-family: monospace;
-    font-size: 14px;
-    border: 1px solid var(--naranja);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
     display: inline-block;
-    box-shadow: 0 0 10px rgba(255,102,0,0.2);
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
 }
 
 /* HERO */
@@ -111,11 +108,12 @@ nav::after{
     background:var(--tarjeta); padding:30px; border:1px solid rgba(255,255,255,.05);
     border-radius:var(--radius); display:flex; flex-direction:column; position: relative; overflow: hidden;
 }
+/* Efecto Tecnológico: Barra RGB Inferior */
 .product-card::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 5px; background: var(--rgb-gradient); transition: width 0.6s ease; }
 .product-card:hover::after { width: 100%; }
 .product-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.05); }
 
-/* IMAGEN ESTILO BENTO */
+/* IMAGEN CONTENEDOR BLANCO */
 .img-container{
     width:calc(100% + 60px); height:280px; margin:-30px -30px 25px -30px;
     background:#fff; border-radius:20px 20px 0 0; display: flex; align-items: center; justify-content: center;
@@ -125,7 +123,7 @@ nav::after{
 .tech-badge{ position:absolute; top:15px; right:45px; background:var(--naranja); color:#000; padding:6px 14px; font-size:10px; font-weight: 800; border-radius:4px; }
 
 .product-card h3{ font-family:'Cinzel',serif; font-size:20px; margin-top: 10px; color: #fff; }
-.product-card p{ font-size:13px; color:#888; margin-bottom:30px; flex-grow: 1; }
+.product-card p{ font-size:13px; color:#888; margin-bottom:30px; flex-grow: 1; line-height: 1.5; }
 
 .btn-consultar{ padding:18px; border:1px solid #444; text-align:center; border-radius:12px; cursor:pointer; font-size: 11px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; }
 .btn-consultar:hover { background: #fff; color: #000; }
@@ -182,6 +180,7 @@ footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; 
     <button class="cat-btn active" data-filter="all">Catálogo Total</button>
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
+    <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
     <button class="cat-btn" data-filter="accesorios">Accesorios</button>
 </div>
 
@@ -192,7 +191,7 @@ footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; 
             <img src="camara-imou.jpg">
         </div>
         <h3>Imou Ranger 2</h3>
-        <p>Vigilancia integral 360° con inteligencia artificial para detección de humanos.</p>
+        <p>Vigilancia integral 360° con inteligencia artificial para detección de humanos y alertas móviles.</p>
         <div class="btn-consultar" onclick="enviarConsulta('Imou Ranger 2')">Consultar Producto</div>
     </div>
 
@@ -202,8 +201,18 @@ footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; 
             <img src="alarma-ajax-kit.jpg">
         </div>
         <h3>Ajax Hub 2</h3>
-        <p>Ecosistema de seguridad inalámbrico con verificación fotográfica inmediata.</p>
+        <p>Ecosistema de seguridad inalámbrico con verificación fotográfica inmediata de intrusiones.</p>
         <div class="btn-consultar" onclick="enviarConsulta('Ajax Hub 2')">Consultar Producto</div>
+    </div>
+
+    <div class="product-card" data-category="grabacion">
+        <div class="img-container">
+            <div class="tech-badge">WIZSENSE</div>
+            <img src="dvr-dahua.jpg">
+        </div>
+        <h3>DVR Dahua 8CH</h3>
+        <p>Grabador digital de alta resolución con inteligencia artificial para filtrado de falsas alarmas.</p>
+        <div class="btn-consultar" onclick="enviarConsulta('DVR Dahua 8 Canales')">Consultar Producto</div>
     </div>
 
     <div class="product-card" data-category="accesorios">
@@ -212,7 +221,7 @@ footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; 
             <img src="balun.jpg">
         </div>
         <h3>Kit Balunes 4K</h3>
-        <p>Transmisión de video de alta definición sin interferencias para sistemas cableados.</p>
+        <p>Transmisión de video de alta definición sin interferencias para sistemas cableados profesionales.</p>
         <div class="btn-consultar" onclick="enviarConsulta('Kit Balunes 4K')">Consultar Producto</div>
     </div>
 </div>
