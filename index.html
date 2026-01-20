@@ -38,7 +38,23 @@
         .status-live { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 11px; font-weight: 600; color: #fff; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
         .dot { width: 8px; height: 8px; background: var(--verde-online); border-radius: 50%; box-shadow: 0 0 12px var(--verde-online); animation: blink 1.5s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-        .location-text { font-size: 10px; color: var(--naranja); font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
+        
+        .location-text { 
+            font-size: 10px; 
+            color: #555; 
+            font-weight: 300; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
+        
+        /* ESTILO PARA EL RELOJ */
+        #reloj { 
+            color: var(--naranja); 
+            font-weight: 600; 
+            margin-left: 10px; 
+            border-left: 1px solid #222; 
+            padding-left: 10px;
+        }
 
         /* --- HERO --- */
         .hero { padding: 100px 8% 40px; text-align: center; }
@@ -49,11 +65,10 @@
         .brands-grid { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; opacity: 0.2; margin-top: 20px; }
         .brand-item { font-size: 16px; font-weight: 300; letter-spacing: 4px; }
 
-        /* --- FILTROS (SCROLLABLE) --- */
+        /* --- FILTROS --- */
         .filter-wrapper { padding: 40px 5% 10px; width: 100%; display: flex; justify-content: center; }
         .filter-container { display: flex; gap: 15px; overflow-x: auto; padding: 10px 20px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
         .filter-container::-webkit-scrollbar { display: none; }
-
         .cat-btn { flex: 0 0 auto; background: transparent; border: 1px solid rgba(255,255,255,0.05); color: #555; padding: 12px 30px; border-radius: 2px; cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; white-space: nowrap; }
         .cat-btn.active { border-color: var(--naranja); color: #fff; background: var(--naranja-soft); }
 
@@ -94,7 +109,9 @@
   <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
   <div class="status-container">
       <div class="status-live"><div class="dot"></div> ATENCIÓN PROFESIONAL</div>
-      <div class="location-text">La Plata | Argentina</div>
+      <div class="location-text">
+          LA PLATA | ARGENTINA <span id="reloj">00:00:00</span>
+      </div>
   </div>
 </nav>
 
@@ -136,27 +153,11 @@
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
-  <div class="product-card" data-category="grabacion">
-    <div class="badge">Enterprise</div>
-    <img src="dvr8ch.jpg" alt="NVR">
-    <h3>Smart NVR 8CH</h3>
-    <p>Gestión de datos masiva con inteligencia artificial avanzada.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
-  </div>
-
   <div class="product-card" data-category="accesorios">
     <div class="badge">Essential</div>
     <img src="balun.jpg" alt="Balun">
     <h3>Balun Pasivo HD</h3>
-    <p>Transmisión de video de alta calidad sin interferencias para sistemas CCTV.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
-  </div>
-
-  <div class="product-card" data-category="accesorios">
-    <div class="badge">Power</div>
-    <img src="fuente12v.jpg" alt="Fuente">
-    <h3>Fuente Switching 12V 2A</h3>
-    <p>Alimentación estable y protegida para cámaras y sensores profesionales.</p>
+    <p>Transmisión de video de alta calidad sin interferencias.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 </div>
@@ -166,7 +167,18 @@
 </footer>
 
 <script>
-    // Lógica de Filtrado
+    // RELOJ DINÁMICO
+    function actualizarReloj() {
+        const ahora = new Date();
+        const horas = String(ahora.getHours()).padStart(2, '0');
+        const minutos = String(ahora.getMinutes()).padStart(2, '0');
+        const segundos = String(ahora.getSeconds()).padStart(2, '0');
+        document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
+    }
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj();
+
+    // FILTRADO
     const buttons = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.product-card');
 
@@ -187,13 +199,12 @@
         }
     });
 
-    // LÓGICA DE WHATSAPP DINÁMICO
+    // WHATSAPP
     function consultarWSP(elemento) {
         const numero = "5492216172384";
         const nombreProducto = elemento.parentElement.querySelector('h3').innerText;
         const mensaje = encodeURIComponent("Hola! Me interesa obtener más información sobre el producto: " + nombreProducto);
-        const url = "https://wa.me/" + numero + "?text=" + mensaje;
-        window.open(url, '_blank');
+        window.open("https://wa.me/" + numero + "?text=" + mensaje, '_blank');
     }
 </script>
 
