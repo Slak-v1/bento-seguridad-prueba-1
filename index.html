@@ -4,36 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BENTO | Security Excellence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         :root { 
             --negro-pro: #010101; 
-            --tarjeta: rgba(25, 25, 25, 0.95); /* Fondo un poco más sólido para el efecto del borde */
+            --tarjeta: rgba(25, 25, 25, 0.95);
             --verde-neon: #00ff88;
             --naranja: #ff6600;
-            /* El degradado RGB que usaremos en NAV y en el BORDE HOVER */
             --rgb-gradient: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400);
         }
         
-        /* BLOQUEO DE SELECCIÓN Y ANTI-COPIA */
         * { 
             box-sizing: border-box; 
-            transition: all 0.3s ease; /* Transición un poco más rápida para el hover */
+            transition: all 0.3s ease; 
             user-select: none; 
             -webkit-user-select: none;
             -webkit-touch-callout: none;
         }
         
         body { 
-            margin: 0; font-family: 'Lexend', sans-serif; 
+            margin: 0; 
+            /* Cambio de fuente base a Montserrat para elegancia y lectura clara */
+            font-family: 'Montserrat', sans-serif; 
             background-color: var(--negro-pro);
             background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
-            color: #ffffff; overflow-x: hidden;
+            color: #ffffff; 
+            overflow-x: hidden;
+            font-weight: 300; /* Letra más fina = más elegante */
         }
 
-        /* --- NAV CON FRANJA RGB ANIMADA --- */
+        /* --- NAV --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
             align-items: center; padding: 30px 8%; background: rgba(0, 0, 0, 0.95); 
@@ -41,98 +43,119 @@
             position: relative;
         }
 
-        /* EFECTO FRANJA RGB (ANIMADA) */
         nav::after {
-            content: "";
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--rgb-gradient);
-            background-size: 200% auto;
-            animation: rgbFlow 3s linear infinite;
-            box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
+            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px;
+            background: var(--rgb-gradient); background-size: 200% auto;
+            animation: rgbFlow 3s linear infinite; box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
         }
 
-        @keyframes rgbFlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
+        @keyframes rgbFlow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 
         .logo-box img { height: 130px; filter: drop-shadow(0 0 15px rgba(255, 102, 0, 0.3)); }
 
         .status-container { text-align: right; }
-        .status-live { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: 2px; }
-        .dot { width: 8px; height: 8px; background: var(--verde-neon); border-radius: 50%; box-shadow: 0 0 12px var(--verde-neon); animation: blink 1.5s infinite; }
+        .status-live { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; }
+        .dot { width: 6px; height: 6px; background: var(--verde-neon); border-radius: 50%; box-shadow: 0 0 10px var(--verde-neon); animation: blink 1.5s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-        #reloj { color: var(--naranja); font-weight: 600; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; }
+        #reloj { color: var(--naranja); font-weight: 500; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; font-family: 'Montserrat', sans-serif; }
 
         /* --- HERO --- */
         .hero { padding: 100px 8% 40px; text-align: center; }
-        .hero h1 { font-size: clamp(35px, 6vw, 70px); font-weight: 100; margin-bottom: 20px; letter-spacing: -3px; line-height: 1.1; }
-        .hero h1 b { font-weight: 800; color: #fff; }
-        .hero p { color: #888; max-width: 600px; margin: 0 auto 50px; font-size: 16px; font-weight: 300; line-height: 1.8; letter-spacing: 1px; }
+        
+        /* FUENTE CINZEL PARA EL TÍTULO PRINCIPAL */
+        .hero h1 { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(30px, 5vw, 60px); 
+            font-weight: 400; 
+            margin-bottom: 25px; 
+            letter-spacing: 2px; 
+            line-height: 1.2; 
+        }
+        .hero h1 b { font-weight: 700; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.1); }
+        
+        .hero p { 
+            color: #999; 
+            max-width: 650px; 
+            margin: 0 auto 50px; 
+            font-size: 15px; 
+            font-weight: 300; 
+            line-height: 1.8; 
+            letter-spacing: 1px; /* Espaciado elegante */
+        }
 
         /* --- MARCAS --- */
         .brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0 8% 60px; }
-        .brand-pill { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #888; padding: 10px 20px; border-radius: 50px; font-size: 11px; font-weight: 600; letter-spacing: 2px; cursor: pointer; }
+        .brand-pill { 
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
+            color: #aaa; padding: 10px 25px; border-radius: 0; /* Bordes rectos son más formales */
+            font-size: 10px; font-weight: 500; letter-spacing: 3px; cursor: pointer; 
+            font-family: 'Montserrat', sans-serif;
+        }
         .brand-pill:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-3px); }
 
         /* --- FILTROS --- */
         .filter-wrapper { padding: 20px 0 40px; text-align: center; }
-        .cat-btn { background: transparent; border: 1px solid #222; color: #666; padding: 12px 25px; margin: 5px; cursor: pointer; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; }
-        .cat-btn.active { background: #ff6600; color: #000; border: none; font-weight: 800; box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
+        .cat-btn { 
+            background: transparent; border: 1px solid #333; color: #777; 
+            padding: 12px 30px; margin: 5px; cursor: pointer; 
+            font-size: 10px; font-weight: 600; text-transform: uppercase; 
+            letter-spacing: 3px; font-family: 'Montserrat', sans-serif;
+        }
+        .cat-btn.active { background: #ff6600; color: #000; border-color: #ff6600; font-weight: 700; box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
 
         /* --- GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
         
         .product-card { 
-            background: var(--tarjeta); 
-            padding: 45px; 
-            border: 1px solid rgba(255,255,255,0.05); /* Borde inicial sutil */
+            background: var(--tarjeta); padding: 50px; border: 1px solid rgba(255,255,255,0.05); 
             position: relative; overflow: hidden; 
-            /* Preparamos las propiedades para la animación del borde */
-            background-origin: padding-box, border-box;
-            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box; background-clip: padding-box, border-box;
         }
         
-        /* --- EFECTO HOVER CON BORDE RGB ANIMADO --- */
         .product-card:hover {
             transform: translateY(-10px);
-            border: 2px solid transparent; /* Hacemos espacio transparente para el borde */
-            /* Truco de doble fondo: El primero es el color de la tarjeta, el segundo es el degradado animado */
+            border: 2px solid transparent;
             background-image: linear-gradient(var(--tarjeta), var(--tarjeta)), var(--rgb-gradient);
             background-size: 100% 100%, 200% auto;
-            /* Animamos solo el segundo fondo (el degradado) */
             animation: rgbBorderFlow 3s linear infinite;
-            box-shadow: 0 10px 30px -10px rgba(255, 102, 0, 0.3); /* Sombra naranja al levantar */
+            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.8);
         }
 
-        /* Nueva animación específica para el borde de las tarjetas */
-        @keyframes rgbBorderFlow {
-            0% { background-position: 0 0, 0 0; }
-            100% { background-position: 0 0, 200% 0; }
-        }
+        @keyframes rgbBorderFlow { 0% { background-position: 0 0, 0 0; } 100% { background-position: 0 0, 200% 0; } }
         
-        /* PROTECCIÓN DE IMAGEN */
-        .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 40px; }
+        .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 30px; }
         .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 10; }
-        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; filter: none; }
+        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 
-        .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--verde-neon); opacity: 0; z-index: 2; box-shadow: 0 0 15px var(--verde-neon); }
-        .product-card:hover .scan-line { opacity: 0.8; animation: scan 3s infinite linear; }
+        /* TIPOGRAFÍA DE TARJETA MEJORADA */
+        .product-card h3 {
+            font-family: 'Cinzel', serif; /* Título del producto en fuente elegante */
+            font-size: 18px; margin-bottom: 10px; color: #fff; letter-spacing: 1px;
+        }
+        .product-card p {
+            font-size: 13px; color: #888; font-weight: 300; line-height: 1.6; margin-bottom: 25px;
+        }
+
+        .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: var(--verde-neon); opacity: 0; z-index: 2; box-shadow: 0 0 10px var(--verde-neon); }
+        .product-card:hover .scan-line { opacity: 0.6; animation: scan 3s infinite linear; }
         @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        .btn-consultar { display: block; width: 100%; padding: 18px; border: 1px solid #333; color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; text-align: center; }
+        .btn-consultar { 
+            display: block; width: 100%; padding: 15px; border: 1px solid #444; 
+            color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 4px; text-align: center;
+            transition: 0.4s;
+        }
         .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
 
         /* --- TRUST BAR --- */
-        .trust-bar { background: #050505; padding: 80px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; border-top: 1px solid #111; }
-        .trust-item { color: #888; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
-        .trust-item i { font-size: 38px; color: var(--naranja); margin-bottom: 20px; display: block; }
+        .trust-bar { background: #050505; padding: 90px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; border-top: 1px solid #111; }
+        .trust-item { color: #666; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-align: center; font-weight: 400; }
+        .trust-item i { font-size: 32px; color: var(--naranja); margin-bottom: 25px; display: block; opacity: 0.8; }
 
-        footer { padding: 80px 8%; text-align: center; border-top: 1px solid #111; }
-        .footer-logo span { color: var(--verde-neon); font-weight: 800; }
+        footer { padding: 90px 8%; text-align: center; border-top: 1px solid #111; }
+        .footer-logo { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 5px; color: #555; }
+        .footer-logo span { color: var(--verde-neon); }
 
         .wsp-flotante { position: fixed; bottom: 40px; right: 40px; z-index: 2000; transition: 0.3s; }
     </style>
@@ -146,8 +169,8 @@
 <nav>
   <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
   <div class="status-container">
-      <div class="status-live"><div class="dot"></div> ATENCIÓN PROFESIONAL</div>
-      <div class="location-text" style="font-size: 10px; color: #555;">LA PLATA | ARGENTINA <span id="reloj">00:00:00</span></div>
+      <div class="status-live"><div class="dot"></div> Atención Profesional</div>
+      <div class="location-text" style="font-size: 9px; color: #666; margin-top: 5px; letter-spacing: 2px;">LA PLATA | ARGENTINA <span id="reloj">00:00:00</span></div>
   </div>
 </nav>
 
@@ -164,7 +187,7 @@
 </div>
 
 <div class="filter-wrapper">
-    <button class="cat-btn active" data-filter="all">Catálogo Completo</button>
+    <button class="cat-btn active" data-filter="all">Catálogo</button>
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
     <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
@@ -216,7 +239,6 @@
 </footer>
 
 <script>
-    // BLOQUEO DE TECLAS DE INSPECCIÓN
     document.onkeydown = function(e) {
         if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
             return false;
