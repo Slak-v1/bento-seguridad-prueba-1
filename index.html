@@ -15,12 +15,13 @@
             --verde-neon: #00ff88;
         }
         
-        /* BLOQUEO DE SELECCIÓN DE TEXTO */
+        /* BLOQUEO DE SELECCIÓN */
         * { 
             box-sizing: border-box; 
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-            user-select: none; /* Nadie puede seleccionar texto ni fotos */
+            user-select: none; 
             -webkit-user-select: none;
+            -webkit-touch-callout: none; /* Bloqueo en móviles */
         }
         
         body { 
@@ -64,29 +65,15 @@
         .cat-btn { background: transparent; border: 1px solid #222; color: #666; padding: 12px 25px; margin: 5px; cursor: pointer; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; }
         .cat-btn.active { background: var(--naranja-degradado); color: #000; border: none; font-weight: 800; box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3); }
 
-        /* --- GRID DE PRODUCTOS --- */
+        /* --- GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
+        .product-card { background: var(--tarjeta); padding: 45px; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; }
         
-        .product-card { 
-            background: var(--tarjeta); padding: 45px; border: 1px solid rgba(255,255,255,0.03); 
-            position: relative; overflow: hidden; 
-        }
-        
-        /* ESCUDO ANTICOPIA SOBRE LA IMAGEN */
-        .img-container { 
-            position: relative; 
-            width: 100%; 
-            height: 260px; 
-            margin-bottom: 40px;
-        }
-        .img-container::after {
-            content: "";
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: transparent; z-index: 10;
-        }
-        
+        /* ESCUDO INVISIBLE SOBRE FOTOS */
+        .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 40px; }
+        .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 10; }
         .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
-        
+
         .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--verde-neon); opacity: 0; z-index: 2; box-shadow: 0 0 15px var(--verde-neon); }
         .product-card:hover .scan-line { opacity: 0.8; animation: scan 3s infinite linear; }
         @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
@@ -103,14 +90,9 @@
         .footer-logo span { color: var(--verde-neon); font-weight: 800; }
 
         .wsp-flotante { position: fixed; bottom: 40px; right: 40px; z-index: 2000; transition: 0.3s; }
-
-        @media (max-width: 768px) {
-            .logo-box img { height: 90px; }
-            nav { padding: 20px 5%; }
-        }
     </style>
 </head>
-<body oncontextmenu="return false" onkeydown="return disableF12(event)">
+<body oncontextmenu="return false">
 
 <a href="https://wa.me/5492216172384" class="wsp-flotante" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="55">
@@ -149,7 +131,7 @@
     <div class="img-container"><img src="alarma-ajax-kit.jpg" alt="Ajax"></div>
     <div class="scan-line"></div>
     <h3>Ajax Hub 2 Plus</h3>
-    <p>Central de seguridad inalámbrica de largo alcance.</p>
+    <p>Central de seguridad inalámbrica profesional.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
@@ -157,7 +139,23 @@
     <div class="img-container"><img src="bullet2mp.jpg" alt="Dahua"></div>
     <div class="scan-line"></div>
     <h3>Dahua Series Pro</h3>
-    <p>Vigilancia nocturna avanzada 4K.</p>
+    <p>Vigilancia nocturna avanzada de alta resolución.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+  </div>
+
+  <div class="product-card" data-category="grabacion">
+    <div class="img-container"><img src="dvr8ch.jpg" alt="DVR"></div>
+    <div class="scan-line"></div>
+    <h3>DVR Hikvision 8CH</h3>
+    <p>Grabación híbrida con acceso remoto móvil.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+  </div>
+
+  <div class="product-card" data-category="accesorios">
+    <div class="img-container"><img src="balun.jpg" alt="Balun"></div>
+    <div class="scan-line"></div>
+    <h3>Balun Pasivo HD</h3>
+    <p>Transmisores de video de alta calidad sin interferencias.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 </div>
@@ -173,14 +171,13 @@
 </footer>
 
 <script>
-    // BLOQUEO DE TECLAS DE INSPECCIÓN
-    function disableF12(e) {
-        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
+    // BLOQUEO DE TECLAS (F12, Ctrl+U, Ctrl+Shift+I)
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
             return false;
         }
-    }
+    };
 
-    // RELOJ
     function actualizarReloj() {
         const ahora = new Date();
         document.getElementById('reloj').textContent = ahora.toLocaleTimeString('es-AR');
@@ -188,7 +185,6 @@
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // FILTROS
     const buttons = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.product-card');
 
