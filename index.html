@@ -1,232 +1,208 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENTO | Security Excellence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        :root { 
-            --negro-pro: #010101; 
-            --verde-neon: #00ff88; 
-            --naranja: #ff6600; 
-            --rgb-gradient: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400); 
-            --tarjeta: rgba(255, 255, 255, 0.02); 
-            --radius: 20px; 
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BENTO | Security Excellence</title>
 
-        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); user-select: none; -webkit-user-select: none; }
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-        @keyframes fadeInPage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+<style>
+:root{
+    --negro:#010101;
+    --naranja:#ff6600;
+    --tarjeta:rgba(255,255,255,.03);
+    --radius:22px;
+}
 
-        body { 
-            margin: 0; font-family: 'Montserrat', sans-serif; 
-            background-color: var(--negro-pro); 
-            background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.1) 0%, transparent 40%); 
-            background-attachment: fixed; color: #ffffff; overflow-x: hidden; font-weight: 300; 
-            animation: fadeInPage 1.2s ease-out; 
-        }
+*{box-sizing:border-box;margin:0;padding:0}
 
-        .top-banner { background: #0a0a0a; color: #777; font-size: 10px; text-align: center; padding: 12px 0; letter-spacing: 4px; text-transform: uppercase; border-bottom: 1px solid #1a1a1a; font-weight: 500; }
-        .top-banner b { color: var(--naranja); font-weight: 700; }
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#000;
+    color:#fff;
+}
 
-        nav { position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); position: relative; }
-        nav::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: var(--rgb-gradient); background-size: 200% auto; animation: rgbFlow 3s linear infinite; box-shadow: 0 0 15px rgba(255, 102, 0, 0.5); }
+/* NAV */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:#000;
+    border-bottom:3px solid var(--naranja);
+}
 
-        @keyframes rgbFlow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+.logo-box img{height:90px}
 
-        .logo-box img { height: 110px; filter: drop-shadow(0 0 15px rgba(255, 102, 0, 0.3)); }
-        .status-container { text-align: right; }
-        .status-live { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; }
-        .dot { width: 8px; height: 8px; background: var(--verde-neon); border-radius: 50%; box-shadow: 0 0 12px var(--verde-neon); animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-        #reloj { color: var(--naranja); font-weight: 500; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; }
+/* HERO */
+.hero{
+    text-align:center;
+    padding:80px 8% 40px;
+}
+.hero h1{
+    font-family:'Cinzel',serif;
+    font-size:42px;
+}
+.hero p{
+    color:#aaa;
+    margin-top:15px;
+}
 
-        .hero { padding: 80px 8% 40px; text-align: center; }
-        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 60px); letter-spacing: 2px; margin-bottom: 25px; }
-        .hero h1 b { font-weight: 700; color: #fff; }
-        .hero p { color: #888; max-width: 650px; margin: 0 auto 50px; font-size: 15px; letter-spacing: 1px; line-height: 1.8; }
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:40px;
+    padding:40px 8% 100px;
+}
 
-        .brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0 8% 60px; }
-        .brand-pill { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #aaa; padding: 10px 25px; font-size: 10px; font-weight: 500; letter-spacing: 3px; cursor: pointer; border-radius: 50px; }
-        .brand-pill:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-3px); }
+/* CARD */
+.product-card{
+    background:var(--tarjeta);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 15px 40px rgba(0,0,0,.7);
+    transition:.4s;
+}
 
-        .filter-wrapper { padding: 20px 0 40px; text-align: center; }
-        .cat-btn { background: transparent; border: 1px solid #333; color: #777; padding: 12px 30px; margin: 5px; cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; border-radius: 10px; }
-        .cat-btn.active { background: var(--naranja); color: #000; border-color: var(--naranja); box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
+.product-card:hover{
+    transform:translateY(-8px);
+}
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
-        
-        .product-card { background: var(--tarjeta); padding: 30px; border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius); position: relative; overflow: hidden; display: flex; flex-direction: column; }
-        
-        .product-card:hover { border: 1px solid transparent; background-image: linear-gradient(var(--negro-pro), var(--negro-pro)), var(--rgb-gradient); background-origin: border-box; background-clip: padding-box, border-box; background-size: 100% 100%, 200% auto; animation: rgbFlow 3s linear infinite; transform: translateY(-10px); box-shadow: 0 15px 40px -10px rgba(0,0,0,0.8); }
+/* CONTORNO DE IMAGEN (COMO TU FOTO) */
+.img-container{
+    width:100%;
+    height:260px;
+    background:#fff;
+    border-radius:22px 22px 0 0;
+    position:relative;
+    overflow:hidden;
+}
 
-        /* --- CONTENEDOR DE IMAGEN CON REBORDE (SOLICITADO) --- */
-        .img-container { 
-            position: relative; 
-            width: 100%; 
-            height: 260px; 
-            margin-bottom: 25px; 
-            background: rgba(0,0,0,0.4); /* Fondo para que resalte la foto */
-            border: 1px solid rgba(255,255,255,0.1); /* Reborde sutil */
-            border-radius: 15px; /* Redondeado del recuadro */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+.img-container img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
 
-        .img-container img { 
-            width: 85%; 
-            height: 85%; 
-            object-fit: contain; 
-            pointer-events: none; 
-        }
+/* BADGE */
+.tech-badge{
+    position:absolute;
+    top:12px;
+    right:12px;
+    background:var(--naranja);
+    color:#000;
+    font-size:10px;
+    font-weight:800;
+    padding:6px 12px;
+    border-radius:6px;
+}
 
-        .tech-badge { position: absolute; top: 10px; right: 10px; background: var(--naranja); color: #000; padding: 5px 12px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; border-radius: 5px; z-index: 20; box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3); }
+/* TEXTO */
+.card-body{
+    padding:25px;
+}
 
-        .product-card h3 { font-family: 'Cinzel', serif; font-size: 18px; margin-bottom: 10px; color: #fff; }
-        .product-card p { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 25px; }
+.card-body h3{
+    font-family:'Cinzel',serif;
+    font-size:18px;
+    margin-bottom:10px;
+}
 
-        .btn-consultar { display: block; width: 100%; padding: 15px; border: 1px solid #444; color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; text-align: center; border-radius: 12px; }
-        .btn-consultar:hover { background: #fff; color: #000; }
+.card-body p{
+    font-size:13px;
+    color:#aaa;
+    margin-bottom:25px;
+    line-height:1.6;
+}
 
-        .wsp-container { position: fixed; bottom: 40px; right: 40px; z-index: 2000; display: flex; align-items: center; justify-content: center; }
-        .wsp-aura { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: rgba(37, 211, 102, 0.2); animation: pulseAura 2.5s infinite; z-index: -1; }
-        @keyframes pulseAura { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
-        .wsp-flotante { transition: 0.3s; filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4)); }
+/* BOTÓN */
+.btn-consultar{
+    display:block;
+    text-align:center;
+    padding:14px;
+    border:1px solid #444;
+    color:#fff;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    border-radius:12px;
+    cursor:pointer;
+}
 
-        .trust-bar { background: #050505; padding: 80px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; border-top: 1px solid #111; gap: 40px;}
-        .trust-item { color: #666; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
-        .trust-item i { font-size: 30px; color: var(--naranja); margin-bottom: 20px; display: block; opacity: 0.8;}
+.btn-consultar:hover{
+    background:#fff;
+    color:#000;
+}
 
-        footer { padding: 60px 8%; text-align: center; border-top: 1px solid #111; background: #000; }
-        .copyright-text { font-family: 'Montserrat', sans-serif; font-size: 10px; color: #444; letter-spacing: 2px; text-transform: uppercase; }
-        .copyright-text b { color: #666; font-family: 'Cinzel', serif; }
-    </style>
+/* WHATSAPP */
+.wsp{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+}
+.wsp img{width:55px}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+    .img-container{height:220px}
+}
+</style>
 </head>
-<body oncontextmenu="return false">
 
-<div class="top-banner"> Compromiso y <b>Servicio de Calidad</b> en cada instalación</div>
+<body>
 
-<div class="wsp-container"> 
-    <div class="wsp-aura"></div> 
-    <a href="https://wa.me/5492216172384" class="wsp-flotante" target="_blank"> 
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="55"> 
-    </a>
-</div>
-
-<nav> 
-    <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div> 
-    <div class="status-container"> 
-        <div class="status-live"><div class="dot"></div> Atención Profesional</div> 
-        <div class="location-text" style="font-size: 9px; color: #666; margin-top: 5px; letter-spacing: 2px;">LA PLATA | ARGENTINA <span id="reloj">00:00:00</span></div> 
+<nav>
+    <div class="logo-box">
+        <img src="logo.jpg" alt="BENTO">
     </div>
+    <div>📞 221 617-2384</div>
 </nav>
 
-<section class="hero"> 
-    <h1>Elegancia en <b>Seguridad</b></h1> 
-    <p>Tecnología de precisión y monitoreo inteligente para una protección sin precedentes.</p>
+<section class="hero">
+    <h1>Elegancia en <b>Seguridad</b></h1>
+    <p>Tecnología avanzada en alarmas y cámaras profesionales</p>
 </section>
 
-<div class="brands-container"> 
-    <div class="brand-pill">DAHUA</div> 
-    <div class="brand-pill">HIKVISION</div> 
-    <div class="brand-pill">IMOU</div> 
-    <div class="brand-pill">AJAX</div> 
-    <div class="brand-pill">INTELBRAS</div>
-</div>
+<div class="grid">
 
-<div class="filter-wrapper"> 
-    <button class="cat-btn active" data-filter="all">Catálogo</button> 
-    <button class="cat-btn" data-filter="alarmas">Alarmas</button> 
-    <button class="cat-btn" data-filter="camaras">Cámaras</button> 
-    <button class="cat-btn" data-filter="grabacion">DVR/NVR</button> 
-    <button class="cat-btn" data-filter="accesorios">Accesorios</button>
-</div>
-
-<div class="grid"> 
-    <div class="product-card" data-category="camaras"> 
-        <div class="img-container"> 
-            <div class="tech-badge">Full HD 1080p</div> 
-            <img src="camara-imou.jpg" alt="Imou"> 
-        </div> 
-        <h3>Imou Ranger 2</h3> 
-        <p>Cámara inteligente con seguimiento 360° y audio bidireccional.</p> 
-        <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div> 
-    </div> 
-
-    <div class="product-card" data-category="alarmas"> 
-        <div class="img-container"> 
-            <div class="tech-badge">Ultra-Link</div> 
-            <img src="alarma-ajax-kit.jpg" alt="Ajax"> 
-        </div> 
-        <h3>Ajax Hub 2 Plus</h3> 
-        <p>Central de seguridad inalámbrica con triple canal de comunicación.</p> 
-        <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div> 
-    </div> 
-
-    <div class="product-card" data-category="camaras"> 
-        <div class="img-container"> 
-            <div class="tech-badge">4K Ultra HD</div> 
-            <img src="bullet2mp.jpg" alt="Dahua"> 
-        </div> 
-        <h3>Dahua Series Pro</h3> 
-        <p>Vigilancia nocturna ColorVu de alta definición y precisión.</p> 
-        <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div> 
-    </div> 
-
-    <div class="product-card" data-category="grabacion"> 
-        <div class="img-container"> 
-            <div class="tech-badge">H.265+ Zip</div> 
-            <img src="dvr8ch.jpg" alt="DVR"> 
-        </div> 
-        <h3>DVR Hikvision 8CH</h3> 
-        <p>Grabación híbrida con compresión avanzada y acceso remoto.</p> 
-        <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div> 
+    <div class="product-card">
+        <div class="img-container">
+            <span class="tech-badge">FULL HD</span>
+            <img src="alarma-ajax-kit.jpg" alt="Ajax">
+        </div>
+        <div class="card-body">
+            <h3>Kit Alarma Ajax</h3>
+            <p>Alarma inteligente WiFi con sensores profesionales.</p>
+            <div class="btn-consultar" onclick="wsp('Kit Alarma Ajax')">Consultar</div>
+        </div>
     </div>
+
+    <div class="product-card">
+        <div class="img-container">
+            <span class="tech-badge">2MP</span>
+            <img src="bullet2mp.jpg" alt="Dahua">
+        </div>
+        <div class="card-body">
+            <h3>Cámara Bullet 2MP</h3>
+            <p>Visión nocturna HD y carcasa exterior.</p>
+            <div class="btn-consultar" onclick="wsp('Cámara Bullet 2MP')">Consultar</div>
+        </div>
+    </div>
+
 </div>
 
-<section class="trust-bar"> 
-    <div class="trust-item"><i class="fas fa-shield-alt"></i> Garantía Oficial</div> 
-    <div class="trust-item"><i class="fas fa-tools"></i> Soporte Técnico</div> 
-    <div class="trust-item"><i class="fas fa-shipping-fast"></i> Envíos Nacionales</div>
-</section>
+<a class="wsp" href="https://wa.me/5492216172384" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+</a>
 
-<footer> 
-    <div class="copyright-text"> © 2026 TODOS LOS DERECHOS RESERVADOS | <b>BENTO SECURITY GROUP</b> </div>
-</footer>
-
-<script> 
-    function actualizarReloj() { const ahora = new Date(); document.getElementById('reloj').textContent = ahora.toLocaleTimeString('es-AR'); } 
-    setInterval(actualizarReloj, 1000); actualizarReloj(); 
-
-    const buttons = document.querySelectorAll('.cat-btn'); 
-    const cards = document.querySelectorAll('.product-card'); 
-    buttons.forEach(btn => { 
-        btn.onclick = () => { 
-            buttons.forEach(b => b.classList.remove('active')); 
-            btn.classList.add('active'); 
-            const f = btn.dataset.filter; 
-            cards.forEach(c => { 
-                if (f === 'all' || c.dataset.category === f) { 
-                    c.style.display = 'flex'; 
-                    setTimeout(() => c.style.opacity = '1', 50); 
-                } else { 
-                    c.style.opacity = '0'; 
-                    setTimeout(() => c.style.display = 'none', 400); 
-                } 
-            }); 
-        } 
-    }); 
-
-    function consultarWSP(elemento) { 
-        const nombre = elemento.parentElement.querySelector('h3').innerText; 
-        window.open("https://wa.me/5492216172384?text=Hola! Me interesa: " + nombre, '_blank'); 
-    } 
-
-    document.onkeydown = function(e) { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) { return false; } };
+<script>
+function wsp(prod){
+    window.open("https://wa.me/5492216172384?text=Hola! Me interesa: "+prod)
+}
 </script>
+
 </body>
 </html>
