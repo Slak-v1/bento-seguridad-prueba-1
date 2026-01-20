@@ -18,7 +18,6 @@
         
         * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); user-select: none; -webkit-user-select: none; }
         
-        /* Efecto de entrada suave al cargar la página */
         @keyframes fadeInPage {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -33,149 +32,95 @@
             animation: fadeInPage 1.2s ease-out;
         }
 
-        /* --- BANNER SUPERIOR DE CALIDAD --- */
-        .top-banner {
-            background: #0a0a0a;
-            color: #777;
-            font-size: 10px;
-            text-align: center;
-            padding: 10px 0;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            border-bottom: 1px solid #1a1a1a;
-            font-weight: 500;
-        }
-        .top-banner b { color: var(--naranja); font-weight: 700; }
+        /* --- TOP BANNER --- */
+        .top-banner { background: #0a0a0a; color: #777; font-size: 10px; text-align: center; padding: 10px 0; letter-spacing: 4px; text-transform: uppercase; border-bottom: 1px solid #1a1a1a; }
+        .top-banner b { color: var(--naranja); }
 
         /* --- NAV --- */
-        nav { 
-            position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 25px 8%; background: rgba(0, 0, 0, 0.95); 
-            backdrop-filter: blur(20px); position: relative;
-        }
-        nav::after {
-            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px;
-            background: var(--rgb-gradient); background-size: 200% auto;
-            animation: rgbFlow 3s linear infinite; box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
-        }
+        nav { position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); }
+        nav::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: var(--rgb-gradient); background-size: 200% auto; animation: rgbFlow 3s linear infinite; }
         @keyframes rgbFlow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
-
         .logo-box img { height: 110px; filter: drop-shadow(0 0 15px rgba(255, 102, 0, 0.3)); }
         
-        .status-container { text-align: right; }
         .status-live { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; }
         .dot { width: 8px; height: 8px; background: var(--verde-neon); border-radius: 50%; box-shadow: 0 0 12px var(--verde-neon); animation: blink 1.5s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
         #reloj { color: var(--naranja); font-weight: 500; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; }
 
-        /* --- WHATSAPP CON AURA --- */
-        .wsp-container { position: fixed; bottom: 40px; right: 40px; z-index: 2000; display: flex; align-items: center; justify-content: center; }
-        .wsp-aura { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: rgba(37, 211, 102, 0.2); animation: pulseAura 2.5s infinite; z-index: -1; }
-        @keyframes pulseAura { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
-        .wsp-flotante { transition: 0.3s; filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4)); }
-
-        /* --- HERO --- */
-        .hero { padding: 80px 8% 40px; text-align: center; }
-        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 60px); letter-spacing: 2px; margin-bottom: 25px; }
-        .hero h1 b { font-weight: 700; color: #fff; }
-        .hero p { color: #888; max-width: 650px; margin: 0 auto 50px; font-size: 15px; letter-spacing: 1px; line-height: 1.8; }
-
-        /* --- MARCAS --- */
-        .brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0 8% 60px; }
-        .brand-pill { 
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
-            color: #aaa; padding: 10px 25px; font-size: 10px; font-weight: 500; letter-spacing: 3px; cursor: pointer; border-radius: 50px; 
-        }
-        .brand-pill:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-3px); }
+        /* --- CARRUSEL PUBLICITARIO --- */
+        .slider-container { width: 84%; margin: 0 auto 60px; height: 350px; position: relative; overflow: hidden; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
+        .slide.active { opacity: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+        .slide-text { position: absolute; bottom: 40px; left: 40px; z-index: 10; }
+        .slide-text h2 { font-family: 'Cinzel', serif; font-size: 24px; color: var(--naranja); margin: 0; text-transform: uppercase; letter-spacing: 2px; }
 
         /* --- FILTROS --- */
         .filter-wrapper { padding: 20px 0 40px; text-align: center; }
-        .cat-btn { 
-            background: transparent; border: 1px solid #333; color: #777; padding: 12px 30px; margin: 5px; 
-            cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; border-radius: 10px;
-        }
+        .cat-btn { background: transparent; border: 1px solid #333; color: #777; padding: 12px 30px; margin: 5px; cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; border-radius: 10px; }
         .cat-btn.active { background: var(--naranja); color: #000; border-color: var(--naranja); box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
 
         /* --- GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
-        
-        .product-card { 
-            background: var(--tarjeta); padding: 40px; border: 1px solid rgba(255,255,255,0.05); 
-            border-radius: var(--radius); position: relative; overflow: hidden; display: flex; flex-direction: column;
-        }
-        
-        .product-card:hover {
-            border: 1px solid transparent; background-image: linear-gradient(var(--negro-pro), var(--negro-pro)), var(--rgb-gradient);
-            background-origin: border-box; background-clip: padding-box, border-box; background-size: 100% 100%, 200% auto;
-            animation: rgbFlow 3s linear infinite; transform: translateY(-10px);
-        }
+        .product-card { background: var(--tarjeta); padding: 40px; border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .product-card:hover { border: 1px solid transparent; background-image: linear-gradient(var(--negro-pro), var(--negro-pro)), var(--rgb-gradient); background-origin: border-box; background-clip: padding-box, border-box; background-size: 100% 100%, 200% auto; animation: rgbFlow 3s linear infinite; transform: translateY(-10px); }
         
         .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 30px; }
-        .img-container img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+        .img-container img { width: 100%; height: 100%; object-fit: contain; }
 
-        .tech-badge {
-            position: absolute; top: 10px; right: 10px; background: var(--naranja); color: #000;
-            padding: 5px 12px; font-size: 9px; font-weight: 800; text-transform: uppercase; 
-            letter-spacing: 1px; border-radius: 5px; z-index: 20; box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3);
-        }
+        .tech-badge { position: absolute; top: 10px; right: 10px; background: var(--naranja); color: #000; padding: 5px 12px; font-size: 9px; font-weight: 800; border-radius: 5px; z-index: 20; }
 
-        .product-card h3 { font-family: 'Cinzel', serif; font-size: 18px; margin-bottom: 10px; color: #fff; }
-        .product-card p { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 25px; }
-
-        .btn-consultar { 
-            display: block; width: 100%; padding: 15px; border: 1px solid #444; 
-            color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 4px; text-align: center; border-radius: 12px;
-        }
+        .btn-consultar { display: block; width: 100%; padding: 15px; border: 1px solid #444; color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; text-align: center; border-radius: 12px; cursor: pointer;}
         .btn-consultar:hover { background: #fff; color: #000; }
+
+        /* --- WHATSAPP CON AURA --- */
+        .wsp-container { position: fixed; bottom: 40px; right: 40px; z-index: 2000; display: flex; align-items: center; justify-content: center; }
+        .wsp-aura { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: rgba(37, 211, 102, 0.2); animation: pulseAura 2.5s infinite; z-index: -1; }
+        @keyframes pulseAura { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
 
         /* --- TRUST BAR --- */
         .trust-bar { background: #050505; padding: 80px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; border-top: 1px solid #111; gap: 40px;}
         .trust-item { color: #666; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
-        .trust-item i { font-size: 30px; color: var(--naranja); margin-bottom: 20px; display: block; opacity: 0.8;}
+        .trust-item i { font-size: 30px; color: var(--naranja); margin-bottom: 20px; display: block; }
 
-        /* --- FOOTER --- */
         footer { padding: 60px 8%; text-align: center; border-top: 1px solid #111; background: #000; }
         .copyright-text { font-family: 'Montserrat', sans-serif; font-size: 10px; color: #444; letter-spacing: 2px; text-transform: uppercase; }
-        .copyright-text b { color: #666; font-family: 'Cinzel', serif; }
     </style>
 </head>
 <body oncontextmenu="return false">
 
-<div class="top-banner">
-    Compromiso y <b>Servicio de Calidad</b> en cada instalación
-</div>
+<div class="top-banner">Compromiso y <b>Servicio de Calidad</b> en cada instalación</div>
 
 <div class="wsp-container">
     <div class="wsp-aura"></div>
-    <a href="https://wa.me/5492216172384" class="wsp-flotante" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="55">
-    </a>
+    <a href="https://wa.me/5492216172384" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="55"></a>
 </div>
 
 <nav>
   <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
   <div class="status-container">
       <div class="status-live"><div class="dot"></div> Atención Profesional</div>
-      <div class="location-text" style="font-size: 9px; color: #666; margin-top: 5px; letter-spacing: 2px;">LA PLATA | ARGENTINA <span id="reloj">00:00:00</span></div>
+      <div style="font-size: 9px; color: #666; margin-top: 5px; letter-spacing: 2px;">LA PLATA | ARGENTINA <span id="reloj">00:00:00</span></div>
   </div>
 </nav>
 
-<section class="hero">
-    <h1>Elegancia en <b>Seguridad</b></h1>
-    <p>Tecnología de precisión y monitoreo inteligente para una protección sin precedentes.</p>
-</section>
-
-<div class="brands-container">
-    <div class="brand-pill">DAHUA</div>
-    <div class="brand-pill">HIKVISION</div>
-    <div class="brand-pill">IMOU</div>
-    <div class="brand-pill">AJAX</div>
-    <div class="brand-pill">INTELBRAS</div>
+<div class="slider-container">
+    <div class="slide active">
+        <img src="https://images.unsplash.com/photo-1557597774-9d2739f85a76?auto=format&fit=crop&w=1200" alt="Instalacion">
+        <div class="slide-text"><h2>Protección Residencial</h2><p>Seguridad inteligente para tu hogar.</p></div>
+    </div>
+    <div class="slide">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c29596ba?auto=format&fit=crop&w=1200" alt="Negocios">
+        <div class="slide-text"><h2>Sistemas Comerciales</h2><p>Monitoreo profesional 24/7.</p></div>
+    </div>
+    <div class="slide">
+        <img src="https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=1200" alt="Tech">
+        <div class="slide-text"><h2>Tecnología 4K</h2><p>Máxima nitidez en cada detalle.</p></div>
+    </div>
 </div>
 
 <div class="filter-wrapper">
-    <button class="cat-btn active" data-filter="all">Catálogo</button>
+    <button class="cat-btn active" data-filter="all">Catálogo Completo</button>
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
     <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
@@ -184,12 +129,30 @@
 
 <div class="grid">
   <div class="product-card" data-category="camaras">
-    <div class="img-container">
-        <div class="tech-badge">4K Ultra HD</div>
-        <img src="camara-ejemplo.jpg" alt="Seguridad">
-    </div>
-    <h3>Dahua Series Pro</h3>
-    <p>Máxima fidelidad de imagen y visión nocturna avanzada para su tranquilidad.</p>
+    <div class="img-container"><div class="tech-badge">4K Ultra HD</div><img src="camara-imou.jpg"></div>
+    <h3>Imou Ranger 2</h3>
+    <p>Cámara inteligente con seguimiento 360° y visión nocturna.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+  </div>
+
+  <div class="product-card" data-category="alarmas">
+    <div class="img-container"><div class="tech-badge">Inalámbrica</div><img src="alarma-ajax-kit.jpg"></div>
+    <h3>Ajax Hub 2 Plus</h3>
+    <p>Sistema de intrusión grado 2. Máxima fiabilidad europea.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+  </div>
+
+  <div class="product-card" data-category="camaras">
+    <div class="img-container"><div class="tech-badge">Full Color</div><img src="bullet2mp.jpg"></div>
+    <h3>Dahua Bullet Pro</h3>
+    <p>Imagen a color incluso en oscuridad total.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+  </div>
+
+  <div class="product-card" data-category="grabacion">
+    <div class="img-container"><div class="tech-badge">8 Canales</div><img src="dvr8ch.jpg"></div>
+    <h3>DVR Hikvision Pro</h3>
+    <p>Grabación híbrida con detección de humanos y vehículos.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 </div>
@@ -201,41 +164,37 @@
 </section>
 
 <footer>
-    <div class="copyright-text">
-        © 2026 TODOS LOS DERECHOS RESERVADOS | <b>BENTO SECURITY GROUP</b>
-    </div>
+    <div class="copyright-text">© 2026 TODOS LOS DERECHOS RESERVADOS | <b>BENTO SECURITY GROUP</b></div>
 </footer>
 
 <script>
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
-            return false;
-        }
-    };
+    // Lógica del Carrusel
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+    setInterval(nextSlide, 5000);
 
+    // Reloj
     function actualizarReloj() {
-        const ahora = new Date();
-        document.getElementById('reloj').textContent = ahora.toLocaleTimeString('es-AR');
+        document.getElementById('reloj').textContent = new Date().toLocaleTimeString('es-AR');
     }
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
+    // Filtros
     const buttons = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.product-card');
-
     buttons.forEach(btn => {
         btn.onclick = () => {
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const f = btn.dataset.filter;
             cards.forEach(c => {
-                if (f === 'all' || c.dataset.category === f) {
-                    c.style.display = 'flex';
-                    setTimeout(() => c.style.opacity = '1', 50);
-                } else {
-                    c.style.opacity = '0';
-                    setTimeout(() => c.style.display = 'none', 400);
-                }
+                c.style.display = (f === 'all' || c.dataset.category === f) ? 'flex' : 'none';
             });
         }
     });
@@ -245,6 +204,5 @@
         window.open("https://wa.me/5492216172384?text=Hola! Me interesa: " + nombre, '_blank');
     }
 </script>
-
 </body>
 </html>
