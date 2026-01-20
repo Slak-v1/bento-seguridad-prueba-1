@@ -9,15 +9,17 @@
     <style>
         :root { 
             --negro-pro: #010101; 
-            --tarjeta: rgba(255, 255, 255, 0.03);
+            --tarjeta: rgba(25, 25, 25, 0.95); /* Fondo un poco más sólido para el efecto del borde */
             --verde-neon: #00ff88;
             --naranja: #ff6600;
+            /* El degradado RGB que usaremos en NAV y en el BORDE HOVER */
+            --rgb-gradient: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400);
         }
         
         /* BLOQUEO DE SELECCIÓN Y ANTI-COPIA */
         * { 
             box-sizing: border-box; 
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            transition: all 0.3s ease; /* Transición un poco más rápida para el hover */
             user-select: none; 
             -webkit-user-select: none;
             -webkit-touch-callout: none;
@@ -36,7 +38,7 @@
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
             align-items: center; padding: 30px 8%; background: rgba(0, 0, 0, 0.95); 
             backdrop-filter: blur(20px);
-            position: relative; /* Necesario para la franja animada */
+            position: relative;
         }
 
         /* EFECTO FRANJA RGB (ANIMADA) */
@@ -45,12 +47,11 @@
             position: absolute;
             bottom: 0; left: 0;
             width: 100%;
-            height: 4px; /* Grosor de la franja */
-            /* Degradado que simula el RGB pero en tonos de la marca */
-            background: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400);
+            height: 4px;
+            background: var(--rgb-gradient);
             background-size: 200% auto;
             animation: rgbFlow 3s linear infinite;
-            box-shadow: 0 0 20px rgba(255, 102, 0, 0.6); /* Resplandor */
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
         }
 
         @keyframes rgbFlow {
@@ -84,12 +85,39 @@
 
         /* --- GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
-        .product-card { background: var(--tarjeta); padding: 45px; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; }
         
-        /* PROTECCIÓN DE IMAGEN (Overlay invisible) */
+        .product-card { 
+            background: var(--tarjeta); 
+            padding: 45px; 
+            border: 1px solid rgba(255,255,255,0.05); /* Borde inicial sutil */
+            position: relative; overflow: hidden; 
+            /* Preparamos las propiedades para la animación del borde */
+            background-origin: padding-box, border-box;
+            background-clip: padding-box, border-box;
+        }
+        
+        /* --- EFECTO HOVER CON BORDE RGB ANIMADO --- */
+        .product-card:hover {
+            transform: translateY(-10px);
+            border: 2px solid transparent; /* Hacemos espacio transparente para el borde */
+            /* Truco de doble fondo: El primero es el color de la tarjeta, el segundo es el degradado animado */
+            background-image: linear-gradient(var(--tarjeta), var(--tarjeta)), var(--rgb-gradient);
+            background-size: 100% 100%, 200% auto;
+            /* Animamos solo el segundo fondo (el degradado) */
+            animation: rgbBorderFlow 3s linear infinite;
+            box-shadow: 0 10px 30px -10px rgba(255, 102, 0, 0.3); /* Sombra naranja al levantar */
+        }
+
+        /* Nueva animación específica para el borde de las tarjetas */
+        @keyframes rgbBorderFlow {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 0 0, 200% 0; }
+        }
+        
+        /* PROTECCIÓN DE IMAGEN */
         .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 40px; }
         .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 10; }
-        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; filter: none; } /* Fotos vivas */
+        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; filter: none; }
 
         .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--verde-neon); opacity: 0; z-index: 2; box-shadow: 0 0 15px var(--verde-neon); }
         .product-card:hover .scan-line { opacity: 0.8; animation: scan 3s infinite linear; }
