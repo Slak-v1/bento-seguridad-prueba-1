@@ -25,118 +25,70 @@
             letter-spacing: 0.2px;
         }
 
-        /* --- NAV REFINADO --- */
+        /* --- NAV --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
             align-items: center; padding: 30px 8%; background: rgba(0, 0, 0, 0.8); 
             backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 102, 0, 0.3);
         }
 
-        .logo-box img { 
-            height: 90px;
-            filter: drop-shadow(0 0 20px rgba(255, 102, 0, 0.3));
-        }
+        .logo-box img { height: 90px; filter: drop-shadow(0 0 20px rgba(255, 102, 0, 0.3)); }
 
-        /* --- ESTADO ONLINE ARRIBA A LA DERECHA --- */
         .status-container { text-align: right; }
-        
-        .status-live { 
-            display: flex; 
-            align-items: center; 
-            justify-content: flex-end;
-            gap: 10px;
-            font-size: 11px; 
-            font-weight: 600; 
-            color: #fff; 
-            letter-spacing: 2px; 
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .dot { 
-            width: 8px; 
-            height: 8px; 
-            background: var(--verde-online); 
-            border-radius: 50%; 
-            box-shadow: 0 0 12px var(--verde-online); 
-            animation: blink 1.5s infinite; 
-        }
-
+        .status-live { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 11px; font-weight: 600; color: #fff; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+        .dot { width: 8px; height: 8px; background: var(--verde-online); border-radius: 50%; box-shadow: 0 0 12px var(--verde-online); animation: blink 1.5s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+        .location-text { font-size: 10px; color: var(--naranja); font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
 
-        .location-text { 
-            font-size: 10px; 
-            color: var(--naranja); 
-            font-weight: 300; 
-            letter-spacing: 2px; 
-            text-transform: uppercase;
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero { padding: 100px 8% 40px; text-align: center; }
-        .hero h1 {
-            font-size: clamp(35px, 6vw, 70px); font-weight: 100; 
-            margin-bottom: 20px; letter-spacing: -3px; line-height: 1.1;
-            background: linear-gradient(180deg, #ffffff 0%, #666 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
+        .hero h1 { font-size: clamp(35px, 6vw, 70px); font-weight: 100; margin-bottom: 20px; letter-spacing: -3px; line-height: 1.1; background: linear-gradient(180deg, #ffffff 0%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero h1 b { font-weight: 800; color: #fff; }
-        
-        .hero p { 
-            color: #888; max-width: 600px; margin: 0 auto 50px; 
-            font-size: 16px; font-weight: 300; line-height: 1.8; letter-spacing: 1px;
+        .hero p { color: #888; max-width: 600px; margin: 0 auto 50px; font-size: 16px; font-weight: 300; line-height: 1.8; letter-spacing: 1px; }
+
+        .brands-grid { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; opacity: 0.2; margin-top: 20px; }
+        .brand-item { font-size: 16px; font-weight: 300; letter-spacing: 4px; }
+
+        /* --- BARRA DE SECTORES (CORREGIDA) --- */
+        .filter-wrapper {
+            padding: 40px 5% 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
-        /* --- BRANDS --- */
-        .brand-label { font-size: 9px; letter-spacing: 5px; color: var(--naranja); margin-bottom: 25px; display: block; font-weight: 600; }
-        .brands-grid { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; opacity: 0.3; }
-        .brand-item { font-size: 18px; font-weight: 300; letter-spacing: 4px; }
+        .filter-container { 
+            display: flex; 
+            gap: 15px; 
+            overflow-x: auto; 
+            padding: 10px 20px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Oculta scroll en Firefox */
+        }
+        
+        .filter-container::-webkit-scrollbar { display: none; } /* Oculta scroll en Chrome/Safari */
 
-        /* --- FILTROS --- */
-        .filter-container { display: flex; gap: 20px; padding: 40px 5%; justify-content: center; }
         .cat-btn { 
+            flex: 0 0 auto; /* Evita que los botones se achiquen */
             background: transparent; border: 1px solid rgba(255,255,255,0.05); 
             color: #555; padding: 12px 30px; border-radius: 2px; 
             cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px;
+            white-space: nowrap;
         }
         .cat-btn.active { border-color: var(--naranja); color: #fff; background: var(--naranja-soft); }
 
         /* --- GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 40px 8% 120px; }
-        
-        .product-card { 
-            background: var(--tarjeta); border-radius: 0px; 
-            padding: 45px; border: 1px solid rgba(255,255,255,0.03); position: relative;
-        }
-
-        .product-card:hover { 
-            border-color: rgba(255, 102, 0, 0.5);
-            background: rgba(255, 102, 0, 0.02);
-            transform: translateY(-5px);
-        }
-
-        .badge { 
-            position: absolute; top: 0; right: 45px; background: var(--naranja); 
-            padding: 6px 12px; font-size: 8px; font-weight: 800; color: #000; 
-            letter-spacing: 2px; text-transform: uppercase;
-        }
-
+        .product-card { background: var(--tarjeta); padding: 45px; border: 1px solid rgba(255,255,255,0.03); position: relative; }
+        .product-card:hover { border-color: rgba(255, 102, 0, 0.5); background: rgba(255, 102, 0, 0.02); transform: translateY(-5px); }
+        .badge { position: absolute; top: 0; right: 45px; background: var(--naranja); padding: 6px 12px; font-size: 8px; font-weight: 800; color: #000; letter-spacing: 2px; text-transform: uppercase; }
         .product-card img { width: 100%; height: 260px; object-fit: contain; margin-bottom: 40px; filter: grayscale(0.5); }
         .product-card:hover img { filter: grayscale(0); }
+        .product-card h3 { font-size: 24px; font-weight: 300; letter-spacing: -1px; margin-bottom: 15px; }
+        .product-card p { color: #555; font-size: 14px; margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
 
-        .product-card h3 { 
-            font-size: 24px; font-weight: 300; letter-spacing: -1px; margin-bottom: 15px; 
-        }
-        .product-card p { 
-            color: #555; font-size: 14px; margin-bottom: 40px; font-weight: 300; 
-            line-height: 1.6; letter-spacing: 0.5px;
-        }
-
-        .btn-consultar { 
-            display: inline-block; width: 100%; padding: 18px; border: 1px solid #222; 
-            color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 4px; text-align: center;
-        }
+        .btn-consultar { display: inline-block; width: 100%; padding: 18px; border: 1px solid #222; color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; text-align: center; }
         .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
 
         /* --- FOOTER --- */
@@ -145,7 +97,12 @@
         .footer-logo b { font-weight: 800; color: #444; }
 
         .wsp-flotante { position: fixed; bottom: 40px; right: 40px; z-index: 2000; opacity: 0.7; }
-        .wsp-flotante:hover { opacity: 1; transform: scale(1.1); }
+        
+        @media (max-width: 768px) {
+            .filter-wrapper { justify-content: flex-start; }
+            nav { padding: 20px 5%; }
+            .logo-box img { height: 60px; }
+        }
     </style>
 </head>
 <body>
@@ -155,22 +112,16 @@
 </a>
 
 <nav>
-  <div class="logo-box">
-    <img src="logo.jpg" alt="BENTO">
-  </div>
+  <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
   <div class="status-container">
-      <div class="status-live">
-          <div class="dot"></div> ATENCIÓN PROFESIONAL
-      </div>
+      <div class="status-live"><div class="dot"></div> ATENCIÓN PROFESIONAL</div>
       <div class="location-text">La Plata | Argentina</div>
   </div>
 </nav>
 
 <section class="hero">
     <h1>Elegancia en <b>Seguridad</b></h1>
-    <p>Sistemas de monitoreo y protección diseñados para quienes no aceptan menos que la perfección tecnológica.</p>
-    
-    <span class="brand-label">PARTNERS TECNOLÓGICOS</span>
+    <p>Sistemas de monitoreo diseñados para la perfección tecnológica.</p>
     <div class="brands-grid">
         <div class="brand-item">DAHUA</div>
         <div class="brand-item">HIKVISION</div>
@@ -179,11 +130,15 @@
     </div>
 </section>
 
-<div class="filter-container">
-  <button class="cat-btn active" data-filter="all">Catálogo Completo</button>
-  <button class="cat-btn" data-filter="alarmas">Alarmas</button>
-  <button class="cat-btn" data-filter="camaras">Cámaras</button>
-  <button class="cat-btn" data-filter="grabacion">Grabación</button>
+<div class="filter-wrapper">
+    <div class="filter-container">
+      <button class="cat-btn active" data-filter="all">Catálogo Completo</button>
+      <button class="cat-btn" data-filter="alarmas">Alarmas</button>
+      <button class="cat-btn" data-filter="camaras">Cámaras</button>
+      <button class="cat-btn" data-filter="grabacion">Grabación</button>
+      <button class="cat-btn" data-filter="acceso">Control de Acceso</button>
+      <button class="cat-btn" data-filter="incendio">Detección de Incendio</button>
+    </div>
 </div>
 
 <div class="grid">
@@ -191,7 +146,7 @@
     <div class="badge">Advanced</div>
     <img src="alarma-ajax-kit.jpg" alt="Ajax">
     <h3>Ajax Hub 2 Plus</h3>
-    <p>La máxima expresión en seguridad inalámbrica. Control total desde su smartphone con diseño europeo.</p>
+    <p>La máxima expresión en seguridad inalámbrica con diseño europeo.</p>
     <a href="https://wa.me/5492216172384" class="btn-consultar">Solicitar Información</a>
   </div>
 
@@ -199,7 +154,7 @@
     <div class="badge">Ultra HD</div>
     <img src="bullet2mp.jpg" alt="Dahua">
     <h3>Dahua Series Pro</h3>
-    <p>Claridad visual absoluta. Sensor de alta gama para una vigilancia nítida bajo cualquier condición.</p>
+    <p>Claridad visual absoluta bajo cualquier condición de luz.</p>
     <a href="https://wa.me/5492216172384" class="btn-consultar">Solicitar Información</a>
   </div>
 
@@ -207,14 +162,13 @@
     <div class="badge">Enterprise</div>
     <img src="dvr8ch.jpg" alt="NVR">
     <h3>Smart NVR 8CH</h3>
-    <p>Gestión de datos masiva con inteligencia artificial. Seguridad robusta para infraestructuras críticas.</p>
+    <p>Gestión de datos masiva con inteligencia artificial avanzada.</p>
     <a href="https://wa.me/5492216172384" class="btn-consultar">Solicitar Información</a>
   </div>
 </div>
 
 <footer>
     <div class="footer-logo">BENTO <b>CORPORATION</b></div>
-    <div style="font-size: 9px; color: #222; margin-top: 30px; letter-spacing: 5px; text-transform: uppercase;">Excellence in Electronic Security</div>
 </footer>
 
 <script>
