@@ -9,168 +9,109 @@
     <style>
         :root { 
             --negro-pro: #010101; 
-            --tarjeta: rgba(25, 25, 25, 0.95);
             --verde-neon: #00ff88;
             --naranja: #ff6600;
             --rgb-gradient: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400);
         }
         
-        * { 
-            box-sizing: border-box; 
-            transition: all 0.3s ease; 
-            user-select: none; 
-            -webkit-user-select: none;
-            -webkit-touch-callout: none;
-        }
+        * { box-sizing: border-box; transition: all 0.4s ease; user-select: none; -webkit-user-select: none; }
         
         body { 
-            margin: 0; 
-            /* Cambio de fuente base a Montserrat para elegancia y lectura clara */
-            font-family: 'Montserrat', sans-serif; 
+            margin: 0; font-family: 'Montserrat', sans-serif; 
             background-color: var(--negro-pro);
-            background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.1) 0%, transparent 40%);
+            background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.08) 0%, transparent 50%);
             background-attachment: fixed;
-            color: #ffffff; 
-            overflow-x: hidden;
-            font-weight: 300; /* Letra más fina = más elegante */
+            color: #ffffff; overflow-x: hidden; font-weight: 300;
         }
 
-        /* --- NAV --- */
+        /* --- NAV RGB --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 30px 8%; background: rgba(0, 0, 0, 0.95); 
-            backdrop-filter: blur(20px);
-            position: relative;
+            align-items: center; padding: 25px 8%; background: rgba(0, 0, 0, 0.9); 
+            backdrop-filter: blur(20px); position: relative;
         }
-
         nav::after {
-            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px;
+            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
             background: var(--rgb-gradient); background-size: 200% auto;
-            animation: rgbFlow 3s linear infinite; box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
+            animation: rgbFlow 3s linear infinite;
         }
-
         @keyframes rgbFlow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 
-        .logo-box img { height: 130px; filter: drop-shadow(0 0 15px rgba(255, 102, 0, 0.3)); }
-
-        .status-container { text-align: right; }
-        .status-live { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; }
-        .dot { width: 6px; height: 6px; background: var(--verde-neon); border-radius: 50%; box-shadow: 0 0 10px var(--verde-neon); animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-        #reloj { color: var(--naranja); font-weight: 500; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; font-family: 'Montserrat', sans-serif; }
+        .logo-box img { height: 110px; filter: drop-shadow(0 0 10px rgba(255, 102, 0, 0.2)); }
+        #reloj { color: var(--naranja); font-weight: 500; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; }
 
         /* --- HERO --- */
-        .hero { padding: 100px 8% 40px; text-align: center; }
-        
-        /* FUENTE CINZEL PARA EL TÍTULO PRINCIPAL */
-        .hero h1 { 
-            font-family: 'Cinzel', serif; 
-            font-size: clamp(30px, 5vw, 60px); 
-            font-weight: 400; 
-            margin-bottom: 25px; 
-            letter-spacing: 2px; 
-            line-height: 1.2; 
-        }
-        .hero h1 b { font-weight: 700; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.1); }
-        
-        .hero p { 
-            color: #999; 
-            max-width: 650px; 
-            margin: 0 auto 50px; 
-            font-size: 15px; 
-            font-weight: 300; 
-            line-height: 1.8; 
-            letter-spacing: 1px; /* Espaciado elegante */
-        }
+        .hero { padding: 100px 8% 60px; text-align: center; }
+        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 55px); letter-spacing: 4px; margin-bottom: 20px; }
+        .hero h1 b { font-weight: 700; color: #fff; }
+        .hero p { color: #777; max-width: 600px; margin: 0 auto; font-size: 14px; letter-spacing: 2px; line-height: 1.8; }
 
-        /* --- MARCAS --- */
-        .brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0 8% 60px; }
-        .brand-pill { 
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
-            color: #aaa; padding: 10px 25px; border-radius: 0; /* Bordes rectos son más formales */
-            font-size: 10px; font-weight: 500; letter-spacing: 3px; cursor: pointer; 
-            font-family: 'Montserrat', sans-serif;
-        }
-        .brand-pill:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-3px); }
-
-        /* --- FILTROS --- */
-        .filter-wrapper { padding: 20px 0 40px; text-align: center; }
+        /* --- FILTROS MINIMALISTAS --- */
+        .filter-wrapper { padding: 0 0 50px; text-align: center; }
         .cat-btn { 
-            background: transparent; border: 1px solid #333; color: #777; 
-            padding: 12px 30px; margin: 5px; cursor: pointer; 
-            font-size: 10px; font-weight: 600; text-transform: uppercase; 
-            letter-spacing: 3px; font-family: 'Montserrat', sans-serif;
+            background: transparent; border: none; color: #555; padding: 10px 20px; 
+            margin: 0 10px; cursor: pointer; font-size: 9px; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 3px; position: relative;
         }
-        .cat-btn.active { background: #ff6600; color: #000; border-color: #ff6600; font-weight: 700; box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
+        .cat-btn.active { color: #fff; }
+        .cat-btn.active::after { content: ""; position: absolute; bottom: 0; left: 25%; width: 50%; height: 1px; background: var(--naranja); }
 
-        /* --- GRID --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
+        /* --- GRID MINIMALISTA --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 8% 100px; }
         
         .product-card { 
-            background: var(--tarjeta); padding: 50px; border: 1px solid rgba(255,255,255,0.05); 
-            position: relative; overflow: hidden; 
-            background-origin: padding-box, border-box; background-clip: padding-box, border-box;
+            background: transparent; /* Fondo transparente para minimalismo */
+            padding: 20px; 
+            border: 1px solid rgba(255,255,255,0.03); 
+            position: relative; transition: 0.5s;
         }
         
+        /* Efecto RGB Minimalista en el borde inferior al hacer hover */
         .product-card:hover {
-            transform: translateY(-10px);
-            border: 2px solid transparent;
-            background-image: linear-gradient(var(--tarjeta), var(--tarjeta)), var(--rgb-gradient);
-            background-size: 100% 100%, 200% auto;
-            animation: rgbBorderFlow 3s linear infinite;
-            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.8);
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
         }
 
-        @keyframes rgbBorderFlow { 0% { background-position: 0 0, 0 0; } 100% { background-position: 0 0, 200% 0; } }
+        .product-card::before {
+            content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--rgb-gradient); background-size: 200% auto;
+            transition: 0.5s;
+        }
+        .product-card:hover::before { width: 100%; animation: rgbFlow 3s linear infinite; }
         
-        .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 30px; }
-        .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 10; }
-        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+        .img-container { position: relative; width: 100%; height: 240px; margin-bottom: 20px; overflow: hidden; }
+        .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
+        .product-card img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(0.2); transition: 0.6s; }
+        .product-card:hover img { filter: grayscale(0); transform: scale(1.05); }
 
-        /* TIPOGRAFÍA DE TARJETA MEJORADA */
-        .product-card h3 {
-            font-family: 'Cinzel', serif; /* Título del producto en fuente elegante */
-            font-size: 18px; margin-bottom: 10px; color: #fff; letter-spacing: 1px;
-        }
-        .product-card p {
-            font-size: 13px; color: #888; font-weight: 300; line-height: 1.6; margin-bottom: 25px;
-        }
-
-        .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: var(--verde-neon); opacity: 0; z-index: 2; box-shadow: 0 0 10px var(--verde-neon); }
-        .product-card:hover .scan-line { opacity: 0.6; animation: scan 3s infinite linear; }
-        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+        .product-card h3 { font-family: 'Cinzel', serif; font-size: 16px; margin: 15px 0 10px; letter-spacing: 1px; color: #eee; }
+        .product-card p { font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 20px; }
 
         .btn-consultar { 
-            display: block; width: 100%; padding: 15px; border: 1px solid #444; 
-            color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 4px; text-align: center;
-            transition: 0.4s;
+            display: inline-block; padding: 12px 0; border-top: 1px solid #222; 
+            color: #555; text-decoration: none; font-size: 9px; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 3px; width: 100%; text-align: center;
         }
-        .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
+        .product-card:hover .btn-consultar { color: #fff; border-top-color: #444; }
 
-        /* --- TRUST BAR --- */
-        .trust-bar { background: #050505; padding: 90px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; border-top: 1px solid #111; }
-        .trust-item { color: #666; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-align: center; font-weight: 400; }
-        .trust-item i { font-size: 32px; color: var(--naranja); margin-bottom: 25px; display: block; opacity: 0.8; }
+        /* --- FOOTER --- */
+        footer { padding: 60px 8%; text-align: center; border-top: 1px solid #111; opacity: 0.5; }
+        .footer-logo { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 4px; }
 
-        footer { padding: 90px 8%; text-align: center; border-top: 1px solid #111; }
-        .footer-logo { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 5px; color: #555; }
-        .footer-logo span { color: var(--verde-neon); }
-
-        .wsp-flotante { position: fixed; bottom: 40px; right: 40px; z-index: 2000; transition: 0.3s; }
+        .wsp-flotante { position: fixed; bottom: 30px; right: 30px; z-index: 2000; opacity: 0.7; }
+        .wsp-flotante:hover { opacity: 1; transform: scale(1.1); }
     </style>
 </head>
 <body oncontextmenu="return false">
 
 <a href="https://wa.me/5492216172384" class="wsp-flotante" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="55">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="45">
 </a>
 
 <nav>
   <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
   <div class="status-container">
-      <div class="status-live"><div class="dot"></div> Atención Profesional</div>
-      <div class="location-text" style="font-size: 9px; color: #666; margin-top: 5px; letter-spacing: 2px;">LA PLATA | ARGENTINA <span id="reloj">00:00:00</span></div>
+      <div style="font-size: 9px; letter-spacing: 2px; color: #555;">SISTEMAS DE ALTA PRECISIÓN <span id="reloj">00:00:00</span></div>
   </div>
 </nav>
 
@@ -179,15 +120,8 @@
     <p>Tecnología de precisión y monitoreo inteligente para una protección sin precedentes.</p>
 </section>
 
-<div class="brands-container">
-    <div class="brand-pill">DAHUA</div>
-    <div class="brand-pill">HIKVISION</div>
-    <div class="brand-pill">AJAX</div>
-    <div class="brand-pill">INTELBRAS</div>
-</div>
-
 <div class="filter-wrapper">
-    <button class="cat-btn active" data-filter="all">Catálogo</button>
+    <button class="cat-btn active" data-filter="all">Todos</button>
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
     <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
@@ -196,55 +130,40 @@
 
 <div class="grid">
   <div class="product-card" data-category="alarmas">
-    <div class="img-container"><img src="alarma-ajax-kit.jpg" alt="Ajax"></div>
-    <div class="scan-line"></div>
+    <div class="img-container"><img src="alarma-ajax-kit.jpg" alt="Alarma"></div>
     <h3>Ajax Hub 2 Plus</h3>
-    <p>Central de seguridad inalámbrica profesional.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+    <p>Central de seguridad inalámbrica profesional de largo alcance.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
   </div>
 
   <div class="product-card" data-category="camaras">
-    <div class="img-container"><img src="bullet2mp.jpg" alt="Dahua"></div>
-    <div class="scan-line"></div>
+    <div class="img-container"><img src="bullet2mp.jpg" alt="Cámara"></div>
     <h3>Dahua Series Pro</h3>
-    <p>Vigilancia nocturna avanzada de alta resolución.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+    <p>Vigilancia nocturna avanzada con tecnología de alta resolución.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
   </div>
 
   <div class="product-card" data-category="grabacion">
     <div class="img-container"><img src="dvr8ch.jpg" alt="DVR"></div>
-    <div class="scan-line"></div>
     <h3>DVR Hikvision 8CH</h3>
-    <p>Grabación híbrida con acceso remoto móvil.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+    <p>Grabación inteligente híbrida con acceso remoto móvil.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
   </div>
 
   <div class="product-card" data-category="accesorios">
-    <div class="img-container"><img src="balun.jpg" alt="Balun"></div>
-    <div class="scan-line"></div>
+    <div class="img-container"><img src="balun.jpg" alt="Accesorio"></div>
     <h3>Balun Pasivo HD</h3>
-    <p>Transmisores de video de alta calidad sin interferencias.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+    <p>Transmisores de video premium para instalaciones críticas.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
   </div>
 </div>
 
-<section class="trust-bar">
-    <div class="trust-item"><i class="fas fa-shield-alt"></i> Garantía Oficial</div>
-    <div class="trust-item"><i class="fas fa-tools"></i> Soporte Técnico</div>
-    <div class="trust-item"><i class="fas fa-shipping-fast"></i> Envíos Nacionales</div>
-</section>
-
 <footer>
-    <div class="footer-logo"><span>BENTO</span> CORPORATION</div>
+    <div class="footer-logo">BENTO <span>SECURITY</span> GROUP</div>
 </footer>
 
 <script>
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
-            return false;
-        }
-    };
-
+    // Reloj
     function actualizarReloj() {
         const ahora = new Date();
         document.getElementById('reloj').textContent = ahora.toLocaleTimeString('es-AR');
@@ -252,6 +171,7 @@
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
+    // Filtros
     const buttons = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.product-card');
 
