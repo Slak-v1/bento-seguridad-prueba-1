@@ -13,6 +13,7 @@
             --naranja: #ff6600;
             --rgb-gradient: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400);
             --tarjeta: rgba(255, 255, 255, 0.02);
+            --radius: 20px; /* Control central del redondeo */
         }
         
         * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); user-select: none; -webkit-user-select: none; }
@@ -25,7 +26,7 @@
             color: #ffffff; overflow-x: hidden; font-weight: 300;
         }
 
-        /* --- NAV CON PUNTO VERDE --- */
+        /* --- NAV --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
             align-items: center; padding: 30px 8%; background: rgba(0, 0, 0, 0.95); 
@@ -52,35 +53,38 @@
         .hero h1 b { font-weight: 700; color: #fff; }
         .hero p { color: #888; max-width: 650px; margin: 0 auto 50px; font-size: 15px; line-height: 1.8; letter-spacing: 1px; }
 
-        /* --- MARCAS --- */
+        /* --- MARCAS (Incluida IMOU y redondeadas) --- */
         .brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0 8% 60px; }
         .brand-pill { 
             background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
             color: #aaa; padding: 10px 25px; font-size: 10px; font-weight: 500; letter-spacing: 3px; cursor: pointer; 
+            border-radius: 50px; /* Redondeado total para las pastillas */
         }
         .brand-pill:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-3px); }
 
-        /* --- FILTROS DIDÁCTICOS --- */
+        /* --- FILTROS --- */
         .filter-wrapper { padding: 20px 0 40px; text-align: center; }
         .cat-btn { 
             background: transparent; border: 1px solid #333; color: #777; 
             padding: 12px 30px; margin: 5px; cursor: pointer; 
             font-size: 10px; font-weight: 600; text-transform: uppercase; 
             letter-spacing: 3px; font-family: 'Montserrat', sans-serif;
+            border-radius: 10px; /* Botones suavizados */
         }
         .cat-btn.active { background: var(--naranja); color: #000; border-color: var(--naranja); font-weight: 700; box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
-        .cat-btn:hover:not(.active) { border-color: #666; color: #fff; }
 
-        /* --- GRID MINIMALISTA CON REBORDE --- */
+        /* --- GRID CON TARJETAS REDONDEADAS --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
         
         .product-card { 
-            background: var(--tarjeta); padding: 50px; border: 1px solid rgba(255,255,255,0.05); 
+            background: var(--tarjeta); padding: 50px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: var(--radius); /* Redondeado de los recuadros */
             position: relative; overflow: hidden;
             display: flex; flex-direction: column;
         }
         
-        /* Efecto RGB en el reborde al hacer hover */
+        /* Efecto RGB en el reborde REDONDEADO */
         .product-card:hover {
             border: 1px solid transparent;
             background-image: linear-gradient(var(--negro-pro), var(--negro-pro)), var(--rgb-gradient);
@@ -94,7 +98,7 @@
         
         .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 30px; }
         .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
-        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; border-radius: 10px; }
 
         .product-card h3 { font-family: 'Cinzel', serif; font-size: 18px; margin-bottom: 10px; color: #fff; letter-spacing: 1px; }
         .product-card p { font-size: 13px; color: #888; font-weight: 300; line-height: 1.6; margin-bottom: 25px; }
@@ -103,10 +107,11 @@
             display: block; width: 100%; padding: 15px; border: 1px solid #444; 
             color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; 
             text-transform: uppercase; letter-spacing: 4px; text-align: center;
+            border-radius: 12px; /* Botón interno redondeado */
         }
         .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
 
-        /* --- TRUST BAR (RECUPERADA) --- */
+        /* --- TRUST BAR --- */
         .trust-bar { background: #050505; padding: 90px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; border-top: 1px solid #111; }
         .trust-item { color: #666; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-align: center; font-weight: 400; }
         .trust-item i { font-size: 32px; color: var(--naranja); margin-bottom: 25px; display: block; opacity: 0.8; }
@@ -141,6 +146,7 @@
 <div class="brands-container">
     <div class="brand-pill">DAHUA</div>
     <div class="brand-pill">HIKVISION</div>
+    <div class="brand-pill">IMOU</div>
     <div class="brand-pill">AJAX</div>
     <div class="brand-pill">INTELBRAS</div>
 </div>
@@ -154,31 +160,31 @@
 </div>
 
 <div class="grid">
+  <div class="product-card" data-category="camaras">
+    <div class="img-container"><img src="camara-imou.jpg" alt="Imou"></div>
+    <h3>Imou Ranger 2</h3>
+    <p>Cámara inteligente con seguimiento de movimiento y audio bidireccional.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
+  </div>
+
   <div class="product-card" data-category="alarmas">
     <div class="img-container"><img src="alarma-ajax-kit.jpg" alt="Ajax"></div>
     <h3>Ajax Hub 2 Plus</h3>
-    <p>Central de seguridad inalámbrica profesional.</p>
+    <p>Central de seguridad inalámbrica de máxima fiabilidad.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="camaras">
     <div class="img-container"><img src="bullet2mp.jpg" alt="Dahua"></div>
     <h3>Dahua Series Pro</h3>
-    <p>Vigilancia nocturna avanzada de alta resolución.</p>
+    <p>Vigilancia de precisión con visión nocturna avanzada.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="grabacion">
     <div class="img-container"><img src="dvr8ch.jpg" alt="DVR"></div>
     <h3>DVR Hikvision 8CH</h3>
-    <p>Grabación híbrida con acceso remoto móvil.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
-  </div>
-
-  <div class="product-card" data-category="accesorios">
-    <div class="img-container"><img src="balun.jpg" alt="Balun"></div>
-    <h3>Balun Pasivo HD</h3>
-    <p>Transmisores de video premium sin interferencias.</p>
+    <p>Sistema de grabación híbrido de alto rendimiento.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 </div>
@@ -194,7 +200,6 @@
 </footer>
 
 <script>
-    // Bloqueo de teclas de inspección
     document.onkeydown = function(e) {
         if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
             return false;
