@@ -17,7 +17,7 @@
 
 *{ box-sizing:border-box; transition:all .4s cubic-bezier(.16,1,.3,1); }
 
-/* --- BLOQUEO TOTAL ANTI-COPIA --- */
+/* BLOQUEO TOTAL */
 body {
     user-select: none; -webkit-user-select: none;
     margin:0; font-family:'Montserrat',sans-serif;
@@ -34,7 +34,7 @@ img { -webkit-user-drag: none; pointer-events: none; }
     text-transform: uppercase; font-weight: 800; border-bottom: 1px solid #111;
 }
 
-/* NAV CON BARRA RGB */
+/* ARRA RGB */
 nav{
     position:sticky; top:0; z-index:1000; display:flex;
     justify-content:space-between; align-items:center; padding:15px 8%;
@@ -49,7 +49,7 @@ nav::after{
 /* LOGO BENTO IZQUIERDA AGRANDADO */
 .logo-box img{ height:130px; width: auto; filter: brightness(1.1); }
 
-/* RELOJ CON CÍRCULO VERDE AL INICIO */
+/* RELOJ CON CÍRCULO VERDE  */
 .status-container{ text-align: right; }
 .status-label {
     color: #555; font-size: 10px; letter-spacing: 2px;
@@ -64,7 +64,7 @@ nav::after{
 @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
 #reloj-box { color: #fff; font-size: 22px; font-weight: 300; letter-spacing: 2px; }
 
-/* TÍTULO HERO ORIGINAL */
+/* TÍTULO  */
 .hero{ padding:80px 8% 40px; text-align:center; }
 .hero h1{ font-family:'Cinzel',serif; font-size:clamp(30px,5vw,55px); margin-bottom: 25px; letter-spacing: 4px;}
 .hero h1 b{ color: var(--naranja); }
@@ -111,16 +111,45 @@ nav::after{
     font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
     z-index: 15;
 }
-/* Escudo invisible anti-clic en la foto */
+/* Escudo invisible anti-clic */
 .img-container::before { content: ""; position: absolute; top:0; left:0; width:100%; height:100%; z-index: 10; }
 .img-container img{ width:75%; height:75%; object-fit:contain; }
 
 /* WHATSAPP */
-.wsp-container { position: fixed; bottom: 35px; right: 35px; z-index: 2000; }
+.wsp-container { 
+    position: fixed; 
+    bottom: 35px; 
+    right: 35px; 
+    z-index: 99999; /* Lo subimos al frente de todo */
+}
+
+.wsp-container a {
+    display: block;
+    pointer-events: auto !important; /* Permite el clic aunque haya seguridad */
+}
+
+/* WHATSAPP  */
+.wsp-container { 
+    position: fixed; 
+    bottom: 35px; 
+    right: 35px; 
+    z-index: 99999; 
+}
+
+.wsp-container a {
+    display: block;
+    pointer-events: auto !important; 
+}
+
 .wsp-aura { 
-    position: absolute; width: 60px; height: 60px; border-radius: 50%; 
-    background: rgba(37, 211, 102, 0.4); animation: pulseAura 2s infinite; 
-    z-index: -1; top: 0; left: 0; 
+    position: absolute; 
+    width: 60px; height: 60px; 
+    border-radius: 50%; 
+    background: rgba(37, 211, 102, 0.4); 
+    animation: pulseAura 2s infinite; 
+    z-index: -1; 
+    top: 0; left: 0; 
+    pointer-events: none; 
 }
 @keyframes pulseAura { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
 
