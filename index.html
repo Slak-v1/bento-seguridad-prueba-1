@@ -8,7 +8,7 @@
     <style>
         :root { 
             --naranja: #ff6600; 
-            --naranja-brillo: rgba(255, 102, 0, 0.4);
+            --naranja-glow: rgba(255, 102, 0, 0.7);
             --negro-absoluto: #000000;
             --negro-profundo: #05070a;
             --tarjeta: rgba(15, 18, 23, 0.8);
@@ -20,86 +20,87 @@
             margin: 0; 
             font-family: 'Lexend', sans-serif; 
             background-color: var(--negro-profundo);
-            /* Degradado naranja que nace arriba y se pierde rápido */
-            background-image: radial-gradient(circle at 50% -100px, rgba(255, 102, 0, 0.25) 0%, transparent 40%);
+            /* Degradado naranja sutil general */
+            background-image: radial-gradient(circle at 50% -120px, rgba(255, 102, 0, 0.2) 0%, transparent 45%);
             background-attachment: fixed;
             color: #ffffff;
             min-height: 100vh;
         }
 
-        /* --- NAV NEGRO SÓLIDO --- */
+        /* --- NAV CON LOGO RESALTADO --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 18px 5%; 
+            align-items: center; padding: 20px 5%; 
             background: var(--negro-absoluto); 
-            /* La franja que genera el resplandor */
             border-bottom: 2px solid var(--naranja);
-            box-shadow: 0 5px 25px rgba(255, 102, 0, 0.3);
+            box-shadow: 0 5px 30px rgba(255, 102, 0, 0.25);
         }
 
-        .logo img { 
-            height: 60px; 
-            filter: drop-shadow(0 0 12px var(--naranja-brillo));
+        .logo-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* EFECTO ULTRA GLOW AL LOGO */
+        .logo-container img { 
+            height: 65px; 
+            filter: drop-shadow(0 0 10px var(--naranja)) 
+                    drop-shadow(0 0 25px var(--naranja-glow));
+            z-index: 2;
+        }
+
+        /* Halo de luz adicional detrás del logo */
+        .logo-container::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--naranja-glow) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            opacity: 0.6;
         }
 
         .nav-phone { 
             color: #fff; font-weight: 800; font-size: 14px;
             text-shadow: 0 0 10px var(--naranja-brillo);
+            opacity: 0.9;
         }
 
         /* --- FILTROS --- */
         .filter-container { display: flex; gap: 12px; padding: 40px 5% 20px; overflow-x: auto; justify-content: center; }
-        
         .cat-btn { 
             flex: 0 0 auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); 
-            color: #999; padding: 10px 22px; border-radius: 12px; 
-            cursor: pointer; font-size: 13px; font-weight: 600;
+            color: #999; padding: 10px 22px; border-radius: 12px; cursor: pointer; font-size: 13px; font-weight: 600;
         }
-        
         .cat-btn.active { 
             background: var(--naranja); color: #000; border-color: var(--naranja);
-            box-shadow: 0 0 15px var(--naranja-brillo);
+            box-shadow: 0 0 15px var(--naranja-glow);
         }
 
         /* --- GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 10px 5% 80px; }
-        
         .product-card { 
-            background: var(--tarjeta); 
-            border-radius: 20px; 
-            padding: 25px; 
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
+            background: var(--tarjeta); border-radius: 20px; padding: 25px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
         }
-
-        /* REMARQUE NARANJA AL PASAR EL CURSOR */
         .product-card:hover { 
-            transform: translateY(-8px); 
-            border-color: var(--naranja);
-            box-shadow: 0 0 30px rgba(255, 102, 0, 0.2);
-            background: rgba(25, 30, 38, 0.9);
+            transform: translateY(-8px); border-color: var(--naranja);
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.15);
         }
-        
         .product-card img { width: 100%; height: 210px; object-fit: cover; border-radius: 15px; margin-bottom: 20px; }
-        .product-card h3 { margin: 10px 0; font-size: 19px; font-weight: 800; }
-        .product-card p { color: #888; font-size: 14px; margin-bottom: 25px; }
-        
         .btn-consultar { 
-            display: block; background: transparent; color: #fff; 
-            text-decoration: none; padding: 12px; border-radius: 12px; 
-            font-weight: 800; border: 1px solid var(--naranja);
-            font-size: 12px; text-transform: uppercase;
+            display: block; background: transparent; color: #fff; text-decoration: none; 
+            padding: 12px; border-radius: 12px; font-weight: 800; border: 1px solid var(--naranja);
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
         }
-        .btn-consultar:hover { 
-            background: var(--naranja); color: #000; box-shadow: 0 0 20px var(--naranja);
-        }
+        .btn-consultar:hover { background: var(--naranja); color: #000; box-shadow: 0 0 20px var(--naranja); }
 
-        /* --- MARCA DE AGUA CORPORATIVA --- */
-        footer {
-            text-align: center; padding: 60px 20px;
-            opacity: 0.3; border-top: 1px solid rgba(255,255,255,0.03);
-        }
+        /* --- FOOTER MARCA DE AGUA --- */
+        footer { text-align: center; padding: 60px 20px; opacity: 0.3; }
         .footer-logo { font-size: 12px; letter-spacing: 4px; font-weight: 300; }
         .corporation { font-weight: 800; color: var(--naranja); }
 
@@ -113,8 +114,7 @@
 
         @media (max-width: 768px) {
             .filter-container { justify-content: flex-start; }
-            nav { padding: 15px 5%; }
-            .logo img { height: 50px; }
+            .logo-container img { height: 50px; }
         }
     </style>
 </head>
@@ -125,7 +125,7 @@
 </a>
 
 <nav>
-  <div class="logo">
+  <div class="logo-container">
     <img src="logo.jpg" alt="BENTO">
   </div>
   <div class="nav-phone">TEL: 221 617-2384</div>
