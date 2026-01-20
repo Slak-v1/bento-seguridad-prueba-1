@@ -44,19 +44,9 @@ body{
     text-transform:uppercase;
     border-bottom:1px solid #1a1a1a;
 }
-.top-banner b{color:var(--naranja); text-shadow: 0 0 10px rgba(255,102,0,0.3);}
+.top-banner b{color:var(--naranja)}
 
-/* WHATSAPP CON AURA */
-.wsp-container { position: fixed; bottom: 40px; right: 40px; z-index: 2000; }
-.wsp-aura { 
-    position: absolute; width: 60px; height: 60px; border-radius: 50%; 
-    background: rgba(37, 211, 102, 0.4); 
-    animation: pulseAura 2s infinite; 
-    z-index: -1; top: 0; left: 0; 
-}
-@keyframes pulseAura { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
-
-/* NAV - RELOJ Y ESTADO RESALTADOS */
+/* NAV */
 nav{
     position:sticky;
     top:0;
@@ -69,148 +59,86 @@ nav{
     backdrop-filter:blur(20px);
 }
 nav::after{
-    content:"";
-    position:absolute;
-    bottom:0; left:0; width:100%; height:3px;
-    background:var(--rgb-gradient);
-    background-size:200% auto;
-    animation:rgbFlow 3s linear infinite;
+    content:""; position:absolute; bottom:0; left:0; width:100%; height:3px;
+    background:var(--rgb-gradient); background-size:200% auto; animation:rgbFlow 3s linear infinite;
 }
 @keyframes rgbFlow{ 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
 
 .logo-box img{height:100px}
 
+/* RELOJ VISIBLE */
+.status-container{ text-align: right; }
 .status-live{
     color: var(--verde-neon);
     font-weight: 700;
-    text-shadow: 0 0 10px rgba(0,255,136,0.5);
+    font-size: 11px;
     letter-spacing: 2px;
+    margin-bottom: 5px;
 }
-#reloj{
+#reloj-box {
+    background: #111;
     color: #fff;
-    background: rgba(255,255,255,0.05);
-    padding: 4px 10px;
+    padding: 6px 15px;
     border-radius: 5px;
-    margin-left: 10px;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 15px rgba(255,255,255,0.05);
+    font-family: monospace;
+    font-size: 14px;
+    border: 1px solid var(--naranja);
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(255,102,0,0.2);
 }
 
-/* HERO & MARCAS */
-.hero{ padding:80px 8% 20px; text-align:center; }
-.hero h1{ font-family:'Cinzel',serif; font-size:clamp(30px,5vw,60px); margin-bottom: 10px;}
-.hero p{ color:#aaa; font-size:15px; letter-spacing:1px; max-width:700px; margin:0 auto 40px; line-height: 1.8; }
+/* HERO */
+.hero{ padding:80px 8% 40px; text-align:center; }
+.hero h1{ font-family:'Cinzel',serif; font-size:clamp(32px,6vw,65px); margin-bottom: 20px; letter-spacing: 2px;}
+.hero p{ color:#bbb; font-size:16px; letter-spacing:1px; max-width:800px; margin:0 auto 40px; line-height: 1.6; font-weight: 300; }
 
-.brands-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    padding-bottom: 50px;
-}
-.brand-pill {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #fff;
-    padding: 10px 25px;
-    font-size: 10px;
-    letter-spacing: 2px;
-    border-radius: 50px;
-    font-weight: 600;
-}
+/* MARCAS */
+.brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding-bottom: 50px; }
+.brand-pill { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 10px 25px; font-size: 10px; letter-spacing: 2px; border-radius: 50px; font-weight: 600; }
 
 /* FILTROS */
 .filter-wrapper{text-align:center; padding: 20px 8% 60px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;}
 .cat-btn{
-    background:rgba(255,255,255,0.02);
-    border: 1px solid #333;
-    color:#aaa;
-    padding:12px 20px;
-    font-size:9px;
-    letter-spacing:2px;
-    border-radius:8px;
-    cursor:pointer;
-    text-transform: uppercase;
-    flex: 1;
-    min-width: 150px;
-    max-width: 200px;
+    background:rgba(255,255,255,0.02); border: 1px solid #333; color:#aaa; padding:12px 25px;
+    font-size:10px; letter-spacing:2px; border-radius:8px; cursor:pointer; text-transform: uppercase;
 }
-.cat-btn.active{ border-color: var(--naranja); color: #fff; background: rgba(255,102,0,0.2); box-shadow: 0 0 20px rgba(255,102,0,0.2); }
+.cat-btn.active{ border-color: var(--naranja); color: #fff; background: rgba(255,102,0,0.2); }
 
-/* GRID PRODUCTOS */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
-    gap:40px;
-    padding:0 8% 100px;
-}
+/* GRID */
+.grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:40px; padding:0 8% 100px; }
 
 .product-card{
-    background:var(--tarjeta);
-    padding:30px;
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:var(--radius);
-    display:flex;
-    flex-direction:column;
-    position: relative;
-    overflow: hidden;
+    background:var(--tarjeta); padding:30px; border:1px solid rgba(255,255,255,.05);
+    border-radius:var(--radius); display:flex; flex-direction:column; position: relative; overflow: hidden;
 }
-
-/* Barra RGB Inferior Profesional */
-.product-card::after {
-    content: "";
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0; height: 5px;
-    background: var(--rgb-gradient);
-    transition: width 0.6s cubic-bezier(.16,1,.3,1);
-}
+.product-card::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 5px; background: var(--rgb-gradient); transition: width 0.6s ease; }
 .product-card:hover::after { width: 100%; }
-.product-card:hover { transform: translateY(-12px); background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); }
+.product-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.05); }
 
+/* IMAGEN ESTILO BENTO */
 .img-container{
-    width:calc(100% + 60px);
-    height:280px;
-    margin:-30px -30px 25px -30px;
-    background:#fff;
-    border-radius:20px 20px 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    width:calc(100% + 60px); height:280px; margin:-30px -30px 25px -30px;
+    background:#fff; border-radius:20px 20px 0 0; display: flex; align-items: center; justify-content: center;
 }
-.img-container img{ width:80%; height:80%; object-fit:contain; transition: 0.6s ease; }
-.product-card:hover img { transform: scale(1.1); }
+.img-container img{ width:75%; height:75%; object-fit:contain; }
 
-.tech-badge{
-    position:absolute; top:15px; right:45px;
-    background:var(--naranja); color:#000;
-    padding:6px 14px; font-size:10px; font-weight: 800; border-radius:4px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
+.tech-badge{ position:absolute; top:15px; right:45px; background:var(--naranja); color:#000; padding:6px 14px; font-size:10px; font-weight: 800; border-radius:4px; }
 
 .product-card h3{ font-family:'Cinzel',serif; font-size:20px; margin-top: 10px; color: #fff; }
-.product-card p{ font-size:13px; color:#888; margin-bottom:30px; flex-grow: 1; line-height: 1.6; }
+.product-card p{ font-size:13px; color:#888; margin-bottom:30px; flex-grow: 1; }
 
-.btn-consultar{
-    padding:18px; border:1px solid #444; text-align:center; border-radius:12px;
-    cursor:pointer; font-size: 11px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase;
-    background: rgba(255,255,255,0.02);
-}
-.btn-consultar:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+.btn-consultar{ padding:18px; border:1px solid #444; text-align:center; border-radius:12px; cursor:pointer; font-size: 11px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; }
+.btn-consultar:hover { background: #fff; color: #000; }
 
-/* BARRA DE CONFIANZA */
-.trust-bar {
-    background: #050505;
-    padding: 80px 8%;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    border-top: 1px solid #111;
-    gap: 40px;
-}
-.trust-item { color: #fff; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; text-align: center; font-weight: 500;}
-.trust-item i { font-size: 32px; color: var(--naranja); margin-bottom: 20px; display: block; filter: drop-shadow(0 0 8px rgba(255,102,0,0.4)); }
+/* WHATSAPP */
+.wsp-container { position: fixed; bottom: 40px; right: 40px; z-index: 2000; }
+.wsp-aura { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: rgba(37, 211, 102, 0.4); animation: pulseAura 2s infinite; z-index: -1; top: 0; left: 0; }
+@keyframes pulseAura { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
+
+/* TRUST BAR */
+.trust-bar { background: #050505; padding: 80px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; border-top: 1px solid #111; gap: 40px; }
+.trust-item { color: #fff; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
+.trust-item i { font-size: 32px; color: var(--naranja); margin-bottom: 20px; display: block; }
 
 footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; background: #000; }
 .copyright { font-size: 10px; color: #555; letter-spacing: 4px; text-transform: uppercase; }
@@ -232,19 +160,14 @@ footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; 
 <nav>
     <div class="logo-box"><img src="logo.jpg"></div>
     <div class="status-container">
-        <div class="status-live">
-            <i class="fas fa-circle" style="font-size: 8px; margin-right: 5px; animation: blink 1s infinite;"></i>
-            ATENCIÓN EN VIVO
-        </div>
-        <div style="font-size:10px; color:#aaa; margin-top:8px; letter-spacing: 2px; font-weight: 600;">
-            LA PLATA | ARG <span id="reloj"></span>
-        </div>
+        <div class="status-live"><i class="fas fa-circle" style="font-size:7px; vertical-align:middle"></i> CANAL OFICIAL ACTIVO</div>
+        <div id="reloj-box"><span id="reloj">00:00:00</span></div>
     </div>
 </nav>
 
 <section class="hero">
-    <h1>Elegancia en <b>Seguridad</b></h1>
-    <p>Protección inteligente diseñada para los entornos más exigentes. Hardware de grado militar y estética minimalista.</p>
+    <h1>Vanguardia en <b>Protección</b></h1>
+    <p>Elevamos el estándar de seguridad con soluciones de ingeniería avanzada y monitoreo de alta fidelidad. La tranquilidad de lo absoluto.</p>
 </section>
 
 <div class="brands-container">
@@ -253,27 +176,24 @@ footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; 
     <div class="brand-pill">IMOU</div>
     <div class="brand-pill">AJAX</div>
     <div class="brand-pill">INTELBRAS</div>
-    <div class="brand-pill">WESTERN DIGITAL</div>
 </div>
 
 <div class="filter-wrapper">
-    <button class="cat-btn active" data-filter="all">Todo el Catálogo</button>
+    <button class="cat-btn active" data-filter="all">Catálogo Total</button>
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
-    <button class="cat-btn" data-filter="alarmas">Sistemas de Alarma</button>
-    <button class="cat-btn" data-filter="grabacion">Grabadores (DVR/NVR)</button>
-    <button class="cat-btn" data-filter="almacenamiento">Discos Rígidos</button>
-    <button class="cat-btn" data-filter="acceso">Control de Acceso</button>
+    <button class="cat-btn" data-filter="alarmas">Alarmas</button>
+    <button class="cat-btn" data-filter="accesorios">Accesorios</button>
 </div>
 
 <div class="grid">
     <div class="product-card" data-category="camaras">
         <div class="img-container">
-            <div class="tech-badge">4K ULTRA</div>
+            <div class="tech-badge">4K PRO</div>
             <img src="camara-imou.jpg">
         </div>
         <h3>Imou Ranger 2</h3>
-        <p>Seguimiento 360° inteligente con detección de humanos, sirena incorporada y visión nocturna avanzada.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('Imou Ranger 2')">Consultar Precio</div>
+        <p>Vigilancia integral 360° con inteligencia artificial para detección de humanos.</p>
+        <div class="btn-consultar" onclick="enviarConsulta('Imou Ranger 2')">Consultar Producto</div>
     </div>
 
     <div class="product-card" data-category="alarmas">
@@ -281,57 +201,26 @@ footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; 
             <div class="tech-badge">GRADO 2</div>
             <img src="alarma-ajax-kit.jpg">
         </div>
-        <h3>Ajax Hub 2 Plus</h3>
-        <p>El cerebro de tu seguridad. Conexión WiFi, Ethernet y 4G con soporte para verificación visual de alarmas.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('Ajax Hub 2 Plus')">Consultar Precio</div>
+        <h3>Ajax Hub 2</h3>
+        <p>Ecosistema de seguridad inalámbrico con verificación fotográfica inmediata.</p>
+        <div class="btn-consultar" onclick="enviarConsulta('Ajax Hub 2')">Consultar Producto</div>
     </div>
 
-    <div class="product-card" data-category="grabacion">
+    <div class="product-card" data-category="accesorios">
         <div class="img-container">
-            <div class="tech-badge">PRO SERIES</div>
-            <img src="dvr8ch.jpg">
+            <div class="tech-badge">PREMIUM</div>
+            <img src="balun.jpg">
         </div>
-        <h3>XV-Dahua WizSense</h3>
-        <p>Grabador de 8 canales con inteligencia artificial para filtrado de falsas alarmas y reconocimiento facial.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('DVR Dahua WizSense')">Consultar Precio</div>
-    </div>
-
-    <div class="product-card" data-category="almacenamiento">
-        <div class="img-container">
-            <div class="tech-badge">PURPLE</div>
-            <img src="disco-wd.jpg">
-        </div>
-        <h3>WD Purple 2TB</h3>
-        <p>Disco rígido diseñado específicamente para videovigilancia 24/7. Alta durabilidad y rendimiento.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('Disco WD Purple 2TB')">Consultar Precio</div>
-    </div>
-
-    <div class="product-card" data-category="acceso">
-        <div class="img-container">
-            <div class="tech-badge">BIOMÉTRICO</div>
-            <img src="control-acceso.jpg">
-        </div>
-        <h3>Hikvision Face ID</h3>
-        <p>Terminal de control de acceso mediante reconocimiento facial ultra rápido, incluso con barbijo.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('Control Acceso Hikvision')">Consultar Precio</div>
-    </div>
-
-    <div class="product-card" data-category="camaras">
-        <div class="img-container">
-            <div class="tech-badge">IP67</div>
-            <img src="bullet2mp.jpg">
-        </div>
-        <h3>Bullet Full Color</h3>
-        <p>Cámara exterior que mantiene la imagen a todo color incluso en plena oscuridad total.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('Bullet Full Color')">Consultar Precio</div>
+        <h3>Kit Balunes 4K</h3>
+        <p>Transmisión de video de alta definición sin interferencias para sistemas cableados.</p>
+        <div class="btn-consultar" onclick="enviarConsulta('Kit Balunes 4K')">Consultar Producto</div>
     </div>
 </div>
 
 <section class="trust-bar">
     <div class="trust-item"><i class="fas fa-shield-alt"></i> Garantía Premium</div>
     <div class="trust-item"><i class="fas fa-shipping-fast"></i> Envíos Nacionales</div>
-    <div class="trust-item"><i class="fas fa-tools"></i> Instalación Certificada</div>
-    <div class="trust-item"><i class="fas fa-headset"></i> Soporte 24/7</div>
+    <div class="trust-item"><i class="fas fa-tools"></i> Soporte Especializado</div>
 </section>
 
 <footer>
@@ -342,10 +231,10 @@ footer { padding: 60px 8% 40px; text-align: center; border-top: 1px solid #111; 
 
 <script>
 function actualizarReloj(){
-    const ahora = new Date();
-    document.getElementById("reloj").innerText = ahora.toLocaleTimeString("es-AR", {hour12: false});
+    const tiempo = new Date().toLocaleTimeString("es-AR", {hour12: false});
+    document.getElementById("reloj").innerText = tiempo;
 }
-setInterval(actualizarReloj,1000);
+setInterval(actualizarReloj, 1000);
 actualizarReloj();
 
 const buttons = document.querySelectorAll('.cat-btn');
@@ -357,22 +246,15 @@ buttons.forEach(btn => {
         btn.classList.add('active');
         const f = btn.dataset.filter;
         cards.forEach(c => {
-            if (f === 'all' || c.dataset.category === f) {
-                c.style.display = 'flex';
-                c.style.animation = 'fadeInPage 0.5s ease forwards';
-            } else {
-                c.style.display = 'none';
-            }
+            c.style.display = (f === 'all' || c.dataset.category === f) ? 'flex' : 'none';
         });
     }
 });
 
 function enviarConsulta(p) {
-    const msg = encodeURIComponent(`Hola Bento Security! Me gustaría recibir asesoramiento y precio del siguiente equipo: ${p}. Muchas gracias.`);
+    const msg = encodeURIComponent(`Hola Bento Security! Solicito asesoramiento técnico sobre el equipo: ${p}.`);
     window.open(`https://wa.me/5492216172384?text=${msg}`, '_blank');
 }
-
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 </script>
 
 </body>
