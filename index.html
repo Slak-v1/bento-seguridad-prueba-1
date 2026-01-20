@@ -49,33 +49,12 @@
         .brands-grid { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; opacity: 0.2; margin-top: 20px; }
         .brand-item { font-size: 16px; font-weight: 300; letter-spacing: 4px; }
 
-        /* --- BARRA DE SECTORES (CORREGIDA) --- */
-        .filter-wrapper {
-            padding: 40px 5% 10px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
+        /* --- FILTROS --- */
+        .filter-wrapper { padding: 40px 5% 10px; width: 100%; display: flex; justify-content: center; }
+        .filter-container { display: flex; gap: 15px; overflow-x: auto; padding: 10px 20px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .filter-container::-webkit-scrollbar { display: none; }
 
-        .filter-container { 
-            display: flex; 
-            gap: 15px; 
-            overflow-x: auto; 
-            padding: 10px 20px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Oculta scroll en Firefox */
-        }
-        
-        .filter-container::-webkit-scrollbar { display: none; } /* Oculta scroll en Chrome/Safari */
-
-        .cat-btn { 
-            flex: 0 0 auto; /* Evita que los botones se achiquen */
-            background: transparent; border: 1px solid rgba(255,255,255,0.05); 
-            color: #555; padding: 12px 30px; border-radius: 2px; 
-            cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px;
-            white-space: nowrap;
-        }
+        .cat-btn { flex: 0 0 auto; background: transparent; border: 1px solid rgba(255,255,255,0.05); color: #555; padding: 12px 30px; border-radius: 2px; cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; white-space: nowrap; }
         .cat-btn.active { border-color: var(--naranja); color: #fff; background: var(--naranja-soft); }
 
         /* --- GRID --- */
@@ -88,16 +67,17 @@
         .product-card h3 { font-size: 24px; font-weight: 300; letter-spacing: -1px; margin-bottom: 15px; }
         .product-card p { color: #555; font-size: 14px; margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
 
-        .btn-consultar { display: inline-block; width: 100%; padding: 18px; border: 1px solid #222; color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; text-align: center; }
+        /* BOTÓN DE CONSULTA DINÁMICO */
+        .btn-consultar { display: inline-block; width: 100%; padding: 18px; border: 1px solid #222; color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; text-align: center; cursor: pointer; }
         .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
 
-        /* --- FOOTER --- */
         footer { padding: 100px 8%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         .footer-logo { font-size: 16px; letter-spacing: 12px; font-weight: 100; color: #333; }
         .footer-logo b { font-weight: 800; color: #444; }
 
-        .wsp-flotante { position: fixed; bottom: 40px; right: 40px; z-index: 2000; opacity: 0.7; }
-        
+        .wsp-flotante { position: fixed; bottom: 40px; right: 40px; z-index: 2000; opacity: 0.7; transition: 0.3s; }
+        .wsp-flotante:hover { opacity: 1; transform: scale(1.1); }
+
         @media (max-width: 768px) {
             .filter-wrapper { justify-content: flex-start; }
             nav { padding: 20px 5%; }
@@ -136,8 +116,6 @@
       <button class="cat-btn" data-filter="alarmas">Alarmas</button>
       <button class="cat-btn" data-filter="camaras">Cámaras</button>
       <button class="cat-btn" data-filter="grabacion">Grabación</button>
-      <button class="cat-btn" data-filter="acceso">Control de Acceso</button>
-      <button class="cat-btn" data-filter="incendio">Detección de Incendio</button>
     </div>
 </div>
 
@@ -147,7 +125,7 @@
     <img src="alarma-ajax-kit.jpg" alt="Ajax">
     <h3>Ajax Hub 2 Plus</h3>
     <p>La máxima expresión en seguridad inalámbrica con diseño europeo.</p>
-    <a href="https://wa.me/5492216172384" class="btn-consultar">Solicitar Información</a>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="camaras">
@@ -155,7 +133,7 @@
     <img src="bullet2mp.jpg" alt="Dahua">
     <h3>Dahua Series Pro</h3>
     <p>Claridad visual absoluta bajo cualquier condición de luz.</p>
-    <a href="https://wa.me/5492216172384" class="btn-consultar">Solicitar Información</a>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="grabacion">
@@ -163,7 +141,7 @@
     <img src="dvr8ch.jpg" alt="NVR">
     <h3>Smart NVR 8CH</h3>
     <p>Gestión de datos masiva con inteligencia artificial avanzada.</p>
-    <a href="https://wa.me/5492216172384" class="btn-consultar">Solicitar Información</a>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 </div>
 
@@ -172,6 +150,7 @@
 </footer>
 
 <script>
+    // Lógica de Filtrado
     const buttons = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.product-card');
 
@@ -191,6 +170,18 @@
             });
         }
     });
+
+    // LÓGICA DE WHATSAPP DINÁMICO
+    function consultarWSP(elemento) {
+        const numero = "5492216172384";
+        // Buscamos el H3 (nombre del producto) dentro del mismo product-card
+        const nombreProducto = elemento.parentElement.querySelector('h3').innerText;
+        const mensaje = encodeURIComponent("Hola! Me interesa obtener más información sobre el producto: " + nombreProducto);
+        const url = "https://wa.me/" + numero + "?text=" + mensaje;
+        
+        // Abrir en nueva pestaña
+        window.open(url, '_blank');
+    }
 </script>
 
 </body>
