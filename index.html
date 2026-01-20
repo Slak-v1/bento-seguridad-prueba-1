@@ -12,7 +12,7 @@
             --verde-neon: #00ff88;
             --naranja: #ff6600;
             --rgb-gradient: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400);
-            --borde-tenue: rgba(255, 255, 255, 0.1);
+            --tarjeta: rgba(255, 255, 255, 0.02);
         }
         
         * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); user-select: none; -webkit-user-select: none; }
@@ -20,57 +20,67 @@
         body { 
             margin: 0; font-family: 'Montserrat', sans-serif; 
             background-color: var(--negro-pro);
-            background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.05) 0%, transparent 50%);
+            background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
             color: #ffffff; overflow-x: hidden; font-weight: 300;
         }
 
-        /* --- NAV RGB --- */
+        /* --- NAV CON PUNTO VERDE --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 25px 8%; background: rgba(0, 0, 0, 0.9); 
+            align-items: center; padding: 30px 8%; background: rgba(0, 0, 0, 0.95); 
             backdrop-filter: blur(20px); position: relative;
         }
         nav::after {
-            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
+            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px;
             background: var(--rgb-gradient); background-size: 200% auto;
-            animation: rgbFlow 3s linear infinite;
+            animation: rgbFlow 3s linear infinite; box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
         }
         @keyframes rgbFlow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 
-        .logo-box img { height: 110px; filter: drop-shadow(0 0 10px rgba(255, 102, 0, 0.2)); }
+        .logo-box img { height: 130px; filter: drop-shadow(0 0 15px rgba(255, 102, 0, 0.3)); }
+        
+        .status-container { text-align: right; }
+        .status-live { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; }
+        .dot { width: 8px; height: 8px; background: var(--verde-neon); border-radius: 50%; box-shadow: 0 0 12px var(--verde-neon); animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
         #reloj { color: var(--naranja); font-weight: 500; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; }
 
         /* --- HERO --- */
-        .hero { padding: 80px 8% 40px; text-align: center; }
-        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 50px); letter-spacing: 6px; margin-bottom: 20px; text-transform: uppercase; }
+        .hero { padding: 100px 8% 40px; text-align: center; }
+        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 60px); letter-spacing: 2px; margin-bottom: 25px; line-height: 1.2; }
         .hero h1 b { font-weight: 700; color: #fff; }
-        .hero p { color: #666; max-width: 600px; margin: 0 auto; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
+        .hero p { color: #888; max-width: 650px; margin: 0 auto 50px; font-size: 15px; line-height: 1.8; letter-spacing: 1px; }
 
-        /* --- FILTROS --- */
-        .filter-wrapper { padding: 40px 0; text-align: center; }
-        .cat-btn { 
-            background: transparent; border: 1px solid #222; color: #555; padding: 10px 25px; 
-            margin: 0 5px; cursor: pointer; font-size: 9px; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 2px;
+        /* --- MARCAS --- */
+        .brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0 8% 60px; }
+        .brand-pill { 
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
+            color: #aaa; padding: 10px 25px; font-size: 10px; font-weight: 500; letter-spacing: 3px; cursor: pointer; 
         }
-        .cat-btn.active { color: #fff; border-color: var(--naranja); background: rgba(255, 102, 0, 0.05); }
+        .brand-pill:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-3px); }
 
-        /* --- GRID DE CUADROS MINIMALISTAS --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 0 8% 100px; }
+        /* --- FILTROS DIDÁCTICOS --- */
+        .filter-wrapper { padding: 20px 0 40px; text-align: center; }
+        .cat-btn { 
+            background: transparent; border: 1px solid #333; color: #777; 
+            padding: 12px 30px; margin: 5px; cursor: pointer; 
+            font-size: 10px; font-weight: 600; text-transform: uppercase; 
+            letter-spacing: 3px; font-family: 'Montserrat', sans-serif;
+        }
+        .cat-btn.active { background: var(--naranja); color: #000; border-color: var(--naranja); font-weight: 700; box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
+        .cat-btn:hover:not(.active) { border-color: #666; color: #fff; }
+
+        /* --- GRID MINIMALISTA CON REBORDE --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
         
         .product-card { 
-            background: rgba(255,255,255,0.01);
-            padding: 40px; 
-            border: 1px solid var(--borde-tenue); /* El reborde minimalista */
-            position: relative; 
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background: var(--tarjeta); padding: 50px; border: 1px solid rgba(255,255,255,0.05); 
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
         }
         
-        /* EFECTO RGB EN EL REBORDE AL HACER HOVER */
+        /* Efecto RGB en el reborde al hacer hover */
         .product-card:hover {
             border: 1px solid transparent;
             background-image: linear-gradient(var(--negro-pro), var(--negro-pro)), var(--rgb-gradient);
@@ -78,52 +88,62 @@
             background-clip: padding-box, border-box;
             background-size: 100% 100%, 200% auto;
             animation: rgbFlow 3s linear infinite;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.8);
         }
         
-        .img-container { position: relative; width: 100%; height: 220px; margin-bottom: 30px; }
-        /* Capa protectora para que no copien la foto */
-        .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: default; }
-        
-        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .product-card:hover img { transform: scale(1.08); }
+        .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 30px; }
+        .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
+        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 
-        .product-card h3 { font-family: 'Cinzel', serif; font-size: 17px; margin: 0 0 12px; letter-spacing: 2px; color: #fff; text-align: center; }
-        .product-card p { font-size: 12px; color: #777; line-height: 1.8; margin-bottom: 30px; text-align: center; font-weight: 300; }
+        .product-card h3 { font-family: 'Cinzel', serif; font-size: 18px; margin-bottom: 10px; color: #fff; letter-spacing: 1px; }
+        .product-card p { font-size: 13px; color: #888; font-weight: 300; line-height: 1.6; margin-bottom: 25px; }
 
         .btn-consultar { 
-            display: block; padding: 15px; border: 1px solid #222; 
-            color: #eee; text-decoration: none; font-size: 9px; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 3px; text-align: center;
-            background: transparent; cursor: pointer;
+            display: block; width: 100%; padding: 15px; border: 1px solid #444; 
+            color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 4px; text-align: center;
         }
         .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
 
-        /* --- FOOTER --- */
-        footer { padding: 80px 8%; text-align: center; border-top: 1px solid #111; }
-        .footer-logo { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 5px; color: #444; }
+        /* --- TRUST BAR (RECUPERADA) --- */
+        .trust-bar { background: #050505; padding: 90px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; border-top: 1px solid #111; }
+        .trust-item { color: #666; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-align: center; font-weight: 400; }
+        .trust-item i { font-size: 32px; color: var(--naranja); margin-bottom: 25px; display: block; opacity: 0.8; }
 
-        .wsp-flotante { position: fixed; bottom: 30px; right: 30px; z-index: 2000; opacity: 0.8; }
+        /* --- FOOTER --- */
+        footer { padding: 90px 8%; text-align: center; border-top: 1px solid #111; }
+        .footer-logo { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 5px; color: #555; }
+        .footer-logo span { color: var(--verde-neon); }
+
+        .wsp-flotante { position: fixed; bottom: 40px; right: 40px; z-index: 2000; transition: 0.3s; }
     </style>
 </head>
 <body oncontextmenu="return false">
 
 <a href="https://wa.me/5492216172384" class="wsp-flotante" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="50">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="55">
 </a>
 
 <nav>
   <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
   <div class="status-container">
-      <div style="font-size: 9px; letter-spacing: 2px; color: #555; font-weight: 600;">SISTEMAS DE ALTA PRECISIÓN <span id="reloj">00:00:00</span></div>
+      <div class="status-live"><div class="dot"></div> Atención Profesional</div>
+      <div class="location-text" style="font-size: 9px; color: #666; margin-top: 5px; letter-spacing: 2px;">LA PLATA | ARGENTINA <span id="reloj">00:00:00</span></div>
   </div>
 </nav>
 
 <section class="hero">
     <h1>Elegancia en <b>Seguridad</b></h1>
-    <p>Tecnología de precisión y monitoreo inteligente</p>
+    <p>Tecnología de precisión y monitoreo inteligente para una protección sin precedentes.</p>
 </section>
+
+<div class="brands-container">
+    <div class="brand-pill">DAHUA</div>
+    <div class="brand-pill">HIKVISION</div>
+    <div class="brand-pill">AJAX</div>
+    <div class="brand-pill">INTELBRAS</div>
+</div>
 
 <div class="filter-wrapper">
     <button class="cat-btn active" data-filter="all">Catálogo</button>
@@ -135,40 +155,52 @@
 
 <div class="grid">
   <div class="product-card" data-category="alarmas">
-    <div class="img-container"><img src="alarma-ajax-kit.jpg" alt="Alarma"></div>
+    <div class="img-container"><img src="alarma-ajax-kit.jpg" alt="Ajax"></div>
     <h3>Ajax Hub 2 Plus</h3>
-    <p>Central de seguridad inalámbrica profesional de largo alcance y alta fiabilidad.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
+    <p>Central de seguridad inalámbrica profesional.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="camaras">
-    <div class="img-container"><img src="bullet2mp.jpg" alt="Cámara"></div>
+    <div class="img-container"><img src="bullet2mp.jpg" alt="Dahua"></div>
     <h3>Dahua Series Pro</h3>
-    <p>Vigilancia nocturna avanzada con tecnología de alta resolución y detección inteligente.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
+    <p>Vigilancia nocturna avanzada de alta resolución.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="grabacion">
     <div class="img-container"><img src="dvr8ch.jpg" alt="DVR"></div>
     <h3>DVR Hikvision 8CH</h3>
-    <p>Grabación inteligente híbrida con acceso remoto móvil en tiempo real.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
+    <p>Grabación híbrida con acceso remoto móvil.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="accesorios">
-    <div class="img-container"><img src="balun.jpg" alt="Accesorio"></div>
+    <div class="img-container"><img src="balun.jpg" alt="Balun"></div>
     <h3>Balun Pasivo HD</h3>
-    <p>Transmisores de video premium diseñados para instalaciones de alta exigencia.</p>
-    <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
+    <p>Transmisores de video premium sin interferencias.</p>
+    <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 </div>
+
+<section class="trust-bar">
+    <div class="trust-item"><i class="fas fa-shield-alt"></i> Garantía Oficial</div>
+    <div class="trust-item"><i class="fas fa-tools"></i> Soporte Técnico</div>
+    <div class="trust-item"><i class="fas fa-shipping-fast"></i> Envíos Nacionales</div>
+</section>
 
 <footer>
     <div class="footer-logo">BENTO <span>SECURITY</span> GROUP</div>
 </footer>
 
 <script>
-    // Reloj
+    // Bloqueo de teclas de inspección
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
+            return false;
+        }
+    };
+
     function actualizarReloj() {
         const ahora = new Date();
         document.getElementById('reloj').textContent = ahora.toLocaleTimeString('es-AR');
@@ -176,7 +208,6 @@
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // Filtros
     const buttons = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.product-card');
 
@@ -201,13 +232,6 @@
         const nombre = elemento.parentElement.querySelector('h3').innerText;
         window.open("https://wa.me/5492216172384?text=Hola! Me interesa: " + nombre, '_blank');
     }
-
-    // Bloqueo de teclas (F12, Ctrl+U)
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
-            return false;
-        }
-    };
 </script>
 
 </body>
