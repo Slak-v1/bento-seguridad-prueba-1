@@ -8,113 +8,107 @@
     <style>
         :root { 
             --naranja: #ff6600; 
-            --naranja-glow: rgba(255, 102, 0, 0.7);
+            --naranja-suave: rgba(255, 102, 0, 0.4);
             --negro-absoluto: #000000;
-            --negro-profundo: #05070a;
-            --tarjeta: rgba(15, 18, 23, 0.8);
+            --negro-profundo: #040508;
+            --tarjeta: rgba(15, 18, 23, 0.7);
         }
         
-        * { box-sizing: border-box; transition: all 0.4s ease; }
+        * { box-sizing: border-box; transition: all 0.3s ease-in-out; }
         
         body { 
             margin: 0; 
             font-family: 'Lexend', sans-serif; 
             background-color: var(--negro-profundo);
-            /* Degradado naranja sutil general */
-            background-image: radial-gradient(circle at 50% -120px, rgba(255, 102, 0, 0.2) 0%, transparent 45%);
+            /* Degradado de fondo muy sutil tras el logo */
+            background-image: radial-gradient(circle at 50% -50px, rgba(255, 102, 0, 0.12) 0%, transparent 35%);
             background-attachment: fixed;
             color: #ffffff;
             min-height: 100vh;
         }
 
-        /* --- NAV CON LOGO RESALTADO --- */
+        /* --- NAV NEGRO CON LUZ SUTIL --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 20px 5%; 
+            align-items: center; padding: 15px 5%; 
             background: var(--negro-absoluto); 
             border-bottom: 2px solid var(--naranja);
-            box-shadow: 0 5px 30px rgba(255, 102, 0, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
-        .logo-container {
-            position: relative;
+        .logo-box {
             display: flex;
             align-items: center;
         }
 
-        /* EFECTO ULTRA GLOW AL LOGO */
-        .logo-container img { 
-            height: 65px; 
-            filter: drop-shadow(0 0 10px var(--naranja)) 
-                    drop-shadow(0 0 25px var(--naranja-glow));
-            z-index: 2;
-        }
-
-        /* Halo de luz adicional detrás del logo */
-        .logo-container::after {
-            content: "";
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, var(--naranja-glow) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            opacity: 0.6;
+        /* LOGO CON DEGRADADO/GLOW SUTIL */
+        .logo-box img { 
+            height: 55px; 
+            /* Un solo drop-shadow suave para no saturar */
+            filter: drop-shadow(0 0 10px var(--naranja-suave));
         }
 
         .nav-phone { 
-            color: #fff; font-weight: 800; font-size: 14px;
-            text-shadow: 0 0 10px var(--naranja-brillo);
-            opacity: 0.9;
+            color: #fff; font-weight: 600; font-size: 14px; opacity: 0.8;
         }
 
         /* --- FILTROS --- */
-        .filter-container { display: flex; gap: 12px; padding: 40px 5% 20px; overflow-x: auto; justify-content: center; }
+        .filter-container { display: flex; gap: 10px; padding: 35px 5% 15px; overflow-x: auto; justify-content: center; }
+        
         .cat-btn { 
-            flex: 0 0 auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); 
-            color: #999; padding: 10px 22px; border-radius: 12px; cursor: pointer; font-size: 13px; font-weight: 600;
+            flex: 0 0 auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); 
+            color: #888; padding: 9px 20px; border-radius: 8px; cursor: pointer; font-size: 13px;
         }
+        
         .cat-btn.active { 
             background: var(--naranja); color: #000; border-color: var(--naranja);
-            box-shadow: 0 0 15px var(--naranja-glow);
+            font-weight: 600;
         }
 
-        /* --- GRID --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 10px 5% 80px; }
+        /* --- GRID DE PRODUCTOS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 10px 5% 80px; }
+        
         .product-card { 
-            background: var(--tarjeta); border-radius: 20px; padding: 25px; text-align: center;
-            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            background: var(--tarjeta); border-radius: 18px; padding: 22px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
         }
+
+        /* REMARQUE NARANJA AL PASAR EL CURSOR (MÁS FINO) */
         .product-card:hover { 
-            transform: translateY(-8px); border-color: var(--naranja);
-            box-shadow: 0 0 30px rgba(255, 102, 0, 0.15);
+            transform: translateY(-5px); 
+            border-color: var(--naranja);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
-        .product-card img { width: 100%; height: 210px; object-fit: cover; border-radius: 15px; margin-bottom: 20px; }
+        
+        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 18px; }
+        .product-card h3 { margin: 10px 0; font-size: 18px; font-weight: 600; }
+        .product-card p { color: #777; font-size: 13px; margin-bottom: 22px; }
+        
         .btn-consultar { 
             display: block; background: transparent; color: #fff; text-decoration: none; 
-            padding: 12px; border-radius: 12px; font-weight: 800; border: 1px solid var(--naranja);
-            font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+            padding: 11px; border-radius: 10px; font-weight: 600; border: 1px solid #333;
+            font-size: 12px;
         }
-        .btn-consultar:hover { background: var(--naranja); color: #000; box-shadow: 0 0 20px var(--naranja); }
+        .btn-consultar:hover { 
+            background: var(--naranja); color: #000; border-color: var(--naranja);
+        }
 
         /* --- FOOTER MARCA DE AGUA --- */
-        footer { text-align: center; padding: 60px 20px; opacity: 0.3; }
-        .footer-logo { font-size: 12px; letter-spacing: 4px; font-weight: 300; }
+        footer { text-align: center; padding: 50px 20px; opacity: 0.25; }
+        .footer-logo { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
         .corporation { font-weight: 800; color: var(--naranja); }
 
         /* --- WHATSAPP --- */
         .wsp-flotante {
-            position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px;
+            position: fixed; width: 55px; height: 55px; bottom: 30px; right: 30px;
             background: #25d366; border-radius: 50%; display: flex; align-items: center; 
-            justify-content: center; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); z-index: 2000;
+            justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 2000;
         }
-        .wsp-flotante img { width: 32px; height: 32px; }
+        .wsp-flotante img { width: 30px; height: 30px; }
 
         @media (max-width: 768px) {
             .filter-container { justify-content: flex-start; }
-            .logo-container img { height: 50px; }
+            .logo-box img { height: 45px; }
         }
     </style>
 </head>
@@ -125,7 +119,7 @@
 </a>
 
 <nav>
-  <div class="logo-container">
+  <div class="logo-box">
     <img src="logo.jpg" alt="BENTO">
   </div>
   <div class="nav-phone">TEL: 221 617-2384</div>
@@ -143,21 +137,21 @@
   <div class="product-card" data-category="alarmas">
     <img src="alarma-ajax-kit.jpg" alt="Alarma Ajax">
     <h3>Kit Alarma Ajax</h3>
-    <p>Seguridad de alta fidelidad e inteligente.</p>
+    <p>Tecnología inalámbrica profesional.</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="camaras">
     <img src="bullet2mp.jpg" alt="Camara">
     <h3>Cámara Bullet 2MP</h3>
-    <p>Visión nocturna optimizada 1080p.</p>
+    <p>Visión nocturna nítida en 1080p.</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="dvr">
     <img src="dvr8ch.jpg" alt="DVR">
     <h3>DVR 8 Canales</h3>
-    <p>Monitoreo profesional desde el móvil.</p>
+    <p>Grabación segura con acceso remoto.</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 </div>
