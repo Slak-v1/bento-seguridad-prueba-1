@@ -33,7 +33,7 @@ body{
     overflow-x:hidden;
 }
 
-/* TOP BANNER */
+/* --- ELEMENTOS FIJOS --- */
 .top-banner{
     background:#0a0a0a;
     color:#777;
@@ -46,7 +46,16 @@ body{
 }
 .top-banner b{color:var(--naranja)}
 
-/* NAV */
+.wsp-container { position: fixed; bottom: 40px; right: 40px; z-index: 2000; }
+.wsp-aura { 
+    position: absolute; width: 60px; height: 60px; border-radius: 50%; 
+    background: rgba(37, 211, 102, 0.4); 
+    animation: pulseAura 2s infinite; 
+    z-index: -1; top: 0; left: 0; 
+}
+@keyframes pulseAura { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
+
+/* --- NAVEGACIÓN --- */
 nav{
     position:sticky;
     top:0;
@@ -69,46 +78,37 @@ nav::after{
     background-size:200% auto;
     animation:rgbFlow 3s linear infinite;
 }
-@keyframes rgbFlow{
-    0%{background-position:0% 50%}
-    100%{background-position:200% 50%}
-}
+@keyframes rgbFlow{ 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
 
 .logo-box img{height:110px}
 
-/* HERO */
-.hero{ padding:80px 8% 40px; text-align:center; }
+/* --- HERO & FILTROS --- */
+.hero{ padding:60px 8% 20px; text-align:center; }
 .hero h1{ font-family:'Cinzel',serif; font-size:clamp(30px,5vw,60px); margin-bottom: 20px;}
 
-/* FILTROS */
-.filter-wrapper{text-align:center; padding-bottom: 60px;}
+.filter-wrapper{text-align:center; padding: 20px 0 60px;}
 .cat-btn{
     background:transparent;
     border:1px solid #222;
     color:#555;
-    padding:12px 30px;
+    padding:12px 25px;
     margin:5px;
-    font-size:10px;
+    font-size:9px;
     letter-spacing:3px;
     border-radius:8px;
     cursor:pointer;
     text-transform: uppercase;
 }
-.cat-btn.active{
-    border-color: var(--naranja);
-    color: var(--naranja);
-    background: rgba(255,102,0,0.05);
-}
+.cat-btn.active{ border-color: var(--naranja); color: var(--naranja); background: rgba(255,102,0,0.05); }
 
-/* GRID */
+/* --- GRID DE PRODUCTOS --- */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
     gap:40px;
-    padding:0 8% 100px;
+    padding:0 8% 80px;
 }
 
-/* CARD PROFESIONAL */
 .product-card{
     background:var(--tarjeta);
     padding:30px;
@@ -116,11 +116,11 @@ nav::after{
     border-radius:var(--radius);
     display:flex;
     flex-direction:column;
-    overflow:hidden;
     position: relative;
+    overflow: hidden;
 }
 
-/* Efecto Tecnológico: Barra inferior RGB en hover */
+/* Efecto Tecnológico Barra Inferior */
 .product-card::after {
     content: "";
     position: absolute;
@@ -129,21 +129,18 @@ nav::after{
     width: 0;
     height: 4px;
     background: var(--rgb-gradient);
-    transition: width 0.5s ease;
+    transition: width 0.6s cubic-bezier(.16,1,.3,1);
 }
 
 .product-card:hover {
     transform: translateY(-10px);
     background: rgba(255,255,255,0.04);
     box-shadow: 0 30px 60px -12px rgba(0,0,0,0.9);
-    border-color: rgba(255,255,255,0.1);
 }
 
-.product-card:hover::after {
-    width: 100%;
-}
+.product-card:hover::after { width: 100%; }
 
-/* CONTORNO DE IMAGEN */
+/* Imagen con fondo blanco solicitado */
 .img-container{
     width:calc(100% + 60px);
     height:260px;
@@ -155,71 +152,53 @@ nav::after{
     align-items: center;
     justify-content: center;
 }
-.img-container img{ width:80%; height:80%; object-fit:contain; transition: 0.5s;}
-.product-card:hover img { transform: scale(1.05); }
+.img-container img{ width:75%; height:75%; object-fit:contain; transition: 0.5s; }
+.product-card:hover img { transform: scale(1.08); }
 
 .tech-badge{
-    position:absolute;
-    top:15px;
-    right:45px;
-    background:var(--naranja);
-    color:#000;
-    padding:5px 12px;
-    font-size:9px;
-    font-weight: 800;
-    border-radius:4px;
+    position:absolute; top:15px; right:45px;
+    background:var(--naranja); color:#000;
+    padding:5px 12px; font-size:9px; font-weight: 800; border-radius:4px;
 }
 
-.product-card h3{ font-family:'Cinzel',serif; font-size:18px; margin-top: 10px; letter-spacing: 1px;}
-.product-card p{ font-size:13px; color:#777; margin-bottom:25px; flex-grow: 1; line-height: 1.6;}
+.product-card h3{ font-family:'Cinzel',serif; font-size:18px; margin-top: 10px; }
+.product-card p{ font-size:13px; color:#777; margin-bottom:25px; flex-grow: 1; line-height: 1.6; }
 
-/* BOTÓN CONSULTAR */
 .btn-consultar{
-    padding:16px;
-    border:1px solid #333;
-    text-align:center;
-    border-radius:10px;
-    cursor:pointer;
-    font-size: 10px;
-    letter-spacing: 3px;
-    font-weight: 700;
-    text-transform: uppercase;
-    background: transparent;
+    padding:16px; border:1px solid #333; text-align:center; border-radius:10px;
+    cursor:pointer; font-size: 10px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase;
 }
-.btn-consultar:hover{
-    background:#fff;
-    color:#000;
-    border-color:#fff;
-    box-shadow: 0 0 20px rgba(255,255,255,0.1);
-}
+.btn-consultar:hover{ background:#fff; color:#000; border-color:#fff; }
 
-/* WHATSAPP CON AURA */
-.wsp-container { position: fixed; bottom: 40px; right: 40px; z-index: 2000; }
-.wsp-aura { 
-    position: absolute; width: 60px; height: 60px; border-radius: 50%; 
-    background: rgba(37, 211, 102, 0.4); 
-    animation: pulseAura 2s infinite; 
-    z-index: -1; top: 0; left: 0; 
+/* --- BARRA DE CONFIANZA --- */
+.trust-bar {
+    background: #050505;
+    padding: 60px 8%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-top: 1px solid #111;
+    gap: 40px;
 }
-@keyframes pulseAura { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
-.wsp-flotante img { filter: drop-shadow(0 0 10px rgba(37,211,102,0.5)); transition: 0.3s; }
-.wsp-flotante:hover img { transform: scale(1.1); }
-
-/* FOOTER */
-footer { 
-    padding: 60px 8% 40px; 
-    text-align: center; 
-    border-top: 1px solid #111; 
-    background: #000;
-}
-.copyright {
-    font-size: 10px;
-    color: #444;
+.trust-item {
+    color: #666;
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
+    text-align: center;
 }
+.trust-item i {
+    font-size: 30px;
+    color: var(--naranja);
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0.8;
+}
+
+/* --- FOOTER --- */
+footer { padding: 60px 8%; text-align: center; border-top: 1px solid #111; background: #000; }
+.copyright { font-size: 10px; color: #444; letter-spacing: 3px; text-transform: uppercase; }
 .copyright b { color: #888; font-family: 'Cinzel', serif; }
-
 </style>
 </head>
 
@@ -229,17 +208,17 @@ footer {
 
 <div class="wsp-container">
     <div class="wsp-aura"></div>
-    <a href="https://wa.me/5492216172384" target="_blank" class="wsp-flotante">
+    <a href="https://wa.me/5492216172384" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="60">
     </a>
 </div>
 
 <nav>
-    <div class="logo-box"><img src="logo.jpg"></div>
+    <div class="logo-box"><img src="logo.jpg" alt="Bento"></div>
     <div class="status-container">
-        <div style="display:flex; align-items:center; gap:8px; font-size:10px; letter-spacing:2px;">
+        <div style="display:flex; align-items:center; justify-content:flex-end; gap:8px; font-size:10px; letter-spacing:2px;">
             <div style="width:8px; height:8px; background:var(--verde-neon); border-radius:50%; box-shadow:0 0 10px var(--verde-neon);"></div> 
-            ATENCIÓN ONLINE
+            ONLINE
         </div>
         <div style="font-size:9px;color:#444; margin-top:5px; letter-spacing: 2px;">LA PLATA | ARG <span id="reloj"></span></div>
     </div>
@@ -247,36 +226,64 @@ footer {
 
 <section class="hero">
     <h1>Elegancia en <b>Seguridad</b></h1>
-    <p style="color:#666; font-size:14px; letter-spacing:1px;">Sistemas de monitoreo inteligente con terminaciones de lujo.</p>
 </section>
 
 <div class="filter-wrapper">
     <button class="cat-btn active" data-filter="all">Catálogo</button>
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
+    <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
+    <button class="cat-btn" data-filter="accesorios">Accesorios</button>
 </div>
 
 <div class="grid">
     <div class="product-card" data-category="camaras">
         <div class="img-container">
-            <div class="tech-badge">4K ULTRA</div>
+            <div class="tech-badge">4K ULTRA HD</div>
             <img src="camara-imou.jpg">
         </div>
         <h3>Imou Ranger 2</h3>
-        <p>Seguimiento inteligente 360° con detección de personas y audio bidireccional.</p>
+        <p>Seguimiento 360° inteligente, audio bidireccional y alertas al celular.</p>
         <div class="btn-consultar" onclick="enviarConsulta('Imou Ranger 2')">Consultar Producto</div>
     </div>
 
     <div class="product-card" data-category="alarmas">
         <div class="img-container">
-            <div class="tech-badge">INALÁMBRICA</div>
+            <div class="tech-badge">GRADO 2</div>
             <img src="alarma-ajax-kit.jpg">
         </div>
         <h3>Ajax Hub 2 Plus</h3>
-        <p>Sistema de alarma grado 2 profesional con conectividad triple vía.</p>
+        <p>La alarma inalámbrica más premiada de Europa. Seguridad impenetrable.</p>
         <div class="btn-consultar" onclick="enviarConsulta('Ajax Hub 2 Plus')">Consultar Producto</div>
     </div>
+
+    <div class="product-card" data-category="camaras">
+        <div class="img-container">
+            <div class="tech-badge">FULL COLOR</div>
+            <img src="bullet2mp.jpg">
+        </div>
+        <h3>Dahua Bullet Pro</h3>
+        <p>Visión nocturna a color y detección de humanos con IA avanzada.</p>
+        <div class="btn-consultar" onclick="enviarConsulta('Dahua Bullet Pro')">Consultar Producto</div>
+    </div>
+
+    <div class="product-card" data-category="grabacion">
+        <div class="img-container">
+            <div class="tech-badge">H.265+</div>
+            <img src="dvr8ch.jpg">
+        </div>
+        <h3>DVR Hikvision 8CH</h3>
+        <p>Grabación de alta fidelidad con acceso remoto desde cualquier lugar.</p>
+        <div class="btn-consultar" onclick="enviarConsulta('DVR Hikvision 8CH')">Consultar Producto</div>
+    </div>
 </div>
+
+<section class="trust-bar">
+    <div class="trust-item"><i class="fas fa-shield-alt"></i> Garantía Oficial</div>
+    <div class="trust-item"><i class="fas fa-shipping-fast"></i> Envíos Nacionales</div>
+    <div class="trust-item"><i class="fas fa-tools"></i> Soporte Técnico</div>
+    <div class="trust-item"><i class="fas fa-globe"></i> Proyectos Especiales</div>
+</section>
 
 <footer>
     <div class="copyright">
@@ -285,14 +292,12 @@ footer {
 </footer>
 
 <script>
-// Reloj Tiempo Real
 function actualizarReloj(){
     document.getElementById("reloj").innerText = new Date().toLocaleTimeString("es-AR");
 }
 setInterval(actualizarReloj,1000);
 actualizarReloj();
 
-// Filtros Funcionales
 const buttons = document.querySelectorAll('.cat-btn');
 const cards = document.querySelectorAll('.product-card');
 
@@ -300,9 +305,9 @@ buttons.forEach(btn => {
     btn.onclick = () => {
         buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filter = btn.dataset.filter;
+        const f = btn.dataset.filter;
         cards.forEach(c => {
-            if (filter === 'all' || c.dataset.category === filter) {
+            if (f === 'all' || c.dataset.category === f) {
                 c.style.display = 'flex';
             } else {
                 c.style.display = 'none';
@@ -311,18 +316,13 @@ buttons.forEach(btn => {
     }
 });
 
-// Mensaje Automático de WhatsApp por Producto
-function enviarConsulta(nombreProducto) {
-    const numero = "5492216172384";
-    const mensaje = encodeURIComponent(`Hola Bento! Me interesa obtener más información sobre el producto: ${nombreProducto}. ¿Podrían asesorarme?`);
-    window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
+function enviarConsulta(p) {
+    const msg = encodeURIComponent(`Hola Bento! Me interesa obtener asesoramiento sobre el producto: ${p}.`);
+    window.open(`https://wa.me/5492216172384?text=${msg}`, '_blank');
 }
 
-// Seguridad básica
 document.onkeydown = function(e) {
-    if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
-        return false;
-    }
+    if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) return false;
 };
 </script>
 
