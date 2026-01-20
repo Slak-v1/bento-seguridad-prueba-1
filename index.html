@@ -9,8 +9,9 @@
         :root { 
             --naranja: #ff6600; 
             --naranja-soft: rgba(255, 102, 0, 0.15);
-            --negro-pro: #010101; /* Negro casi absoluto para más elegancia */
+            --negro-pro: #010101; 
             --tarjeta: rgba(255, 255, 255, 0.02);
+            --verde-online: #00ff88;
         }
         
         * { box-sizing: border-box; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -21,7 +22,7 @@
             background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.15) 0%, transparent 40%);
             background-attachment: fixed;
             color: #ffffff; overflow-x: hidden;
-            letter-spacing: 0.2px; /* Espaciado base refinado */
+            letter-spacing: 0.2px;
         }
 
         /* --- NAV REFINADO --- */
@@ -36,25 +37,50 @@
             filter: drop-shadow(0 0 20px rgba(255, 102, 0, 0.3));
         }
 
-        .nav-contact { text-align: right; }
-        .nav-contact div { 
-            font-size: 13px; font-weight: 600; color: #fff; 
-            letter-spacing: 3px; text-transform: uppercase; 
-        }
-        .nav-contact span { 
-            font-size: 10px; color: var(--naranja); font-weight: 300; 
-            letter-spacing: 2px; text-transform: uppercase;
+        /* --- ESTADO ONLINE ARRIBA A LA DERECHA --- */
+        .status-container { text-align: right; }
+        
+        .status-live { 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-end;
+            gap: 10px;
+            font-size: 11px; 
+            font-weight: 600; 
+            color: #fff; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
-        /* --- HERO SECTION REFINADO --- */
+        .dot { 
+            width: 8px; 
+            height: 8px; 
+            background: var(--verde-online); 
+            border-radius: 50%; 
+            box-shadow: 0 0 12px var(--verde-online); 
+            animation: blink 1.5s infinite; 
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .location-text { 
+            font-size: 10px; 
+            color: var(--naranja); 
+            font-weight: 300; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
+
+        /* --- HERO SECTION --- */
         .hero { padding: 100px 8% 40px; text-align: center; }
         .hero h1 {
-            font-size: clamp(35px, 6vw, 70px); font-weight: 100; /* Letra ultra delgada para elegancia */
+            font-size: clamp(35px, 6vw, 70px); font-weight: 100; 
             margin-bottom: 20px; letter-spacing: -3px; line-height: 1.1;
             background: linear-gradient(180deg, #ffffff 0%, #666 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .hero h1 b { font-weight: 800; color: #fff; } /* Resaltado fuerte */
+        .hero h1 b { font-weight: 800; color: #fff; }
         
         .hero p { 
             color: #888; max-width: 600px; margin: 0 auto 50px; 
@@ -70,7 +96,7 @@
         .filter-container { display: flex; gap: 20px; padding: 40px 5%; justify-content: center; }
         .cat-btn { 
             background: transparent; border: 1px solid rgba(255,255,255,0.05); 
-            color: #555; padding: 12px 30px; border-radius: 2px; /* Bordes rectos son más elegantes */
+            color: #555; padding: 12px 30px; border-radius: 2px; 
             cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px;
         }
         .cat-btn.active { border-color: var(--naranja); color: #fff; background: var(--naranja-soft); }
@@ -79,14 +105,14 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 40px 8% 120px; }
         
         .product-card { 
-            background: var(--tarjeta); border-radius: 0px; /* Estilo minimalista recto */
+            background: var(--tarjeta); border-radius: 0px; 
             padding: 45px; border: 1px solid rgba(255,255,255,0.03); position: relative;
         }
 
         .product-card:hover { 
             border-color: rgba(255, 102, 0, 0.5);
             background: rgba(255, 102, 0, 0.02);
-            transform: translateY(-5px); /* Movimiento sutil */
+            transform: translateY(-5px);
         }
 
         .badge { 
@@ -132,9 +158,11 @@
   <div class="logo-box">
     <img src="logo.jpg" alt="BENTO">
   </div>
-  <div class="nav-contact">
-      <div>221 617-2384</div>
-      <span>La Plata | Argentina</span>
+  <div class="status-container">
+      <div class="status-live">
+          <div class="dot"></div> ATENCIÓN PROFESIONAL
+      </div>
+      <div class="location-text">La Plata | Argentina</div>
   </div>
 </nav>
 
