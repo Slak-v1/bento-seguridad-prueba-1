@@ -8,99 +8,95 @@
     <style>
         :root { 
             --naranja: #ff6600; 
-            --naranja-brillo: rgba(255, 102, 0, 0.8);
-            --negro-solido: #000000;
-            --negro-galactico: #020408;
-            --tarjeta-bg: rgba(15, 20, 28, 0.7);
+            --bg-negro: #050505; /* Negro casi puro, muy elegante */
+            --tarjeta: #0d0d0d;
+            --borde: rgba(255, 255, 255, 0.08);
         }
         
-        * { box-sizing: border-box; transition: all 0.4s ease; }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
         
         body { 
             margin: 0; 
             font-family: 'Lexend', sans-serif; 
-            /* El degradado empieza con un resplandor naranja arriba */
-            background: radial-gradient(circle at top, rgba(255, 102, 0, 0.15) 0%, var(--negro-galactico) 40%);
-            background-attachment: fixed;
+            background-color: var(--bg-negro);
             color: #ffffff;
             min-height: 100vh;
         }
 
-        /* --- FRANJA SUPERIOR NEGRA --- */
+        /* --- NAV NEGRO SÓLIDO CON LÍNEA NARANJA SUTIL --- */
         nav { 
             position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; 
-            align-items: center; padding: 20px 5%; 
-            background: var(--negro-solido); 
-            /* LA FRANJA NARANJA QUE SEPARA */
-            border-bottom: 3px solid var(--naranja); 
-            box-shadow: 0 10px 30px var(--naranja-brillo);
+            align-items: center; padding: 15px 5%; 
+            background: #000; 
+            border-bottom: 2px solid var(--naranja); /* La franja naranja */
         }
 
-        .logo img { 
-            height: 65px; 
-            filter: drop-shadow(0 0 10px var(--naranja-brillo));
-        }
+        .logo img { height: 60px; }
 
         .nav-phone { 
-            color: var(--naranja); font-weight: 800; font-size: 16px;
-            text-shadow: 0 0 10px var(--naranja-brillo);
+            color: #fff; font-weight: 600; font-size: 14px; opacity: 0.9;
         }
 
         /* --- FILTROS --- */
-        .filter-container { display: flex; gap: 10px; padding: 40px 5% 20px; overflow-x: auto; justify-content: center; }
+        .filter-container { display: flex; gap: 10px; padding: 30px 5% 10px; overflow-x: auto; justify-content: center; }
+        
         .cat-btn { 
-            flex: 0 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); 
-            color: #fff; padding: 10px 25px; border-radius: 10px; cursor: pointer; font-weight: 600;
-            text-transform: uppercase;
+            flex: 0 0 auto; background: transparent; border: 1px solid var(--borde); 
+            color: #888; padding: 8px 18px; border-radius: 6px; cursor: pointer; font-size: 13px;
         }
+        
         .cat-btn.active { 
-            background: var(--naranja); color: #000; border-color: var(--naranja);
-            box-shadow: 0 0 20px var(--naranja-brillo);
+            background: var(--naranja); color: #fff; border-color: var(--naranja);
         }
 
-        /* --- GRID DE PRODUCTOS --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 10px 5% 50px; }
+        /* --- GRID --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 20px 5% 80px; }
         
         .product-card { 
-            background: var(--tarjeta-bg); border-radius: 20px; padding: 20px; text-align: center;
-            border: 1px solid rgba(255,255,255,0.05); position: relative;
+            background: var(--tarjeta); 
+            border-radius: 12px; 
+            padding: 20px; 
+            text-align: center;
+            border: 1px solid var(--borde);
         }
 
-        /* REMARQUE NARANJA AL PASAR EL CURSOR */
+        /* REMARQUE NARANJA SUTIL SOLO AL POSAR EL CURSOR */
         .product-card:hover { 
-            transform: translateY(-10px); 
             border-color: var(--naranja);
-            box-shadow: 0 0 35px rgba(255, 102, 0, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 102, 0, 0.15);
         }
         
-        .product-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
-        .product-card h3 { margin: 10px 0; font-size: 20px; color: #fff; }
-        .product-card p { color: #aaa; font-size: 14px; margin-bottom: 20px; }
+        .product-card img { width: 100%; height: 210px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+        .product-card h3 { margin: 10px 0; font-size: 18px; font-weight: 600; }
+        .product-card p { color: #777; font-size: 13px; margin-bottom: 20px; }
         
         .btn-consultar { 
             display: block; background: transparent; color: #fff; text-decoration: none; 
-            padding: 10px; border-radius: 8px; font-weight: 800; border: 1px solid var(--naranja);
+            padding: 10px; border-radius: 6px; font-weight: 600; border: 1px solid #333; font-size: 13px;
         }
-        .btn-consultar:hover { background: var(--naranja); color: #000; box-shadow: 0 0 15px var(--naranja); }
+        
+        .btn-consultar:hover { 
+            background: var(--naranja); border-color: var(--naranja);
+        }
 
         /* --- FOOTER MARCA DE AGUA --- */
         footer {
-            text-align: center; padding: 80px 20px 40px; opacity: 0.5;
+            text-align: center; padding: 40px; border-top: 1px solid var(--borde);
         }
-        .footer-logo { font-size: 14px; letter-spacing: 3px; font-weight: 300; }
-        .corporation { font-weight: 800; color: var(--naranja); text-shadow: 0 0 5px var(--naranja-brillo); }
+        .footer-logo { font-size: 12px; letter-spacing: 2px; color: #444; }
+        .corporation { font-weight: 800; color: #666; }
 
         /* --- WHATSAPP --- */
         .wsp-flotante {
-            position: fixed; width: 65px; height: 65px; bottom: 30px; right: 30px;
+            position: fixed; width: 55px; height: 55px; bottom: 25px; right: 25px;
             background: #25d366; border-radius: 50%; display: flex; align-items: center; 
-            justify-content: center; box-shadow: 0 0 25px rgba(37, 211, 102, 0.5); z-index: 2000;
+            justify-content: center; z-index: 2000;
         }
-        .wsp-flotante img { width: 35px; height: 35px; }
+        .wsp-flotante img { width: 30px; height: 30px; }
 
         @media (max-width: 768px) {
             .filter-container { justify-content: flex-start; }
-            .logo img { height: 50px; }
         }
     </style>
 </head>
@@ -129,21 +125,21 @@
   <div class="product-card" data-category="alarmas">
     <img src="alarma-ajax-kit.jpg" alt="Alarma Ajax">
     <h3>Kit Alarma Ajax</h3>
-    <p>Seguridad inteligente de alto nivel.</p>
+    <p>Seguridad inteligente profesional.</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="camaras">
     <img src="bullet2mp.jpg" alt="Camara">
-    <h3>Bullet 2MP</h3>
-    <p>Vigilancia nocturna Full HD.</p>
+    <h3>Cámara Bullet 2MP</h3>
+    <p>Visión nocturna HD.</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 
   <div class="product-card" data-category="dvr">
     <img src="dvr8ch.jpg" alt="DVR">
     <h3>DVR 8 Canales</h3>
-    <p>Grabación estable 24/7.</p>
+    <p>Grabación continua 24/7.</p>
     <a class="btn-consultar" href="https://wa.me/5492216172384" target="_blank">Consultar</a>
   </div>
 </div>
@@ -152,7 +148,6 @@
     <div class="footer-logo">
         BENTO <span class="corporation">CORPORATION</span>
     </div>
-    <div style="font-size: 10px; color: #444; margin-top: 10px;">Seguridad Electrónica Profesional</div>
 </footer>
 
 <script>
