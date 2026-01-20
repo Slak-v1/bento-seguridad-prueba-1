@@ -13,11 +13,20 @@
     --verde-neon:#00ff88; 
     --naranja:#ff6600; 
     --rgb-gradient:linear-gradient(90deg,#ff4400,#ffaa00,#ffcc00,#ffaa00,#ff4400); 
-    --tarjeta:rgba(255,255,255,0.02); 
     --radius:15px; 
 }
 
-*{ box-sizing:border-box; transition:all .4s cubic-bezier(.16,1,.3,1); user-select:none; }
+*{ box-sizing:border-box; transition:all .4s cubic-bezier(.16,1,.3,1); }
+
+/* EVITAR COPIADO DE FOTOS */
+img { 
+    -webkit-user-drag: none; 
+    -khtml-user-drag: none; 
+    -moz-user-drag: none; 
+    -o-user-drag: none; 
+    user-drag: none;
+    pointer-events: none; 
+}
 
 body{
     margin:0;
@@ -27,27 +36,22 @@ body{
     background-attachment:fixed;
     color:#fff;
     overflow-x:hidden;
+    user-select: none; /* Bloquea selección de texto general */
 }
 
-/* TOP BAR & FRANJA RGB SUPERIOR */
+/* BANNER SUPERIOR RESALTADO */
 .top-banner{
-    background:#080808;
-    color:#555;
-    font-size:9px;
-    text-align:center;
-    padding:10px 0;
-    letter-spacing:5px;
-    text-transform:uppercase;
-}
-.rgb-line-top {
-    height: 2px;
-    width: 100%;
-    background: var(--rgb-gradient);
-    background-size: 200% auto;
-    animation: rgbFlow 3s linear infinite;
+    background: var(--naranja);
+    color: #000;
+    font-size: 11px;
+    text-align: center;
+    padding: 12px 0;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
 }
 
-/* NAV */
+/* NAV CON BARRA RGB */
 nav{
     position:sticky;
     top:0;
@@ -58,90 +62,65 @@ nav{
     padding:15px 8%;
     background:rgba(0,0,0,0.95);
     backdrop-filter:blur(15px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
+nav::after{
+    content:"";
+    position:absolute;
+    bottom:0; left:0; width:100%; height:3px;
+    background:var(--rgb-gradient);
+    background-size:200% auto;
+    animation:rgbFlow 3s linear infinite;
+}
+@keyframes rgbFlow{ 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
 
-.logo-box img{height:90px; filter: brightness(1.1);}
+.logo-box img{ height:90px; pointer-events: none; }
 
-/* ESTADO Y RELOJ PROFESIONAL */
-.status-container{ 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-.status-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
-}
-.status-live-text {
-    color: #666;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+/* RELOJ Y CIRCULO VERDE */
+.status-container{ display: flex; align-items: center; gap: 20px; }
 .status-circle {
-    width: 8px;
-    height: 8px;
-    background-color: var(--verde-neon);
+    width: 10px; height: 10px;
+    background: var(--verde-neon);
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--verde-neon);
-    animation: pulseCircle 2s infinite;
+    box-shadow: 0 0 15px var(--verde-neon);
+    animation: glow 1.5s infinite ease-in-out;
 }
-@keyframes pulseCircle { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+@keyframes glow { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
 
 #reloj-box {
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 300;
     letter-spacing: 1px;
-    font-family: 'Montserrat', sans-serif;
 }
 
-/* WHATSAPP CON EFECTO MEJORADO */
+/* WHATSAPP AURA VERDE */
 .wsp-container { position: fixed; bottom: 35px; right: 35px; z-index: 2000; }
 .wsp-aura { 
     position: absolute; width: 60px; height: 60px; border-radius: 50%; 
-    border: 2px solid #25d366;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    animation: radarPulse 2s infinite; 
-    pointer-events: none;
+    background: rgba(37, 211, 102, 0.4); 
+    animation: pulseAura 2s infinite; 
+    z-index: -1; top: 0; left: 0; 
 }
-@keyframes radarPulse {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
-    100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
-}
-.wsp-flotante img { 
-    width: 60px; 
-    filter: drop-shadow(0 0 15px rgba(37,211,102,0.3));
-    transition: 0.4s;
-}
-.wsp-flotante:hover img { transform: scale(1.1) rotate(5deg); }
+@keyframes pulseAura { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
 
 /* HERO */
 .hero{ padding:80px 8% 40px; text-align:center; }
 .hero h1{ font-family:'Cinzel',serif; font-size:clamp(30px,5vw,55px); margin-bottom: 25px; letter-spacing: 4px;}
 .hero h1 b{ color: var(--naranja); }
-.hero p{ color:#777; font-size:14px; letter-spacing:2px; max-width:750px; margin:0 auto; line-height: 1.8; text-transform: uppercase;}
+.hero p{ color:#666; font-size:14px; letter-spacing:3px; max-width:850px; margin:0 auto; line-height: 1.8; text-transform: uppercase;}
 
-/* FRANJA RGB DE LAS TARJETAS */
-@keyframes rgbFlow{ 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
-
-/* GRID Y TARJETAS */
-.grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:30px; padding:0 8% 100px; }
+/* GRID */
+.grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:30px; padding:0 8% 80px; }
 .product-card{
     background: #0a0a0a; padding:25px; border:1px solid #151515;
     border-radius:var(--radius); display:flex; flex-direction:column; position: relative; overflow: hidden;
 }
 .product-card::after { 
     content: ""; position: absolute; bottom: 0; left: 0; 
-    width: 0; height: 3px; background: var(--rgb-gradient); 
+    width: 0; height: 4px; background: var(--rgb-gradient); 
     transition: width 0.6s ease; 
 }
 .product-card:hover::after { width: 100%; }
-.product-card:hover { transform: translateY(-8px); border-color: #252525; }
 
 .img-container{
     width:calc(100% + 50px); height:250px; margin:-25px -25px 20px -25px;
@@ -150,57 +129,47 @@ nav{
 .img-container img{ width:70%; height:70%; object-fit:contain; }
 
 /* FILTROS */
-.filter-wrapper{text-align:center; padding: 0 8% 60px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;}
+.filter-wrapper{text-align:center; padding: 0 8% 60px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;}
 .cat-btn{
-    background:transparent; border: 1px solid #222; color:#666; padding:10px 25px;
-    font-size:9px; letter-spacing:3px; border-radius:4px; cursor:pointer; text-transform: uppercase;
+    background:transparent; border: 1px solid #222; color:#555; padding:10px 22px;
+    font-size:9px; letter-spacing:2px; border-radius:4px; cursor:pointer; text-transform: uppercase;
 }
 .cat-btn.active{ border-color: var(--naranja); color: var(--naranja); background: rgba(255,102,0,0.05); }
 
-/* BOTON CONSULTA */
-.btn-consultar{ 
-    padding:15px; border:1px solid #222; text-align:center; border-radius:5px; 
-    cursor:pointer; font-size: 10px; letter-spacing: 3px; font-weight: 600; text-transform: uppercase; color: #888;
-}
-.btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
+/* TRUST BAR (ENVÍOS) */
+.trust-bar { background: #050505; padding: 60px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; border-top: 1px solid #111; gap: 30px; }
+.trust-item { color: #555; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
+.trust-item i { font-size: 28px; color: var(--naranja); margin-bottom: 15px; display: block; }
 
-/* FOOTER */
-footer { padding: 50px 8%; text-align: center; border-top: 1px solid #111; background: #000; }
-.copyright { font-size: 9px; color: #333; letter-spacing: 4px; text-transform: uppercase; }
-
+footer { padding: 40px 8%; text-align: center; border-top: 1px solid #111; background: #000; }
+.copyright { font-size: 9px; color: #444; letter-spacing: 4px; text-transform: uppercase; }
 </style>
 </head>
 
-<body>
-
-<div class="top-banner">Soluciones Corporativas de Seguridad | <b>BENTO GROUP</b></div>
-<div class="rgb-line-top"></div>
+<body oncontextmenu="return false"> <div class="top-banner">Sistemas Premium | Envios a todo el pais | <b>BENTO SECURITY</b></div>
 
 <div class="wsp-container">
     <div class="wsp-aura"></div>
-    <a href="https://wa.me/5492216172384" target="_blank" class="wsp-flotante">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    <a href="https://wa.me/5492216172384" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="60">
     </a>
 </div>
 
 <nav>
     <div class="logo-box"><img src="logo.jpg"></div>
     <div class="status-container">
-        <div class="status-row">
-            <div class="status-live-text">Sistema Activo</div>
-            <div class="status-circle"></div>
-        </div>
         <div id="reloj-box"><span id="reloj">00:00:00</span></div>
+        <div class="status-circle"></div>
     </div>
 </nav>
 
 <section class="hero">
-    <h1>Ingeniería en <b>Seguridad</b></h1>
-    <p>Desarrollo de ecosistemas de protección de alta fidelidad para activos críticos y entornos de alta gama.</p>
+    <h1>Estrategia en <b>Seguridad</b></h1>
+    <p>Arquitectura de protección avanzada. <br> Equipamiento de alto desempeño para el resguardo de infraestructuras críticas.</p>
 </section>
 
 <div class="filter-wrapper">
-    <button class="cat-btn active" data-filter="all">Todas las Soluciones</button>
+    <button class="cat-btn active" data-filter="all">Catálogo</button>
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
     <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
@@ -209,43 +178,50 @@ footer { padding: 50px 8%; text-align: center; border-top: 1px solid #111; backg
 
 <div class="grid">
     <div class="product-card" data-category="camaras">
-        <div class="img-container">
-            <img src="camara-imou.jpg">
-        </div>
+        <div class="img-container"><img src="camara-imou.jpg"></div>
         <h3>Imou Ranger 2</h3>
-        <p>Monitoreo inteligente con rotación motorizada y detección de intrusión.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('Imou Ranger 2')">Consultar Especificaciones</div>
+        <p>Monitoreo inteligente con rotación y detección térmica.</p>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); letter-spacing:2px; cursor:pointer;" onclick="enviarConsulta('Imou Ranger 2')">CONSULTAR ASESOR</div>
     </div>
 
     <div class="product-card" data-category="alarmas">
-        <div class="img-container">
-            <img src="alarma-ajax-kit.jpg">
-        </div>
+        <div class="img-container"><img src="alarma-ajax-kit.jpg"></div>
         <h3>Ajax Hub 2</h3>
-        <p>Sistema de intrusión inalámbrico con cifrado de alta seguridad.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('Ajax Hub 2')">Consultar Especificaciones</div>
+        <p>Central de intrusión con verificación fotográfica.</p>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); letter-spacing:2px; cursor:pointer;" onclick="enviarConsulta('Ajax Hub 2')">CONSULTAR ASESOR</div>
     </div>
 
     <div class="product-card" data-category="grabacion">
-        <div class="img-container">
-            <img src="dvr-dahua.jpg">
-        </div>
+        <div class="img-container"><img src="dvr-dahua.jpg"></div>
         <h3>DVR Dahua WizSense</h3>
-        <p>Grabación de video con inteligencia artificial para filtrado de falsas alarmas.</p>
-        <div class="btn-consultar" onclick="enviarConsulta('DVR Dahua WizSense')">Consultar Especificaciones</div>
+        <p>Inteligencia artificial aplicada a la grabación continua.</p>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); letter-spacing:2px; cursor:pointer;" onclick="enviarConsulta('DVR Dahua')">CONSULTAR ASESOR</div>
     </div>
 </div>
 
+<section class="trust-bar">
+    <div class="trust-item"><i class="fas fa-truck-moving"></i> Envios a todo el pais</div>
+    <div class="trust-item"><i class="fas fa-shield-alt"></i> Garantia Oficial</div>
+    <div class="trust-item"><i class="fas fa-headset"></i> Soporte Tecnico</div>
+</section>
+
 <footer>
-    <div class="copyright">
-        © 2026 TODOS LOS DERECHOS RESERVADOS | <b>BENTO SECURITY GROUP</b>
-    </div>
+    <div class="copyright">© 2026 TODOS LOS DERECHOS RESERVADOS | <b>BENTO SECURITY GROUP</b></div>
 </footer>
 
 <script>
+// Bloqueo total de inspección de elementos
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if(e.keyCode == 123) return false;
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+}
+
 function actualizarReloj(){
-    const tiempo = new Date().toLocaleTimeString("es-AR", {hour12: false});
-    document.getElementById("reloj").innerText = tiempo;
+    document.getElementById("reloj").innerText = new Date().toLocaleTimeString("es-AR", {hour12: false});
 }
 setInterval(actualizarReloj, 1000);
 actualizarReloj();
@@ -265,7 +241,7 @@ buttons.forEach(btn => {
 });
 
 function enviarConsulta(p) {
-    const msg = encodeURIComponent(`Hola Bento Security. Solicito información técnica y disponibilidad sobre el equipo: ${p}.`);
+    const msg = encodeURIComponent(`Hola Bento Security. Solicito información sobre: ${p}.`);
     window.open(`https://wa.me/5492216172384?text=${msg}`, '_blank');
 }
 </script>
