@@ -8,227 +8,269 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <style>
-        :root { 
-            --negro-pro: #010101; 
-            --verde-neon: #00ff88; 
-            --naranja: #ff6600; 
-            --rgb-gradient: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400); 
-            --tarjeta: rgba(255, 255, 255, 0.02); 
-            --radius: 20px; 
-        }
+<style>
+:root { 
+    --negro-pro:#010101; 
+    --verde-neon:#00ff88; 
+    --naranja:#ff6600; 
+    --rgb-gradient:linear-gradient(90deg,#ff4400,#ffaa00,#ffcc00,#ffaa00,#ff4400); 
+    --tarjeta:rgba(255,255,255,0.02); 
+    --radius:20px; 
+}
 
-        * { 
-            box-sizing: border-box; 
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-            user-select: none; 
-            -webkit-user-select: none; 
-        }
+*{
+    box-sizing:border-box;
+    transition:all .4s cubic-bezier(.16,1,.3,1);
+    user-select:none;
+}
 
-        @keyframes fadeInPage { 
-            from { opacity: 0; transform: translateY(10px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+@keyframes fadeInPage{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+}
 
-        body { 
-            margin: 0; 
-            font-family: 'Montserrat', sans-serif; 
-            background-color: var(--negro-pro); 
-            background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.1) 0%, transparent 40%); 
-            background-attachment: fixed; 
-            color: #ffffff; 
-            overflow-x: hidden; 
-            font-weight: 300; 
-            animation: fadeInPage 1.2s ease-out; 
-        }
+body{
+    margin:0;
+    font-family:'Montserrat',sans-serif;
+    background-color:var(--negro-pro);
+    background-image:radial-gradient(circle at 50% -20%,rgba(255,102,0,.1) 0%,transparent 40%);
+    background-attachment:fixed;
+    color:#fff;
+    overflow-x:hidden;
+    animation:fadeInPage 1.2s ease-out;
+}
 
-        .top-banner { 
-            background: #0a0a0a; 
-            color: #777; 
-            font-size: 10px; 
-            text-align: center; 
-            padding: 12px 0; 
-            letter-spacing: 4px; 
-            text-transform: uppercase; 
-            border-bottom: 1px solid #1a1a1a; 
-            font-weight: 500; 
-        }
+/* TOP */
+.top-banner{
+    background:#0a0a0a;
+    color:#777;
+    font-size:10px;
+    text-align:center;
+    padding:12px 0;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    border-bottom:1px solid #1a1a1a;
+}
+.top-banner b{color:var(--naranja)}
 
-        .top-banner b { color: var(--naranja); }
+/* NAV */
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px 8%;
+    background:rgba(0,0,0,.95);
+    backdrop-filter:blur(20px);
+    position:relative;
+}
+nav::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:var(--rgb-gradient);
+    background-size:200% auto;
+    animation:rgbFlow 3s linear infinite;
+}
+@keyframes rgbFlow{
+    0%{background-position:0% 50%}
+    100%{background-position:200% 50%}
+}
 
-        nav { 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 25px 8%; 
-            background: rgba(0, 0, 0, 0.95); 
-            backdrop-filter: blur(20px); 
-            position: relative; 
-        }
+.logo-box img{height:110px}
 
-        nav::after { 
-            content: ""; 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 4px; 
-            background: var(--rgb-gradient); 
-            background-size: 200% auto; 
-            animation: rgbFlow 3s linear infinite; 
-        }
+.status-container{text-align:right}
+.status-live{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:10px;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+.dot{
+    width:8px;
+    height:8px;
+    background:var(--verde-neon);
+    border-radius:50%;
+    box-shadow:0 0 12px var(--verde-neon);
+    animation:blink 1.5s infinite;
+}
+@keyframes blink{
+    0%,100%{opacity:1}
+    50%{opacity:.2}
+}
+#reloj{
+    color:var(--naranja);
+    margin-left:10px;
+    border-left:1px solid #333;
+    padding-left:10px;
+}
 
-        @keyframes rgbFlow { 
-            0% { background-position: 0% 50%; } 
-            100% { background-position: 200% 50%; } 
-        }
+/* HERO */
+.hero{
+    padding:80px 8% 40px;
+    text-align:center;
+}
+.hero h1{
+    font-family:'Cinzel',serif;
+    font-size:clamp(30px,5vw,60px);
+}
+.hero p{
+    color:#888;
+    max-width:650px;
+    margin:0 auto 50px;
+    font-size:15px;
+}
 
-        .logo-box img { height: 110px; }
+/* FILTROS */
+.filter-wrapper{text-align:center;padding-bottom:40px}
+.cat-btn{
+    background:transparent;
+    border:1px solid #333;
+    color:#777;
+    padding:12px 30px;
+    margin:5px;
+    font-size:10px;
+    letter-spacing:3px;
+    border-radius:10px;
+    cursor:pointer;
+}
+.cat-btn.active{
+    background:var(--naranja);
+    color:#000;
+}
 
-        .status-container { text-align: right; }
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:40px;
+    padding:0 8% 100px;
+}
 
-        .status-live { 
-            display: flex; 
-            align-items: center; 
-            justify-content: flex-end; 
-            gap: 10px; 
-            font-size: 10px; 
-            letter-spacing: 3px; 
-            text-transform: uppercase; 
-        }
+/* CARD */
+.product-card{
+    background:var(--tarjeta);
+    padding:30px;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:var(--radius);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden; /* CLAVE */
+}
 
-        .dot { 
-            width: 8px; 
-            height: 8px; 
-            background: var(--verde-neon); 
-            border-radius: 50%; 
-            box-shadow: 0 0 12px var(--verde-neon); 
-            animation: blink 1.5s infinite; 
-        }
+/* CONTORNO DE IMAGEN (CORREGIDO) */
+.img-container{
+    width:calc(100% + 60px);
+    height:260px;
+    margin:-30px -30px 25px -30px;
+    background:#fff;
+    border-radius:20px 20px 0 0;
+    position:relative;
+    overflow:hidden;
+}
+.img-container img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:#fff;
+}
 
-        @keyframes blink { 
-            0%,100% { opacity: 1; } 
-            50% { opacity: .2; } 
-        }
+.tech-badge{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:var(--naranja);
+    color:#000;
+    padding:5px 12px;
+    font-size:9px;
+    border-radius:5px;
+}
 
-        #reloj { 
-            color: var(--naranja); 
-            margin-left: 10px; 
-            border-left: 1px solid #333; 
-            padding-left: 10px; 
-        }
+.product-card h3{
+    font-family:'Cinzel',serif;
+    font-size:18px;
+}
+.product-card p{
+    font-size:13px;
+    color:#888;
+    margin-bottom:25px;
+}
 
-        .hero { padding: 80px 8% 40px; text-align: center; }
+.btn-consultar{
+    padding:15px;
+    border:1px solid #444;
+    text-align:center;
+    border-radius:12px;
+    cursor:pointer;
+}
+.btn-consultar:hover{
+    background:#fff;
+    color:#000;
+}
+</style>
+</head>
 
-        .hero h1 { 
-            font-family: 'Cinzel', serif; 
-            font-size: clamp(30px, 5vw, 60px); 
-        }
+<body oncontextmenu="return false">
 
-        .hero p { 
-            color: #888; 
-            max-width: 650px; 
-            margin: 0 auto 50px; 
-            font-size: 15px; 
-        }
+<div class="top-banner">Compromiso y <b>Servicio de Calidad</b></div>
 
-        .brands-container { 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            flex-wrap: wrap; 
-            padding: 0 8% 60px; 
-        }
+<nav>
+    <div class="logo-box"><img src="logo.jpg"></div>
+    <div class="status-container">
+        <div class="status-live"><div class="dot"></div>Atención Profesional</div>
+        <div style="font-size:9px;color:#666">LA PLATA | ARG <span id="reloj"></span></div>
+    </div>
+</nav>
 
-        .brand-pill { 
-            background: rgba(255,255,255,0.03); 
-            border: 1px solid rgba(255,255,255,0.1); 
-            color: #aaa; 
-            padding: 10px 25px; 
-            font-size: 10px; 
-            letter-spacing: 3px; 
-            border-radius: 50px; 
-        }
+<section class="hero">
+    <h1>Elegancia en <b>Seguridad</b></h1>
+    <p>Tecnología de precisión y monitoreo inteligente.</p>
+</section>
 
-        .filter-wrapper { padding: 20px 0 40px; text-align: center; }
+<div class="filter-wrapper">
+    <button class="cat-btn active">Catálogo</button>
+</div>
 
-        .cat-btn { 
-            background: transparent; 
-            border: 1px solid #333; 
-            color: #777; 
-            padding: 12px 30px; 
-            margin: 5px; 
-            font-size: 10px; 
-            letter-spacing: 3px; 
-            border-radius: 10px; 
-        }
+<div class="grid">
 
-        .cat-btn.active { 
-            background: var(--naranja); 
-            color: #000; 
-        }
+<div class="product-card">
+    <div class="img-container">
+        <div class="tech-badge">FULL HD</div>
+        <img src="camara-imou.jpg">
+    </div>
+    <h3>Imou Ranger 2</h3>
+    <p>Cámara inteligente con seguimiento 360°.</p>
+    <div class="btn-consultar">Solicitar Información</div>
+</div>
 
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
-            gap: 40px; 
-            padding: 0 8% 100px; 
-        }
+<div class="product-card">
+    <div class="img-container">
+        <div class="tech-badge">WiFi</div>
+        <img src="alarma-ajax-kit.jpg">
+    </div>
+    <h3>Ajax Hub 2</h3>
+    <p>Central de seguridad inalámbrica.</p>
+    <div class="btn-consultar">Solicitar Información</div>
+</div>
 
-        .product-card { 
-            background: var(--tarjeta); 
-            padding: 30px; 
-            border: 1px solid rgba(255,255,255,0.05); 
-            border-radius: var(--radius); 
-            position: relative; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; /* FIX */
-        }
+</div>
 
-        .product-card:hover { 
-            transform: translateY(-10px); 
-        }
+<script>
+function actualizarReloj(){
+    document.getElementById("reloj").innerText=
+    new Date().toLocaleTimeString("es-AR");
+}
+setInterval(actualizarReloj,1000);
+actualizarReloj();
+</script>
 
-        /* ==== CONTORNO CORREGIDO (ÚNICO CAMBIO) ==== */
-        .img-container { 
-            width: calc(100% + 60px); 
-            height: 260px; 
-            margin: -30px -30px 25px -30px; 
-            background: #ffffff; 
-            border-radius: 20px 20px 0 0; 
-            position: relative; 
-            overflow: hidden; 
-        }
-
-        .img-container img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-            background: #ffffff; 
-        }
-
-        .tech-badge { 
-            position: absolute; 
-            top: 10px; 
-            right: 10px; 
-            background: var(--naranja); 
-            color: #000; 
-            padding: 5px 12px; 
-            font-size: 9px; 
-            border-radius: 5px; 
-        }
-
-        .product-card h3 { font-family: 'Cinzel', serif; }
-        .product-card p { color: #888; }
-
-        .btn-consultar { 
-            padding: 15px; 
-            border: 1px solid #444; 
-            text-align: center; 
-            border-radius: 12px; 
-            cursor: pointer; 
-        }
+</body>
+</html>
