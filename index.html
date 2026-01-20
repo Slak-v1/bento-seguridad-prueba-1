@@ -47,110 +47,80 @@
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
         #reloj { color: var(--naranja); font-weight: 500; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; }
 
-        /* --- WHATSAPP FLOTANTE CON AURA --- */
-        .wsp-container {
-            position: fixed; bottom: 40px; right: 40px; z-index: 2000;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .wsp-aura {
-            position: absolute; width: 60px; height: 60px;
-            border-radius: 50%; background: rgba(37, 211, 102, 0.3);
-            animation: pulseAura 2s infinite; z-index: -1;
-        }
-
-        @keyframes pulseAura {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(2.2); opacity: 0; }
-        }
-
+        /* --- WHATSAPP CON AURA --- */
+        .wsp-container { position: fixed; bottom: 40px; right: 40px; z-index: 2000; display: flex; align-items: center; justify-content: center; }
+        .wsp-aura { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: rgba(37, 211, 102, 0.3); animation: pulseAura 2s infinite; z-index: -1; }
+        @keyframes pulseAura { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.2); opacity: 0; } }
         .wsp-flotante { transition: 0.3s; filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.5)); }
-        .wsp-flotante:hover { transform: scale(1.15); filter: drop-shadow(0 0 20px rgba(37, 211, 102, 0.8)); }
 
         /* --- HERO --- */
         .hero { padding: 100px 8% 40px; text-align: center; }
-        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 60px); letter-spacing: 2px; margin-bottom: 25px; line-height: 1.2; }
-        .hero h1 b { font-weight: 700; color: #fff; }
-        .hero p { color: #888; max-width: 650px; margin: 0 auto 50px; font-size: 15px; line-height: 1.8; letter-spacing: 1px; }
+        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 60px); letter-spacing: 2px; margin-bottom: 25px; }
+        .hero h1 b { font-weight: 700; }
+        .hero p { color: #888; max-width: 650px; margin: 0 auto 50px; font-size: 15px; letter-spacing: 1px; }
 
         /* --- MARCAS --- */
         .brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0 8% 60px; }
         .brand-pill { 
             background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
-            color: #aaa; padding: 10px 25px; font-size: 10px; font-weight: 500; letter-spacing: 3px; cursor: pointer; 
-            border-radius: 50px; 
+            color: #aaa; padding: 10px 25px; font-size: 10px; font-weight: 500; letter-spacing: 3px; cursor: pointer; border-radius: 50px; 
         }
-        .brand-pill:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-3px); }
+        .brand-pill:hover { background: #fff; color: #000; transform: translateY(-3px); }
 
         /* --- FILTROS --- */
         .filter-wrapper { padding: 20px 0 40px; text-align: center; }
         .cat-btn { 
-            background: transparent; border: 1px solid #333; color: #777; 
-            padding: 12px 30px; margin: 5px; cursor: pointer; 
-            font-size: 10px; font-weight: 600; text-transform: uppercase; 
-            letter-spacing: 3px; font-family: 'Montserrat', sans-serif;
-            border-radius: 10px;
+            background: transparent; border: 1px solid #333; color: #777; padding: 12px 30px; margin: 5px; 
+            cursor: pointer; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; border-radius: 10px;
         }
-        .cat-btn.active { background: var(--naranja); color: #000; border-color: var(--naranja); font-weight: 700; box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
+        .cat-btn.active { background: var(--naranja); color: #000; border-color: var(--naranja); box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
 
         /* --- GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 0 8% 100px; }
         
         .product-card { 
-            background: var(--tarjeta); padding: 50px; 
-            border: 1px solid rgba(255,255,255,0.05); 
-            border-radius: var(--radius); 
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column;
+            background: var(--tarjeta); padding: 40px; border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: var(--radius); position: relative; overflow: hidden; display: flex; flex-direction: column;
         }
         
         .product-card:hover {
-            border: 1px solid transparent;
-            background-image: linear-gradient(var(--negro-pro), var(--negro-pro)), var(--rgb-gradient);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            background-size: 100% 100%, 200% auto;
-            animation: rgbFlow 3s linear infinite;
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.8);
+            border: 1px solid transparent; background-image: linear-gradient(var(--negro-pro), var(--negro-pro)), var(--rgb-gradient);
+            background-origin: border-box; background-clip: padding-box, border-box; background-size: 100% 100%, 200% auto;
+            animation: rgbFlow 3s linear infinite; transform: translateY(-10px);
         }
         
         .img-container { position: relative; width: 100%; height: 260px; margin-bottom: 30px; }
-        .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
-        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+        .img-container img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 
-        .product-card h3 { font-family: 'Cinzel', serif; font-size: 18px; margin-bottom: 10px; color: #fff; letter-spacing: 1px; }
-        .product-card p { font-size: 13px; color: #888; font-weight: 300; line-height: 1.6; margin-bottom: 25px; }
+        /* --- EL RECUADRO NARANJA (ETIQUETA TÉCNICA) --- */
+        .tech-badge {
+            position: absolute; top: 10px; right: 10px;
+            background: var(--naranja); color: #000;
+            padding: 5px 12px; font-size: 9px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1px;
+            border-radius: 5px; z-index: 20;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3);
+        }
+
+        .product-card h3 { font-family: 'Cinzel', serif; font-size: 18px; margin-bottom: 10px; color: #fff; }
+        .product-card p { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 25px; }
 
         .btn-consultar { 
             display: block; width: 100%; padding: 15px; border: 1px solid #444; 
             color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 4px; text-align: center;
-            border-radius: 12px;
+            text-transform: uppercase; letter-spacing: 4px; text-align: center; border-radius: 12px;
         }
-        .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
+        .btn-consultar:hover { background: #fff; color: #000; }
 
         /* --- TRUST BAR --- */
-        .trust-bar { background: #050505; padding: 90px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; border-top: 1px solid #111; }
-        .trust-item { color: #666; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-align: center; font-weight: 400; }
-        .trust-item i { font-size: 32px; color: var(--naranja); margin-bottom: 25px; display: block; opacity: 0.8; }
+        .trust-bar { background: #050505; padding: 80px 8%; display: flex; justify-content: space-around; flex-wrap: wrap; border-top: 1px solid #111; }
+        .trust-item { color: #666; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
+        .trust-item i { font-size: 30px; color: var(--naranja); margin-bottom: 20px; display: block; }
 
         /* --- FOOTER --- */
-        footer { 
-            padding: 60px 8%; 
-            text-align: center; 
-            border-top: 1px solid #111; 
-            background: #000;
-        }
-        .copyright-text { 
-            font-family: 'Montserrat', sans-serif;
-            font-size: 11px; 
-            color: #4a4a4a; 
-            letter-spacing: 2px; 
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-        .copyright-text b { color: #666; font-family: 'Cinzel', serif; letter-spacing: 4px; }
+        footer { padding: 50px 8%; text-align: center; border-top: 1px solid #111; background: #000; }
+        .copyright-text { font-family: 'Montserrat', sans-serif; font-size: 10px; color: #444; letter-spacing: 2px; text-transform: uppercase; }
+        .copyright-text b { color: #666; font-family: 'Cinzel', serif; }
     </style>
 </head>
 <body oncontextmenu="return false">
@@ -193,30 +163,42 @@
 
 <div class="grid">
   <div class="product-card" data-category="camaras">
-    <div class="img-container"><img src="camara-imou.jpg" alt="Imou"></div>
+    <div class="img-container">
+        <div class="tech-badge">Full HD 1080p</div>
+        <img src="camara-imou.jpg" alt="Imou">
+    </div>
     <h3>Imou Ranger 2</h3>
-    <p>Cámara inteligente con seguimiento de movimiento y audio bidireccional.</p>
+    <p>Cámara inteligente con seguimiento 360° y audio bidireccional.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="alarmas">
-    <div class="img-container"><img src="alarma-ajax-kit.jpg" alt="Ajax"></div>
+    <div class="img-container">
+        <div class="tech-badge">Ultra-Link</div>
+        <img src="alarma-ajax-kit.jpg" alt="Ajax">
+    </div>
     <h3>Ajax Hub 2 Plus</h3>
-    <p>Central de seguridad inalámbrica de máxima fiabilidad.</p>
+    <p>Central de seguridad inalámbrica con triple canal de comunicación.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="camaras">
-    <div class="img-container"><img src="bullet2mp.jpg" alt="Dahua"></div>
+    <div class="img-container">
+        <div class="tech-badge">4K Ultra HD</div>
+        <img src="bullet2mp.jpg" alt="Dahua">
+    </div>
     <h3>Dahua Series Pro</h3>
-    <p>Vigilancia de precisión con visión nocturna avanzada.</p>
+    <p>Vigilancia nocturna ColorVu de alta definición y precisión.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 
   <div class="product-card" data-category="grabacion">
-    <div class="img-container"><img src="dvr8ch.jpg" alt="DVR"></div>
+    <div class="img-container">
+        <div class="tech-badge">H.265+ Zip</div>
+        <img src="dvr8ch.jpg" alt="DVR">
+    </div>
     <h3>DVR Hikvision 8CH</h3>
-    <p>Sistema de grabación híbrido de alto rendimiento.</p>
+    <p>Grabación híbrida con compresión de video avanzada y acceso remoto.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Solicitar Información</div>
   </div>
 </div>
