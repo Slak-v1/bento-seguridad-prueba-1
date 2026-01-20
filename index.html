@@ -27,6 +27,24 @@ body {
 }
 img { -webkit-user-drag: none; pointer-events: none; }
 
+    /* BARRA RGB EN PRODUCTOS */
+.product-card::after { 
+    content: ""; 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 0; 
+    height: 5px; 
+    background: var(--rgb-gradient); 
+    background-size: 200% auto;
+    transition: width 0.6s ease; 
+    animation: rgbFlow 3s linear infinite; 
+}
+
+.product-card:hover::after { 
+    width: 100%; /* Se expande al pasar el mouse */
+}
+
 /* BANNER SUPERIOR */
 .top-banner{
     background: #000; color: var(--naranja); font-size: 10px;
