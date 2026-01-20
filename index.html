@@ -12,14 +12,15 @@
             --verde-neon: #00ff88;
             --naranja: #ff6600;
             --rgb-gradient: linear-gradient(90deg, #ff4400, #ffaa00, #ffcc00, #ffaa00, #ff4400);
+            --borde-tenue: rgba(255, 255, 255, 0.1);
         }
         
-        * { box-sizing: border-box; transition: all 0.4s ease; user-select: none; -webkit-user-select: none; }
+        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); user-select: none; -webkit-user-select: none; }
         
         body { 
             margin: 0; font-family: 'Montserrat', sans-serif; 
             background-color: var(--negro-pro);
-            background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.08) 0%, transparent 50%);
+            background-image: radial-gradient(circle at 50% -20%, rgba(255, 102, 0, 0.05) 0%, transparent 50%);
             background-attachment: fixed;
             color: #ffffff; overflow-x: hidden; font-weight: 300;
         }
@@ -41,87 +42,91 @@
         #reloj { color: var(--naranja); font-weight: 500; margin-left: 10px; border-left: 1px solid #333; padding-left: 10px; }
 
         /* --- HERO --- */
-        .hero { padding: 100px 8% 60px; text-align: center; }
-        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 55px); letter-spacing: 4px; margin-bottom: 20px; }
+        .hero { padding: 80px 8% 40px; text-align: center; }
+        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(30px, 5vw, 50px); letter-spacing: 6px; margin-bottom: 20px; text-transform: uppercase; }
         .hero h1 b { font-weight: 700; color: #fff; }
-        .hero p { color: #777; max-width: 600px; margin: 0 auto; font-size: 14px; letter-spacing: 2px; line-height: 1.8; }
+        .hero p { color: #666; max-width: 600px; margin: 0 auto; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* --- FILTROS MINIMALISTAS --- */
-        .filter-wrapper { padding: 0 0 50px; text-align: center; }
+        /* --- FILTROS --- */
+        .filter-wrapper { padding: 40px 0; text-align: center; }
         .cat-btn { 
-            background: transparent; border: none; color: #555; padding: 10px 20px; 
-            margin: 0 10px; cursor: pointer; font-size: 9px; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 3px; position: relative;
+            background: transparent; border: 1px solid #222; color: #555; padding: 10px 25px; 
+            margin: 0 5px; cursor: pointer; font-size: 9px; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 2px;
         }
-        .cat-btn.active { color: #fff; }
-        .cat-btn.active::after { content: ""; position: absolute; bottom: 0; left: 25%; width: 50%; height: 1px; background: var(--naranja); }
+        .cat-btn.active { color: #fff; border-color: var(--naranja); background: rgba(255, 102, 0, 0.05); }
 
-        /* --- GRID MINIMALISTA --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 8% 100px; }
+        /* --- GRID DE CUADROS MINIMALISTAS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 0 8% 100px; }
         
         .product-card { 
-            background: transparent; /* Fondo transparente para minimalismo */
-            padding: 20px; 
-            border: 1px solid rgba(255,255,255,0.03); 
-            position: relative; transition: 0.5s;
+            background: rgba(255,255,255,0.01);
+            padding: 40px; 
+            border: 1px solid var(--borde-tenue); /* El reborde minimalista */
+            position: relative; 
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         
-        /* Efecto RGB Minimalista en el borde inferior al hacer hover */
+        /* EFECTO RGB EN EL REBORDE AL HACER HOVER */
         .product-card:hover {
-            border-color: rgba(255,255,255,0.1);
-            transform: translateY(-5px);
+            border: 1px solid transparent;
+            background-image: linear-gradient(var(--negro-pro), var(--negro-pro)), var(--rgb-gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            background-size: 100% 100%, 200% auto;
+            animation: rgbFlow 3s linear infinite;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
-
-        .product-card::before {
-            content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-            background: var(--rgb-gradient); background-size: 200% auto;
-            transition: 0.5s;
-        }
-        .product-card:hover::before { width: 100%; animation: rgbFlow 3s linear infinite; }
         
-        .img-container { position: relative; width: 100%; height: 240px; margin-bottom: 20px; overflow: hidden; }
-        .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
-        .product-card img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(0.2); transition: 0.6s; }
-        .product-card:hover img { filter: grayscale(0); transform: scale(1.05); }
+        .img-container { position: relative; width: 100%; height: 220px; margin-bottom: 30px; }
+        /* Capa protectora para que no copien la foto */
+        .img-container::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: default; }
+        
+        .product-card img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .product-card:hover img { transform: scale(1.08); }
 
-        .product-card h3 { font-family: 'Cinzel', serif; font-size: 16px; margin: 15px 0 10px; letter-spacing: 1px; color: #eee; }
-        .product-card p { font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 20px; }
+        .product-card h3 { font-family: 'Cinzel', serif; font-size: 17px; margin: 0 0 12px; letter-spacing: 2px; color: #fff; text-align: center; }
+        .product-card p { font-size: 12px; color: #777; line-height: 1.8; margin-bottom: 30px; text-align: center; font-weight: 300; }
 
         .btn-consultar { 
-            display: inline-block; padding: 12px 0; border-top: 1px solid #222; 
-            color: #555; text-decoration: none; font-size: 9px; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 3px; width: 100%; text-align: center;
+            display: block; padding: 15px; border: 1px solid #222; 
+            color: #eee; text-decoration: none; font-size: 9px; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 3px; text-align: center;
+            background: transparent; cursor: pointer;
         }
-        .product-card:hover .btn-consultar { color: #fff; border-top-color: #444; }
+        .btn-consultar:hover { background: #fff; color: #000; border-color: #fff; }
 
         /* --- FOOTER --- */
-        footer { padding: 60px 8%; text-align: center; border-top: 1px solid #111; opacity: 0.5; }
-        .footer-logo { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 4px; }
+        footer { padding: 80px 8%; text-align: center; border-top: 1px solid #111; }
+        .footer-logo { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 5px; color: #444; }
 
-        .wsp-flotante { position: fixed; bottom: 30px; right: 30px; z-index: 2000; opacity: 0.7; }
-        .wsp-flotante:hover { opacity: 1; transform: scale(1.1); }
+        .wsp-flotante { position: fixed; bottom: 30px; right: 30px; z-index: 2000; opacity: 0.8; }
     </style>
 </head>
 <body oncontextmenu="return false">
 
 <a href="https://wa.me/5492216172384" class="wsp-flotante" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="45">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="50">
 </a>
 
 <nav>
   <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
   <div class="status-container">
-      <div style="font-size: 9px; letter-spacing: 2px; color: #555;">SISTEMAS DE ALTA PRECISIÓN <span id="reloj">00:00:00</span></div>
+      <div style="font-size: 9px; letter-spacing: 2px; color: #555; font-weight: 600;">SISTEMAS DE ALTA PRECISIÓN <span id="reloj">00:00:00</span></div>
   </div>
 </nav>
 
 <section class="hero">
     <h1>Elegancia en <b>Seguridad</b></h1>
-    <p>Tecnología de precisión y monitoreo inteligente para una protección sin precedentes.</p>
+    <p>Tecnología de precisión y monitoreo inteligente</p>
 </section>
 
 <div class="filter-wrapper">
-    <button class="cat-btn active" data-filter="all">Todos</button>
+    <button class="cat-btn active" data-filter="all">Catálogo</button>
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
     <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
@@ -132,28 +137,28 @@
   <div class="product-card" data-category="alarmas">
     <div class="img-container"><img src="alarma-ajax-kit.jpg" alt="Alarma"></div>
     <h3>Ajax Hub 2 Plus</h3>
-    <p>Central de seguridad inalámbrica profesional de largo alcance.</p>
+    <p>Central de seguridad inalámbrica profesional de largo alcance y alta fiabilidad.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
   </div>
 
   <div class="product-card" data-category="camaras">
     <div class="img-container"><img src="bullet2mp.jpg" alt="Cámara"></div>
     <h3>Dahua Series Pro</h3>
-    <p>Vigilancia nocturna avanzada con tecnología de alta resolución.</p>
+    <p>Vigilancia nocturna avanzada con tecnología de alta resolución y detección inteligente.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
   </div>
 
   <div class="product-card" data-category="grabacion">
     <div class="img-container"><img src="dvr8ch.jpg" alt="DVR"></div>
     <h3>DVR Hikvision 8CH</h3>
-    <p>Grabación inteligente híbrida con acceso remoto móvil.</p>
+    <p>Grabación inteligente híbrida con acceso remoto móvil en tiempo real.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
   </div>
 
   <div class="product-card" data-category="accesorios">
     <div class="img-container"><img src="balun.jpg" alt="Accesorio"></div>
     <h3>Balun Pasivo HD</h3>
-    <p>Transmisores de video premium para instalaciones críticas.</p>
+    <p>Transmisores de video premium diseñados para instalaciones de alta exigencia.</p>
     <div class="btn-consultar" onclick="consultarWSP(this)">Consultar</div>
   </div>
 </div>
@@ -182,7 +187,7 @@
             const f = btn.dataset.filter;
             cards.forEach(c => {
                 if (f === 'all' || c.dataset.category === f) {
-                    c.style.display = 'block';
+                    c.style.display = 'flex';
                     setTimeout(() => c.style.opacity = '1', 50);
                 } else {
                     c.style.opacity = '0';
@@ -196,6 +201,13 @@
         const nombre = elemento.parentElement.querySelector('h3').innerText;
         window.open("https://wa.me/5492216172384?text=Hola! Me interesa: " + nombre, '_blank');
     }
+
+    // Bloqueo de teclas (F12, Ctrl+U)
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
+            return false;
+        }
+    };
 </script>
 
 </body>
