@@ -27,23 +27,13 @@ body {
 }
 img { -webkit-user-drag: none; pointer-events: none; }
 
-    /* BARRA RGB EN PRODUCTOS */
+/* BARRA RGB EN PRODUCTOS */
 .product-card::after { 
-    content: ""; 
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    width: 0; 
-    height: 5px; 
-    background: var(--rgb-gradient); 
-    background-size: 200% auto;
-    transition: width 0.6s ease; 
-    animation: rgbFlow 3s linear infinite; 
+    content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 5px; 
+    background: var(--rgb-gradient); background-size: 200% auto;
+    transition: width 0.6s ease; animation: rgbFlow 3s linear infinite; 
 }
-
-.product-card:hover::after { 
-    width: 100%; /* Se expande al pasar el mouse */
-}
+.product-card:hover::after { width: 100%; }
 
 /* BANNER SUPERIOR */
 .top-banner{
@@ -52,7 +42,7 @@ img { -webkit-user-drag: none; pointer-events: none; }
     text-transform: uppercase; font-weight: 800; border-bottom: 1px solid #111;
 }
 
-/* ARRA RGB */
+/* NAV Y BARRA RGB */
 nav{
     position:sticky; top:0; z-index:1000; display:flex;
     justify-content:space-between; align-items:center; padding:15px 8%;
@@ -67,13 +57,21 @@ nav::after{
 /* LOGO BENTO IZQUIERDA AGRANDADO */
 .logo-box img{ height:130px; width: auto; filter: brightness(1.1); }
 
-/* RELOJ CON CÍRCULO VERDE  */
+/* ESTILOS DEL RELOJ Y DOLAR (CSS CORRECTO) */
 .status-container{ text-align: right; }
+
 .status-label {
     color: #555; font-size: 10px; letter-spacing: 2px;
     text-transform: uppercase; margin-bottom: 5px;
     display: flex; align-items: center; justify-content: flex-end; gap: 10px;
 }
+
+#dolar-box {
+    margin-right: 15px; 
+    color: var(--verde-neon); 
+    font-weight: 600;
+}
+
 .status-circle {
     width: 9px; height: 9px; background: var(--verde-neon);
     border-radius: 50%; box-shadow: 0 0 12px var(--verde-neon);
@@ -82,7 +80,7 @@ nav::after{
 @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
 #reloj-box { color: #fff; font-size: 22px; font-weight: 300; letter-spacing: 2px; }
 
-/* TÍTULO  */
+/* TÍTULO */
 .hero{ padding:80px 8% 40px; text-align:center; }
 .hero h1{ font-family:'Cinzel',serif; font-size:clamp(30px,5vw,55px); margin-bottom: 25px; letter-spacing: 4px;}
 .hero h1 b{ color: var(--naranja); }
@@ -133,7 +131,7 @@ nav::after{
 .img-container::before { content: ""; position: absolute; top:0; left:0; width:100%; height:100%; z-index: 10; }
 .img-container img{ width:75%; height:75%; object-fit:contain; }
 
-/* WHATSAPP */
+/* WHATSAPP REPARADO */
 .wsp-container { 
     position: fixed; 
     bottom: 35px; 
@@ -144,19 +142,6 @@ nav::after{
 .wsp-container a {
     display: block;
     pointer-events: auto !important; /* Permite el clic aunque haya seguridad */
-}
-
-/* WHATSAPP  */
-.wsp-container { 
-    position: fixed; 
-    bottom: 35px; 
-    right: 35px; 
-    z-index: 99999; 
-}
-
-.wsp-container a {
-    display: block;
-    pointer-events: auto !important; 
 }
 
 .wsp-aura { 
@@ -185,14 +170,18 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 <nav>
     <div class="logo-box"><img src="logo.jpg" alt="BENTO"></div>
     <div class="status-container">
-        <div class="status-label"><div class="status-circle"></div> Atención Profesional</div>
+        <div class="status-label">
+            <div id="dolar-box">USD: cargando...</div>
+            <div class="status-circle"></div> Atención Profesional
+        </div>
         <div id="reloj-box"><span id="reloj">00:00:00</span></div>
     </div>
 </nav>
 
 <section class="hero">
-    <h1>Ingeniería en <b>Seguridad</b></h1>
-    <p>Diseño y desarrollo de sistemas de protección avanzada. <br> Soluciones tecnológicas para infraestructuras críticas.</p>
+    <h1>Excelencia en <b>Seguridad</b></h1>
+    <p>Diseño y desarrollo de sistemas de protección avanzada. <br> 
+       Soluciones tecnológicas para infraestructuras críticas.</p>
 </section>
 
 <div class="brands-section">
@@ -255,7 +244,7 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 
 <div class="wsp-container">
     <div class="wsp-aura"></div>
-    <a href="https://wa.me/5492216172384" target="_blank">
+    <a href="https://wa.me/5492216172384" target="_blank" draggable="false">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="60">
     </a>
 </div>
@@ -273,6 +262,21 @@ function actualizarReloj(){
     document.getElementById("reloj").innerText = new Date().toLocaleTimeString("es-AR", {hour12: false});
 }
 setInterval(actualizarReloj, 1000); actualizarReloj();
+
+// SCRIPT PARA EL DÓLAR (AGREGADO)
+async function obtenerDolar() {
+    try {
+        const response = await fetch('https://dolarapi.com/v1/dolares/blue');
+        const data = await response.json();
+        document.getElementById('dolar-box').innerText = `USD: $${data.venta}`;
+    } catch (error) {
+        document.getElementById('dolar-box').innerText = 'USD: --';
+    }
+}
+// Lo llamamos al cargar y cada 5 minutos
+obtenerDolar();
+setInterval(obtenerDolar, 300000);
+
 
 const buttons = document.querySelectorAll('.cat-btn');
 const cards = document.querySelectorAll('.product-card');
