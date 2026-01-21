@@ -80,7 +80,7 @@ nav::after{
 @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
 #reloj-box { color: #fff; font-size: 22px; font-weight: 300; letter-spacing: 2px; }
 
-/* TÍTULO PLATEADO Y NARANJA */
+/* TÍTULO */
 .hero{ padding:80px 8% 40px; text-align:center; }
 
 .hero h1{ 
@@ -88,11 +88,11 @@ nav::after{
     font-size:clamp(30px,5vw,55px); 
     margin-bottom: 25px; 
     letter-spacing: 4px;
-    color: #c0c0c0; /* Gris Plata */
+    color: #c0c0c0; 
 }
 
 .hero h1 b{ 
-    color: #e05e00; /* Naranja Oscuro */
+    color: #e05e00; 
 }
 
 .hero p{ color:#666; font-size:14px; letter-spacing:3px; max-width:850px; margin:0 auto; line-height: 1.8; text-transform: uppercase;}
@@ -142,7 +142,7 @@ nav::after{
 .img-container::before { content: ""; position: absolute; top:0; left:0; width:100%; height:100%; z-index: 10; }
 .img-container img{ width:75%; height:75%; object-fit:contain; }
 
-/* WHATSAPP REPARADO */
+/* WHATSAPP */
 .wsp-container { 
     position: fixed; 
     bottom: 35px; 
@@ -174,7 +174,7 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 }
 .trust-item {
     color: #444; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; text-align: center;
-    min-width: 150px; /* Para que no se aplasten */
+    min-width: 150px; 
 }
 .trust-item i {
     font-size: 24px; color: var(--naranja); margin-bottom: 15px; display: block;
@@ -335,17 +335,17 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 // BLOQUEO TOTAL DE INSPECCIÓN Y COPIA
 document.onkeydown = function(e) {
     if(e.keyCode == 123) return false; // F12
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Inspeccionar
-    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ver código
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
 }
-document.addEventListener('contextmenu', event => event.preventDefault()); // Clic derecho
+document.addEventListener('contextmenu', event => event.preventDefault()); 
 
 function actualizarReloj(){
     document.getElementById("reloj").innerText = new Date().toLocaleTimeString("es-AR", {hour12: false});
 }
 setInterval(actualizarReloj, 1000); actualizarReloj();
 
-// SCRIPT PARA EL DÓLAR
+// DÓLAR
 async function obtenerDolar() {
     try {
         const response = await fetch('https://dolarapi.com/v1/dolares/blue');
@@ -355,7 +355,7 @@ async function obtenerDolar() {
         document.getElementById('dolar-box').innerText = 'USD: --';
     }
 }
-// Lo llamamos al cargar y cada 5 minutos
+
 obtenerDolar();
 setInterval(obtenerDolar, 300000);
 
