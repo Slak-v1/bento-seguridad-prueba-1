@@ -30,7 +30,7 @@ body {
 
 img { -webkit-user-drag: none; pointer-events: none; }
 
-/* BARRA RGB ANIMADA */
+/* ANIMACIONES Y BARRAS */
 .product-card::after, nav::after { 
     content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; 
     background: var(--rgb-gradient); background-size: 200% auto;
@@ -54,9 +54,9 @@ nav{
     background:rgba(0,0,0,0.95); backdrop-filter:blur(15px);
 }
 
-.logo-box img{ height:130px; width: auto; filter: brightness(1.1); }
+.logo-box img{ height:110px; width: auto; filter: brightness(1.1); }
 
-/* STATUS (RELOJ Y DOLAR) */
+/* STATUS */
 .status-container{ text-align: right; }
 .status-label {
     color: #555; font-size: 10px; letter-spacing: 2px;
@@ -73,12 +73,12 @@ nav{
 #reloj-box { color: #fff; font-size: 22px; font-weight: 300; letter-spacing: 2px; }
 
 /* HERO Y FILTROS */
-.hero{ padding:80px 8% 40px; text-align:center; }
+.hero{ padding:60px 8% 30px; text-align:center; }
 .hero h1{ font-family:'Cinzel',serif; font-size:clamp(30px,5vw,55px); color: #c0c0c0; letter-spacing: 4px; }
 .hero h1 b{ color: var(--naranja); }
-.hero p{ color:#666; font-size:11px; letter-spacing:3px; text-transform: uppercase; }
+.hero p{ color:#666; font-size:11px; letter-spacing:3px; text-transform: uppercase; margin-top: 10px;}
 
-.filter-wrapper{ text-align:center; padding: 40px 8%; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.filter-wrapper{ text-align:center; padding: 20px 8% 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .cat-btn{
     background:transparent; border: 1px solid #333; color:#888; padding:12px 25px;
     font-size: 10px; letter-spacing:2px; border-radius:4px; cursor:pointer; text-transform: uppercase;
@@ -102,27 +102,22 @@ nav{
     color: #fff; padding: 5px 12px; font-size: 9px; font-weight: 800; text-transform: uppercase;
 }
 
-/* FOOTER */
+/* FOOTER LOGO PLATEADO */
 footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; text-align: center; }
-.trust-bar { 
-    display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-bottom: 50px;
+
+.footer-logo { 
+    height: 45px; /* Logo pequeño como pediste */
+    width: auto; 
+    margin-bottom: 25px; 
+    /* Efecto Plateado/Silver */
+    filter: grayscale(1) brightness(1.5) contrast(1.2); 
+    opacity: 0.8;
 }
-.trust-item {
-    color: #444; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; text-align: center;
-    min-width: 150px; 
-}
-.trust-item i {
-    font-size: 24px; color: var(--naranja); margin-bottom: 15px; display: block;
-}
-.copyright { font-size: 10px; color: #333; letter-spacing: 4px; text-transform: uppercase; border-top: 1px solid #111; padding-top: 30px; }
 
-</style>
-</head>
-
-<body oncontextmenu="return false">
-
-<div class="top-banner">Sistemas Premium | Envios a todo el pais | BENTO SECURITY</div>
-
+.trust-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+.trust-item { color: #444; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+.trust-item i { font-size: 20px; color: var(--naranja); margin-bottom: 10px; display: block; }
+.copyright { font-size: 9px; color: #222; letter-spacing: 3px; border-top: 1px solid #111; padding-top: 20px; }
 
 /* WSP */
 .wsp-container { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
@@ -160,24 +155,20 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
     <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
     <button class="cat-btn" data-filter="Accesorios">Accesorios</button>
- <button class="cat-btn" data-filter="controlesdeacceso">Controles de acceso</button>
+    <button class="cat-btn" data-filter="controlesdeacceso">Controles de acceso</button>
 </div>
 
 <div class="grid">
-
-
-       <div class="product-card" data-category="controlesdeacceso"> 
-    <div class="img-container">
-        <div class="product-tag">Control de acceso poe</div>
-        <img src="controldeaccesopoe.jpg" alt="Controles de acceso">
+    <div class="product-card" data-category="controlesdeacceso"> 
+        <div class="img-container">
+            <div class="product-tag">Control de acceso poe</div>
+            <img src="controldeaccesopoe.jpg" alt="Controles de acceso">
+        </div>
+        <h3 style="font-family:'Cinzel';">Control De Acceso</h3>
+        <p style="color:#555; font-size:12px;">Dahua PoE Autónomo WiFi IP.</p>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Control de Acceso PoE')">CONSULTAR ASESOR</div>
     </div>
-    <h3 style="font-family:'Cinzel';">Control De Acceso</h3>
-    <p style="color:#555; font-size:12px;">Control De Acceso Poe Autonomo Wifi Ip Dahua</p>
-    <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Control de Acceso PoE')">CONSULTAR ASESOR</div>
-</div>
 
-    
-    
     <div class="product-card" data-category="camaras">
         <div class="img-container">
             <div class="product-tag">Camara full HD</div>
@@ -185,137 +176,30 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
         </div>
         <h3 style="font-family:'Cinzel';">Cámara bullet full hd</h3>
         <p style="color:#555; font-size:12px;">Visión nocturna inteligente y detección de humanos.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Domo IP')">CONSULTAR ASESOR</div>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Bullet HD')">CONSULTAR ASESOR</div>
     </div>
-
-
-
-    
-    
-  <div class="product-card" data-category="Accesorios">
-    <div class="img-container">
-        <div class="product-tag">4K Ultra HD</div>
-        <img src="balun.jpg" alt="Video Balun">
-    </div>
-    <h3 style="font-family:'Cinzel';">Video Balun </h3>
-    <p style="color:#555; font-size:12px;">Par de transceptores de video para cámaras HD. Terminales a presión de fácil instalación.</p>
-    <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Par de Video Baluns')">CONSULTAR ASESOR</div>
-</div>
-
-
-    
-
- <div class="product-card" data-category="camaras">
-    <div class="img-container">
-        <div class="product-tag">Smart Tracking</div>
-        <img src="CamarasImouRanger2cIpWifi2mp.jpg" alt="Imou Ranger 2C">
-    </div>
-    <h3 style="font-family:'Cinzel';">Imou Ranger 2C 1080p</h3>
-    <p style="color:#555; font-size:12px;">Cámara Wifi robótica con visión 360°, seguimiento inteligente de movimiento y audio bidireccional.</p>
-    <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Imou Ranger 2C Wifi')">CONSULTAR ASESOR</div>
-</div>
-
-
-    
-    
-<div class="product-card" data-category="Accesorios">
-    <div class="img-container">
-        <div class="product-tag">Video Surveillance</div>
-        <img src="DiscoSeagate1tb.jpg" alt="Disco Seagate 1TB">
-    </div>
-    <h3 style="font-family:'Cinzel';">Disco Rígido 1TB SkyHawk</h3>
-    <p style="color:#555; font-size:12px;">Optimizado para DVR/NVR. Diseñado para trabajar 24/7 sin pérdida de cuadros de video.</p>
-    <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Disco Seagate 1TB SkyHawk')">CONSULTAR ASESOR</div>
-</div>
-
-
-    
-
-     <div class="product-card" data-category="grabacion">
-        <div class="img-container">
-            <div class="product-tag">16 CANALES - FULL HD</div>
-            <img src="dvr16ch.jpg" alt="Dvr/Nvr">
-        </div>
-        <h3 style="font-family:'Cinzel';">Grabador DVR 16 Canales</h3>
-        <p style="color:#555; font-size:12px;">Grabación en tiempo real con inteligencia artificial WizSense y acceso móvil.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Domo IP')">CONSULTAR ASESOR</div>
-    </div>
-
-
-        <div class="product-card" data-category="grabacion">
-        <div class="img-container">
-            <div class="product-tag">8 CANALES - FULL HD</div>
-            <img src="dvr8ch.jpg" alt="Dvr/Nvr">
-        </div>
-        <h3 style="font-family:'Cinzel';">Grabador DVR 8 Canales</h3>
-        <p style="color:#555; font-size:12px;">Grabación en tiempo real con inteligencia artificial WizSense y acceso móvil.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Domo IP')">CONSULTAR ASESOR</div>
-    </div>
-
-
-    
 
     <div class="product-card" data-category="camaras">
-    <div class="img-container">
-        <div class="product-tag">4MP QUAD HD</div>
-        <img src="IMOUPTZ4MP.jpg" alt="IMOU Cruiser 4MP">
+        <div class="img-container">
+            <div class="product-tag">4MP QUAD HD</div>
+            <img src="IMOUPTZ4MP.jpg" alt="IMOU Cruiser">
+        </div>
+        <h3 style="font-family:'Cinzel';">IMOU Cruiser 4MP</h3>
+        <p style="color:#555; font-size:12px;">Exterior motorizada 2K con visión nocturna color.</p>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('IMOU Cruiser 4MP')">CONSULTAR ASESOR</div>
     </div>
-    <h3 style="font-family:'Cinzel';">IMOU Cruiser 4MP</h3>
-    <p style="color:#555; font-size:12px;">Cámara exterior motorizada, resolución 2K, visión nocturna en color y sirena integrada.</p>
-    <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" 
-         onclick="enviarConsulta('IMOU Cruiser 4MP')">CONSULTAR ASESOR</div>
+
+    <div class="product-card" data-category="grabacion">
+        <div class="img-container">
+            <div class="product-tag">16 CANALES</div>
+            <img src="dvr16ch.jpg" alt="DVR 16">
+        </div>
+        <h3 style="font-family:'Cinzel';">Grabador DVR 16 Ch</h3>
+        <p style="color:#555; font-size:12px;">IA WizSense y acceso móvil profesional.</p>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('DVR 16 Canales')">CONSULTAR ASESOR</div>
+    </div>
 </div>
 
-    
-
-   <div class="product-card" data-category="grabacion">
-       <div class="img-container">
-          <div class="product-tag">32 CANALES - 5mp</div>
-         <img src="dvr32ch.jpg" alt="Dvr/Nvr">
-     </div>
-     <h3 style="font-family:'Cinzel';">Grabador DVR 32 Canales</h3>
-     <p style="color:#555; font-size:12px;">Grabación en tiempo real con inteligencia artificial WizSense y acceso móvil.</p>
-     <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Domo IP')">CONSULTAR ASESOR</div>
-    </div>
-
-
-    
-
-    <div class="product-card" data-category="Accesorios">
-        <div class="img-container">
-            <div class="product-tag">Fuente 12V 5A</div>
-            <img src="fuentemet12v5a.jpg" alt="Accesorios">
-        </div>
-        <h3 style="font-family:'Cinzel';">Fuente 12V 5A</h3>
-        <p style="color:#555; font-size:12px;">Metálica regulada con bornera.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Fuente 12V 5A')">CONSULTAR ASESOR</div>
-    </div>
-
-
-     <div class="product-card" data-category="grabacion">
-        <div class="img-container">
-            <div class="product-tag">16 CANALES - FULL HD</div>
-            <img src="dvr16ch.jpg" alt="Dvr/Nvr">
-        </div>
-        <h3 style="font-family:'Cinzel';">Grabador DVR 16 Canales</h3>
-        <p style="color:#555; font-size:12px;">Grabación en tiempo real con inteligencia artificial WizSense y acceso móvil.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Domo IP')">CONSULTAR ASESOR</div>
-    </div>
-
-
-    
-
-    <div class="product-card" data-category="alarmas">
-        <div class="img-container">
-            <div class="product-tag">Ajax Pro</div>
-            <img src="alarma-ajax-kit.jpg" alt="Alarma">
-        </div>
-        <h3 style="font-family:'Cinzel';">Kit Alarma Profesional</h3>
-        <p style="color:#555; font-size:12px;">Sistema inalámbrico con tecnología inteligente</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Kit Alarma')">CONSULTAR ASESOR</div>
-    </div>
-    
-</div>
 <footer>
     <img src="logo.jpg" alt="BENTO SECURITY" class="footer-logo">
     
