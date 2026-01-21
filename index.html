@@ -82,8 +82,19 @@ nav::after{
 
 /* TÍTULO */
 .hero{ padding:80px 8% 40px; text-align:center; }
-.hero h1{ font-family:'Cinzel',serif; font-size:clamp(30px,5vw,55px); margin-bottom: 25px; letter-spacing: 4px;}
-.hero h1 b{ color: var(--naranja); }
+
+.hero h1{ 
+    font-family:'Cinzel',serif; 
+    font-size:clamp(30px,5vw,55px); 
+    margin-bottom: 25px; 
+    letter-spacing: 4px;
+    color: #c0c0c0; 
+}
+
+.hero h1 b{ 
+    color: #e05e00; 
+}
+
 .hero p{ color:#666; font-size:14px; letter-spacing:3px; max-width:850px; margin:0 auto; line-height: 1.8; text-transform: uppercase;}
 
 /* MARCAS QUE TRABAJAN */
@@ -136,12 +147,12 @@ nav::after{
     position: fixed; 
     bottom: 35px; 
     right: 35px; 
-    z-index: 99999; /* Lo subimos al frente de todo */
+    z-index: 99999; 
 }
 
 .wsp-container a {
     display: block;
-    pointer-events: auto !important; /* Permite el clic aunque haya seguridad */
+    pointer-events: auto !important; 
 }
 
 .wsp-aura { 
@@ -191,7 +202,6 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
         <div class="brand-tag">Hikvision</div>
         <div class="brand-tag">Ajax</div>
         <div class="brand-tag">Imou</div>
-        <div class="brand-tag">Western Digital</div>
     </div>
 </div>
 
@@ -200,28 +210,40 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
     <button class="cat-btn" data-filter="camaras">Cámaras</button>
     <button class="cat-btn" data-filter="alarmas">Alarmas</button>
     <button class="cat-btn" data-filter="grabacion">DVR/NVR</button>
+    <button class="cat-btn" data-filter="grabacion">Accesorios</button>
 </div>
 
 <div class="grid">
     <div class="product-card" data-category="camaras">
         <div class="img-container">
-            <div class="product-tag">WizSense</div>
-            <img src="dvr8ch.jpg" alt="Cámara">
+            <div class="product-tag">Camara full HD</div>
+            <img src="bullet2mp.jpg" alt="Cámara">
         </div>
-        <h3 style="font-family:'Cinzel';">Cámara Domo IP</h3>
+        <h3 style="font-family:'Cinzel';">Cámara bullet full hd</h3>
         <p style="color:#555; font-size:12px;">Visión nocturna inteligente y detección de humanos.</p>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Domo IP')">CONSULTAR ASESOR</div>
+    </div>
+
+    <div class="grid">
+    <div class="product-card" data-category="Accesorios">
+        <div class="img-container">
+            <div class="product-tag">Fuente 12V 5A</div>
+            <img src="fuentemet12v5a.jpg" alt="Accesorios">
+        </div>
+        <h3 style="font-family:'Cinzel';">Fuente 12V 5A</h3>
+        <p style="color:#555; font-size:12px;">...</p>
         <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Domo IP')">CONSULTAR ASESOR</div>
     </div>
 
     <div class="product-card" data-category="alarmas">
         <div class="img-container">
             <div class="product-tag">Ajax Pro</div>
-            <img src="alarma.jpg" alt="Alarma">
+            <img src="alarma-aja-kit.jpg" alt="Alarma">
         </div>
         <h3 style="font-family:'Cinzel';">Kit Alarma Profesional</h3>
-        <p style="color:#555; font-size:12px;">Sistema inalámbrico con tecnología Jeweller.</p>
+        <p style="color:#555; font-size:12px;">Sistema inalámbrico con tecnología inteligente</p>
         <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Kit Alarma')">CONSULTAR ASESOR</div>
-    </div>
+    </div>    
 </div>
 
 <footer>
