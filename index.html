@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BENTO | Security Excellence</title>
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com; img-src 'self' https://upload.wikimedia.org data:; connect-src 'self' https://dolarapi.com;">
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -17,7 +20,7 @@
 
 *{ box-sizing:border-box; transition:all .4s cubic-bezier(.16,1,.3,1); }
 
-/* BLOQUEO TOTAL */
+/* BLOQUEO VISUAL */
 body {
     user-select: none; -webkit-user-select: none;
     margin:0; font-family:'Montserrat',sans-serif;
@@ -27,7 +30,7 @@ body {
 }
 img { -webkit-user-drag: none; pointer-events: none; }
 
-/* BARRA RGB EN PRODUCTOS */
+/* BARRA RGB */
 .product-card::after { 
     content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 5px; 
     background: var(--rgb-gradient); background-size: 200% auto;
@@ -35,14 +38,12 @@ img { -webkit-user-drag: none; pointer-events: none; }
 }
 .product-card:hover::after { width: 100%; }
 
-/* BANNER SUPERIOR */
 .top-banner{
     background: #000; color: var(--naranja); font-size: 10px;
     text-align: center; padding: 12px 0; letter-spacing: 5px;
     text-transform: uppercase; font-weight: 800; border-bottom: 1px solid #111;
 }
 
-/* NAV Y BARRA RGB */
 nav{
     position:sticky; top:0; z-index:1000; display:flex;
     justify-content:space-between; align-items:center; padding:15px 8%;
@@ -54,24 +55,16 @@ nav::after{
 }
 @keyframes rgbFlow{ 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
 
-/* LOGO BENTO IZQUIERDA AGRANDADO */
 .logo-box img{ height:130px; width: auto; filter: brightness(1.1); }
 
-/* ESTILOS DEL RELOJ Y DOLAR */
+/* STATUS RELOJ Y DOLAR */
 .status-container{ text-align: right; }
-
 .status-label {
     color: #555; font-size: 10px; letter-spacing: 2px;
     text-transform: uppercase; margin-bottom: 5px;
     display: flex; align-items: center; justify-content: flex-end; gap: 10px;
 }
-
-#dolar-box {
-    margin-right: 15px; 
-    color: var(--verde-neon); 
-    font-weight: 600;
-}
-
+#dolar-box { margin-right: 15px; color: var(--verde-neon); font-weight: 600; }
 .status-circle {
     width: 9px; height: 9px; background: var(--verde-neon);
     border-radius: 50%; box-shadow: 0 0 12px var(--verde-neon);
@@ -80,107 +73,53 @@ nav::after{
 @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
 #reloj-box { color: #fff; font-size: 22px; font-weight: 300; letter-spacing: 2px; }
 
-/* TÍTULO */
 .hero{ padding:80px 8% 40px; text-align:center; }
-
-.hero h1{ 
-    font-family:'Cinzel',serif; 
-    font-size:clamp(30px,5vw,55px); 
-    margin-bottom: 25px; 
-    letter-spacing: 4px;
-    color: #c0c0c0; 
-}
-
-.hero h1 b{ 
-    color: #e05e00; 
-}
-
+.hero h1{ font-family:'Cinzel',serif; font-size:clamp(30px,5vw,55px); margin-bottom: 25px; letter-spacing: 4px; color: #c0c0c0; }
+.hero h1 b{ color: #e05e00; }
 .hero p{ color:#666; font-size:14px; letter-spacing:3px; max-width:850px; margin:0 auto; line-height: 1.8; text-transform: uppercase;}
 
-/* MARCAS QUE trabajan */
 .brands-section { padding: 40px 0; border-bottom: 1px solid #111; text-align: center; }
 .brands-intro { font-size: 11px; color: var(--naranja); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
 .brands-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0 8%; }
-.brand-tag {
-    padding: 10px 20px; border: 1px solid #222; border-radius: 4px;
-    color: #444; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-}
+.brand-tag { padding: 10px 20px; border: 1px solid #222; border-radius: 4px; color: #444; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
 
-/* BOTONES CATÁLOGO INTERACTIVOS */
 .filter-wrapper{text-align:center; padding: 60px 8% 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;}
 .cat-btn{
     background:transparent; border: 1px solid #333; color:#888; padding:15px 32px;
     font-size: 11px; letter-spacing:3px; border-radius:5px; cursor:pointer; 
     text-transform: uppercase; font-weight: 600;
 }
-.cat-btn:hover {
-    border-color: var(--naranja); color: #fff; 
-    transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255,102,0,0.2);
-}
-.cat-btn.active{ border-color: var(--naranja); color: #fff; background: var(--naranja); }
+.cat-btn:hover, .cat-btn.active{ border-color: var(--naranja); color: #fff; background: var(--naranja); }
 
-/* GRID PRODUCTOS */
 .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:35px; padding:0 8% 100px; }
 .product-card{
     background: #0a0a0a; padding:25px; border:1px solid #151515;
     border-radius:18px; display:flex; flex-direction:column; position: relative; overflow: hidden;
 }
 
-/* FOTO CON ETIQUETA NARANJA ARRIBA IZQUIERDA */
 .img-container{
     width:calc(100% + 50px); height:260px; margin:-25px -25px 20px -25px;
-    background:#fff; display: flex; align-items: center; justify-content: center; position: relative;
-    overflow: hidden;
+    background:#fff; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
 }
 .product-tag {
     position: absolute; top: 15px; left: 15px;
     background: var(--naranja); color: #fff; padding: 5px 15px;
-    font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
-    z-index: 15;
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; z-index: 15;
 }
-/* Escudo invisible anti-clic */
-.img-container::before { content: ""; position: absolute; top:0; left:0; width:100%; height:100%; z-index: 10; }
 .img-container img{ width:75%; height:75%; object-fit:contain; }
 
-/* WHATSAPP */
-.wsp-container { 
-    position: fixed; 
-    bottom: 35px; 
-    right: 35px; 
-    z-index: 99999; 
-}
-
-.wsp-container a {
-    display: block;
-    pointer-events: auto !important; 
-}
-
+.wsp-container { position: fixed; bottom: 35px; right: 35px; z-index: 99999; }
 .wsp-aura { 
-    position: absolute; 
-    width: 60px; height: 60px; 
-    border-radius: 50%; 
-    background: rgba(37, 211, 102, 0.4); 
-    animation: pulseAura 2s infinite; 
-    z-index: -1; 
-    top: 0; left: 0; 
-    pointer-events: none; 
+    position: absolute; width: 60px; height: 60px; border-radius: 50%; 
+    background: rgba(37, 211, 102, 0.4); animation: pulseAura 2s infinite; z-index: -1; top: 0; left: 0; 
 }
 @keyframes pulseAura { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
 
-/* FOOTER */
 footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; text-align: center; }
-.trust-bar { 
-    display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-bottom: 50px;
-}
-.trust-item {
-    color: #444; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; text-align: center;
-    min-width: 150px; 
-}
-.trust-item i {
-    font-size: 24px; color: var(--naranja); margin-bottom: 15px; display: block;
-}
+.trust-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-bottom: 50px; }
+.trust-item { color: #444; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; text-align: center; min-width: 150px; }
+.trust-item i { font-size: 24px; color: var(--naranja); margin-bottom: 15px; display: block; }
 .copyright { font-size: 10px; color: #333; letter-spacing: 4px; text-transform: uppercase; border-top: 1px solid #111; padding-top: 30px; }
-
 </style>
 </head>
 
@@ -225,173 +164,74 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 </div>
 
 <div class="grid">
-
-    <div class="product-card" data-category="controlesdeacceso"> 
+    <div class="product-card" data-category="controlesdeacceso">
         <div class="img-container">
             <div class="product-tag">Control de acceso poe</div>
-            <img src="controldeaccesopoe.jpg" alt="Controles de acceso">
+            <img src="controldeaccesopoe.jpg" alt="Acceso">
         </div>
         <h3 style="font-family:'Cinzel';">Control De Acceso</h3>
-        <p style="color:#555; font-size:12px;">Control De Acceso Poe Autonomo Wifi Ip Dahua</p>
+        <p style="color:#555; font-size:12px;">Dahua PoE Autónomo WiFi IP.</p>
         <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Control de Acceso PoE')">CONSULTAR ASESOR</div>
     </div>
 
     <div class="product-card" data-category="camaras">
         <div class="img-container">
-            <div class="product-tag">Camara full HD</div>
-            <img src="bullet2mp.jpg" alt="Cámara">
-        </div>
-        <h3 style="font-family:'Cinzel';">Cámara bullet full hd</h3>
-        <p style="color:#555; font-size:12px;">Visión nocturna inteligente y detección de humanos.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Cámara Domo IP')">CONSULTAR ASESOR</div>
-    </div>
-
-    <div class="product-card" data-category="Accesorios">
-        <div class="img-container">
-            <div class="product-tag">4K Ultra HD</div>
-            <img src="balun.jpg" alt="Video Balun">
-        </div>
-        <h3 style="font-family:'Cinzel';">Video Balun </h3>
-        <p style="color:#555; font-size:12px;">Par de transceptores de video para cámaras HD. Terminales a presión de fácil instalación.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Par de Video Baluns')">CONSULTAR ASESOR</div>
-    </div>
-
-    <div class="product-card" data-category="camaras">
-        <div class="img-container">
-            <div class="product-tag">Smart Tracking</div>
-            <img src="CamarasImouRanger2cIpWifi2mp.jpg" alt="Imou Ranger 2C">
-        </div>
-        <h3 style="font-family:'Cinzel';">Imou Ranger 2C 1080p</h3>
-        <p style="color:#555; font-size:12px;">Cámara Wifi robótica con visión 360°, seguimiento inteligente de movimiento y audio bidireccional.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Imou Ranger 2C Wifi')">CONSULTAR ASESOR</div>
-    </div>
-
-    <div class="product-card" data-category="Accesorios">
-        <div class="img-container">
-            <div class="product-tag">Video Surveillance</div>
-            <img src="DiscoSeagate1tb.jpg" alt="Disco Seagate 1TB">
-        </div>
-        <h3 style="font-family:'Cinzel';">Disco Rígido 1TB SkyHawk</h3>
-        <p style="color:#555; font-size:12px;">Optimizado para DVR/NVR. Diseñado para trabajar 24/7 sin pérdida de cuadros de video.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Disco Seagate 1TB SkyHawk')">CONSULTAR ASESOR</div>
-    </div>
-
-    <div class="product-card" data-category="grabacion">
-        <div class="img-container">
-            <div class="product-tag">16 CANALES - FULL HD</div>
-            <img src="dvr16ch.jpg" alt="Dvr/Nvr">
-        </div>
-        <h3 style="font-family:'Cinzel';">Grabador DVR 16 Canales</h3>
-        <p style="color:#555; font-size:12px;">Grabación en tiempo real con inteligencia artificial WizSense y acceso móvil.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('DVR 16 Canales')">CONSULTAR ASESOR</div>
-    </div>
-
-    <div class="product-card" data-category="grabacion">
-        <div class="img-container">
-            <div class="product-tag">8 CANALES - FULL HD</div>
-            <img src="dvr8ch.jpg" alt="Dvr/Nvr">
-        </div>
-        <h3 style="font-family:'Cinzel';">Grabador DVR 8 Canales</h3>
-        <p style="color:#555; font-size:12px;">Grabación en tiempo real con inteligencia artificial WizSense y acceso móvil.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('DVR 8 Canales')">CONSULTAR ASESOR</div>
-    </div>
-
-    <div class="product-card" data-category="camaras">
-        <div class="img-container">
             <div class="product-tag">4MP QUAD HD</div>
-            <img src="IMOUPTZ4MP.jpg" alt="IMOU Cruiser 4MP">
+            <img src="IMOUPTZ4MP.jpg" alt="Cruiser">
         </div>
         <h3 style="font-family:'Cinzel';">IMOU Cruiser 4MP</h3>
-        <p style="color:#555; font-size:12px;">Cámara exterior motorizada, resolución 2K, visión nocturna en color y sirena integrada.</p>
+        <p style="color:#555; font-size:12px;">Exterior motorizada 2K con visión nocturna color.</p>
         <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('IMOU Cruiser 4MP')">CONSULTAR ASESOR</div>
     </div>
 
     <div class="product-card" data-category="grabacion">
-       <div class="img-container">
-          <div class="product-tag">32 CANALES - 5mp</div>
-         <img src="dvr32ch.jpg" alt="Dvr/Nvr">
-      </div>
-      <h3 style="font-family:'Cinzel';">Grabador DVR 32 Canales</h3>
-      <p style="color:#555; font-size:12px;">Grabación en tiempo real con inteligencia artificial WizSense y acceso móvil.</p>
-      <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('DVR 32 Canales')">CONSULTAR ASESOR</div>
-    </div>
-
-    <div class="product-card" data-category="Accesorios">
         <div class="img-container">
-            <div class="product-tag">Fuente 12V 5A</div>
-            <img src="fuentemet12v5a.jpg" alt="Accesorios">
+            <div class="product-tag">32 Canales</div>
+            <img src="dvr32ch.jpg" alt="DVR">
         </div>
-        <h3 style="font-family:'Cinzel';">Fuente 12V 5A</h3>
-        <p style="color:#555; font-size:12px;">Metálica regulada con bornera.</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Fuente 12V 5A')">CONSULTAR ASESOR</div>
+        <h3 style="font-family:'Cinzel';">DVR 32 Canales</h3>
+        <p style="color:#555; font-size:12px;">IA WizSense y acceso móvil profesional.</p>
+        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('DVR 32 Canales')">CONSULTAR ASESOR</div>
     </div>
-
-    <div class="product-card" data-category="alarmas">
-        <div class="img-container">
-            <div class="product-tag">Ajax Pro</div>
-            <img src="alarma-ajax-kit.jpg" alt="Alarma">
-        </div>
-        <h3 style="font-family:'Cinzel';">Kit Alarma Profesional</h3>
-        <p style="color:#555; font-size:12px;">Sistema inalámbrico con tecnología inteligente</p>
-        <div style="margin-top:auto; font-size:10px; color:var(--naranja); cursor:pointer; font-weight:700;" onclick="enviarConsulta('Kit Alarma')">CONSULTAR ASESOR</div>
-    </div>      
-
-</div> 
+    </div>
 
 <footer>
     <div class="trust-bar">
-        <div class="trust-item">
-            <i class="fas fa-truck-moving"></i> 
-            Envios a todo el pais
-        </div>
-        <div class="trust-item">
-            <i class="fas fa-shield-alt"></i> 
-            Garantia Oficial
-        </div>
-        <div class="trust-item">
-            <i class="fas fa-headset"></i> 
-            Soporte Tecnico
-        </div>
+        <div class="trust-item"><i class="fas fa-truck-moving"></i> Envios a todo el pais</div>
+        <div class="trust-item"><i class="fas fa-shield-alt"></i> Garantia Oficial</div>
+        <div class="trust-item"><i class="fas fa-headset"></i> Soporte Tecnico</div>
     </div>
     <div class="copyright">© 2026 TODOS LOS DERECHOS RESERVADOS | <b>BENTO SECURITY GROUP</b></div>
 </footer>
 
 <div class="wsp-container">
     <div class="wsp-aura"></div>
-    <a href="https://wa.me/5492216172384" target="_blank" draggable="false">
+    <a href="https://wa.me/5492216172384" target="_blank" rel="noopener noreferrer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="60">
     </a>
 </div>
 
 <script>
-// BLOQUEO TOTAL
+// BLOQUEOS DE SEGURIDAD
 document.onkeydown = function(e) {
-    if(e.keyCode == 123) return false; // F12
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
-    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
+    if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) return false;
 }
-document.addEventListener('contextmenu', event => event.preventDefault()); 
 
 function actualizarReloj(){
-    document.getElementById("reloj").innerText = new Date().toLocaleTimeString("es-AR", {hour12: false});
+    const r = document.getElementById("reloj");
+    if(r) r.innerText = new Date().toLocaleTimeString("es-AR", {hour12: false});
 }
 setInterval(actualizarReloj, 1000); actualizarReloj();
 
-// DÓLAR
 async function obtenerDolar() {
     try {
         const response = await fetch('https://dolarapi.com/v1/dolares/blue');
         const data = await response.json();
         document.getElementById('dolar-box').innerText = `USD: $${data.venta}`;
-    } catch (error) {
-        document.getElementById('dolar-box').innerText = 'USD: --';
-    }
+    } catch (e) { document.getElementById('dolar-box').innerText = 'USD: --'; }
 }
-
 obtenerDolar();
-setInterval(obtenerDolar, 300000);
 
-// FILTROS
 const buttons = document.querySelectorAll('.cat-btn');
 const cards = document.querySelectorAll('.product-card');
 buttons.forEach(btn => {
@@ -399,19 +239,14 @@ buttons.forEach(btn => {
         buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const f = btn.dataset.filter;
-        cards.forEach(c => {
-            c.style.display = (f === 'all' || c.dataset.category === f) ? 'flex' : 'none';
-        });
+        cards.forEach(c => c.style.display = (f === 'all' || c.dataset.category === f) ? 'flex' : 'none');
     }
 });
 
-
 function enviarConsulta(p) {
     const msg = encodeURIComponent(`Hola Bento Security. Solicito información sobre: ${p}.`);
-    // para cerrar la vulnerabilidad de Tabnabbing
     window.open(`https://wa.me/5492216172384?text=${msg}`, '_blank', 'noopener,noreferrer');
 }
 </script>
-
 </body>
 </html>
