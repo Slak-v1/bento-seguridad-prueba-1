@@ -8,7 +8,7 @@ app.use(cors());
 
 // --- CONFIGURACIÓN DE MONGODB ---
 // Reemplaza TU_LINK_AQUÍ por el que sacaste de Atlas (Connect -> Drivers)
-const MONGO_URI = 'mongodb+srv://slak:<db_password>@bento.dbh8xfu.mongodb.net/?appName=bento'; 
+const MONGO_URI = 'mongodb+srv://slak:puska1212@bento.dbh8xfu.mongodb.net/bento_db?retryWrites=true&w=majority'; 
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log("Conectado a BENTO DB"))
