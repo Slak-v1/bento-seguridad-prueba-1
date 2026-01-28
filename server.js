@@ -6,16 +6,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// --- CONFIGURACIÓN DE MONGODB ---
-// Reemplaza TU_LINK_AQUÍ por el que sacaste de Atlas (Connect -> Drivers)
-const MONGO_URI = 'mongodb+srv://slak:Puska1212@bento.dbh8xfu.mongodb.net/bento_db?retryWrites=true&w=majority'; 
+// USA ESTE LINK EXACTO (con la P mayúscula)
+const MONGO_URI = 'mongodb+srv://slak:Puska1212@bento.dbh8xfu.mongodb.net/bento_db?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI)
-  .then(() => console.log("Conectado a BENTO DB"))
-  .catch(err => console.error("Error de conexión:", err));
+  .then(() => console.log("✅ CONECTADO A MONGODB ATLAS"))
+  .catch(err => console.error("❌ ERROR DE CONEXIÓN:", err));
 
-// Esquema de producto
-const Producto = mongoose.model('Producto', new mongoose.Schema({
+const Producto = mongoose.model('productos', new mongoose.Schema({
   nombre: String,
   categoria: String,
   etiqueta: String,
@@ -23,15 +21,20 @@ const Producto = mongoose.model('Producto', new mongoose.Schema({
   imagen: String
 }));
 
-// Ruta para que la web lea productos
+// Esto quita el error "Cannot GET /"
+app.get('/', (req, res) => {
+  res.send('🚀 Servidor de BENTO funcionando correctamente');
+});
+
+// Esta es la ruta para tu HTML
 app.get('/api/productos', async (req, res) => {
   try {
-    const productos = await Producto.find();
-    res.json(productos);
+    const lista = await Producto.find();
+    res.json(lista);
   } catch (err) {
-    res.status(500).json({ error: "Error al obtener productos" });
+    res.status(500).json({ error: "Error al obtener datos" });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor activo en puerto ${PORT}`));
+app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
