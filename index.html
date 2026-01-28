@@ -170,7 +170,7 @@ const grid = document.getElementById('product-grid');
 async function cargarDesdeDB() {
     try {
         // Nota: Cambiaremos esta URL cuando el servidor esté en la nube
-        const res = await fetch('http://localhost:3000/api/productos'); 
+        const res = await fetch('https://bento-seguridad-prueba-1.onrender.com/api/productos'); 
         const productos = await res.json();
         
         grid.innerHTML = ""; 
