@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(cors());
 
 // USA ESTE LINK EXACTO (con la P mayúscula)
-const MONGO_URI = 'mongodb+srv://slak:Puska1212@bento.dbh8xfu.mongodb.net/bento_db?retryWrites=true&w=majority';
+const MONGO_URI = 'mongodb+srv://slak:barto1212@bento.dbh8xfu.mongodb.net/bento_db?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log("✅ CONECTADO A MONGODB ATLAS"))
