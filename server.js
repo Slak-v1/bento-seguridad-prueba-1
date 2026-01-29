@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// USA ESTE LINK EXACTO (con la P mayúscula)
+
 const MONGO_URI = 'mongodb+srv://slak:barto1212@bento.dbh8xfu.mongodb.net/bento_db?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI)
@@ -21,12 +21,12 @@ const Producto = mongoose.model('productos', new mongoose.Schema({
   imagen: String
 }));
 
-// Esto quita el error "Cannot GET /"
+
 app.get('/', (req, res) => {
   res.send('🚀 Servidor de BENTO funcionando correctamente');
 });
 
-// Esta es la ruta para tu HTML
+
 app.get('/api/productos', async (req, res) => {
   try {
     const lista = await Producto.find();
