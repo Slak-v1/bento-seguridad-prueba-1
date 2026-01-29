@@ -20,11 +20,6 @@ const Producto = mongoose.model('productos', new mongoose.Schema({
   imagen: String
 }));
 
-app.get('/', (req, res) => {
-  res.send('🚀 Servidor de BENTO funcionando correctamente');
-});
-
-
 app.get('/api/productos', async (req, res) => {
   try {
     const lista = await Producto.find();
@@ -36,12 +31,19 @@ app.get('/api/productos', async (req, res) => {
 
 
 app.post('/api/productos', async (req, res) => {
+  const { password, ...datosProducto } = req.body;
+
+ 
+  if (password !== 'bento2026') {
+    return res.status(401).json({ error: "Contraseña incorrecta" });
+  }
+
   try {
-    const nuevo = new Producto(req.body);
+    const nuevo = new Producto(datosProducto);
     await nuevo.save();
     res.status(201).json({ mensaje: "Producto guardado con éxito" });
   } catch (err) {
-    res.status(500).json({ error: "Error al guardar el producto" });
+    res.status(500).json({ error: "Error al guardar" });
   }
 });
 
