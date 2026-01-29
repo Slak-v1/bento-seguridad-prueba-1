@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>BENTO | Panel de Carga</title>
+    <style>
+        body { background: #0a0a0a; color: white; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; padding: 50px; }
+        .form-container { background: #111; padding: 30px; border-radius: 15px; border: 1px solid #222; width: 100%; max-width: 400px; }
+        h2 { color: #ff6600; text-align: center; font-family: 'Cinzel'; }
+        label { display: block; margin: 15px 0 5px; font-size: 12px; color: #888; text-transform: uppercase; }
+        input, select, textarea { 
+            width: 100%; padding: 10px; background: #000; border: 1px solid #333; 
+            color: white; border-radius: 5px; outline: none; 
+        }
+        input:focus { border-color: #ff6600; }
+        button { 
+            width: 100%; margin-top: 25px; padding: 15px; background: #ff6600; 
+            border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 5px;
+        }
+        button:hover { background: #ff8833; }
+        .msg { margin-top: 15px; text-align: center; font-size: 14px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Cargar Producto</h2>
+    
+    <label>Nombre del Producto</label>
+    <input type="text" id="nombre" placeholder="Ej: Cámara Domo 2MP">
+
+    <label>Categoría</label>
+    <select id="categoria">
+        <option value="camaras">Cámaras</option>
+        <option value="alarmas">Alarmas</option>
+        <option value="grabacion">DVR/NVR</option>
+        <option value="Accesorios">Accesorios</option>
+        <option value="controlesdeacceso">Controles de Acceso</option>
+    </select>
+
+    <label>Descripción</label>
+    <textarea id="descripcion" rows="3" placeholder="Detalles técnicos..."></textarea>
+
+    <label>Etiqueta</label>
+    <input type="text" id="etiqueta" placeholder="Ej: Nuevo, Oferta, 20% OFF">
+
+    <label>Nombre de la imagen (debe estar en carpeta /img)</label>
+    <input type="text" id="imagen" placeholder="Ej: camara1.jpg">
+
+    <button onclick="enviarProducto()">SUBIR A LA WEB</button>
+    <div id="mensaje" class="msg"></div>
+</div>
+
+<script>
+    async function enviarProducto() {
+        const btn = document.querySelector('button');
+        const msg = document.getElementById('mensaje');
+        
+        const data = {
+            nombre: document.getElementById('nombre').value,
+            categoria: document.getElementById('categoria').value,
+            descripcion: document.getElementById('descripcion').value,
+            etiqueta: document.getElementById('etiqueta').value || "Nuevo",
+            imagen: document.getElementById('imagen').value
+        };
+
+        if(!data.nombre || !data.imagen) {
+            alert("Por favor completá Nombre e Imagen");
+            return;
+        }
+
+        btn.innerText = "Subiendo...";
+        btn.disabled = true;
+
+        try {
+            const res = await fetch('https://bento-seguridad-prueba-1.onrender.com/api/productos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (res.ok) {
+                msg.style.display = "block";
+                msg.style.color = "#00ff88";
+                msg.innerText = "¡Producto cargado exitosamente!";
+                document.querySelectorAll('input, textarea').forEach(i => i.value = "");
+            } else {
+                throw new Error();
+            }
+        } catch (e) {
+            alert("Error al conectar con el servidor. Revisá si Render está activo.");
+        } finally {
+            btn.innerText = "SUBIR A LA WEB";
+            btn.disabled = false;
+        }
+    }
+</script>
+</body>
+</html>
