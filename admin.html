@@ -2,24 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BENTO | Panel de Carga</title>
     <style>
-        body { background: #0a0a0a; color: white; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .form-container { background: #111; padding: 25px; border-radius: 10px; border: 1px solid #333; width: 100%; max-width: 400px; }
-        h2 { color: #ff6600; text-align: center; }
-        label { display: block; margin-top: 10px; font-size: 12px; color: #aaa; }
-        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; background: #000; border: 1px solid #333; color: white; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; margin-top: 20px; padding: 12px; background: #ff6600; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 5px; }
-        .pass-field { border: 1px solid #ff6600; margin-top: 20px; }
+        body { background: #0a0a0a; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .form-container { background: #111; padding: 30px; border-radius: 15px; border: 1px solid #222; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { color: #ff6600; text-align: center; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        label { display: block; margin-top: 15px; font-size: 11px; color: #888; text-transform: uppercase; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; background: #000; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; transition: 0.3s; }
+        input:focus { border-color: #ff6600; outline: none; }
+        button { width: 100%; margin-top: 30px; padding: 15px; background: #ff6600; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 6px; text-transform: uppercase; transition: 0.3s; }
+        button:hover { background: #e65c00; transform: translateY(-2px); }
+        button:disabled { background: #444; cursor: not-allowed; }
+        .pass-input { border: 1px solid #ff6600 !important; }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <h2>Panel de Carga</h2>
+    <h2>Cargar Producto</h2>
     
-    <label>Nombre</label>
-    <input type="text" id="nombre">
+    <label>Nombre del Producto</label>
+    <input type="text" id="nombre" placeholder="Ej: Cámara Domo IP 2MP">
 
     <label>Categoría</label>
     <select id="categoria">
@@ -30,41 +34,67 @@
         <option value="controlesdeacceso">Controles de Acceso</option>
     </select>
 
-    <label>Descripción</label>
-    <textarea id="descripcion" rows="2"></textarea>
+    <label>Descripción Corta</label>
+    <textarea id="descripcion" rows="2" placeholder="Características principales..."></textarea>
 
-    <label>Nombre de la imagen (ej: camara.jpg)</label>
-    <input type="text" id="imagen">
+    <label>Etiqueta (Opcional)</label>
+    <input type="text" id="etiqueta" placeholder="Ej: Nuevo, 20% OFF, Premium">
+
+    <label>Nombre de la imagen</label>
+    <input type="text" id="imagen" placeholder="Ej: camara1.jpg">
 
     <label style="color: #ff6600;">Contraseña de Seguridad</label>
-    <input type="password" id="password" class="pass-field" placeholder="Ingresá la clave">
+    <input type="password" id="password" class="pass-input" placeholder="Clave para subir">
 
-    <button onclick="enviar()">SUBIR PRODUCTO</button>
+    <button id="btnSubir" onclick="enviarProducto()">Subir a la Web</button>
 </div>
 
 <script>
-    async function enviar() {
+    async function enviarProducto() {
+        const btn = document.getElementById('btnSubir');
         const data = {
             nombre: document.getElementById('nombre').value,
             categoria: document.getElementById('categoria').value,
             descripcion: document.getElementById('descripcion').value,
+            etiqueta: document.getElementById('etiqueta').value || "Nuevo",
             imagen: document.getElementById('imagen').value,
-            password: document.getElementById('password').value // Enviamos la clave
+            password: document.getElementById('password').value
         };
 
-        const res = await fetch('https://bento-seguridad-prueba-1.onrender.com/api/productos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
+        if(!data.nombre || !data.imagen || !data.password) {
+            alert("⚠️ Por favor completá Nombre, Imagen y Contraseña.");
+            return;
+        }
 
-        if (res.ok) {
-            alert("¡Cargado con éxito!");
-            location.reload();
-        } else {
-            alert("Error: Contraseña incorrecta o servidor caído.");
+        btn.innerText = "PROCESANDO...";
+        btn.disabled = true;
+
+        try {
+            const res = await fetch('https://bento-seguridad-prueba-1.onrender.com/api/productos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (res.ok) {
+                alert("✅ ¡Producto cargado correctamente!");
+                // Limpiar campos
+                document.getElementById('nombre').value = "";
+                document.getElementById('descripcion').value = "";
+                document.getElementById('imagen').value = "";
+                document.getElementById('password').value = "";
+            } else {
+                const errorData = await res.json();
+                alert("❌ Error: " + (errorData.error || "No se pudo subir"));
+            }
+        } catch (e) {
+            alert("❌ El servidor de Render está arrancando. Esperá 30 segundos y probá de nuevo.");
+        } finally {
+            btn.innerText = "SUBIR A LA WEB";
+            btn.disabled = false;
         }
     }
 </script>
+
 </body>
 </html>
