@@ -3,108 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENTO SECURITY | Catálogo</title>
+    <title>BENTO SECURITY | Catálogo Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
-        body { background: #0a0a0a; color: white; font-family: 'Montserrat', sans-serif; margin: 0; }
-        .header { text-align: center; padding: 40px; border-bottom: 2px solid #ff6600; }
-        .filtros { display: flex; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        /* --- ESTILOS VISUALES (TU DISEÑO) --- */
+        :root { --accent: #ff6600; --bg: #0a0a0a; --card-bg: #111; }
+        body { background: var(--bg); color: white; font-family: 'Montserrat', sans-serif; margin: 0; overflow-x: hidden; }
         
-        button { 
-            background: transparent; border: 1px solid #333; color: #888; 
-            padding: 10px 20px; cursor: pointer; text-transform: uppercase; 
-            transition: 0.3s; font-size: 12px;
-        }
-        button:hover, button.active { border-color: #ff6600; color: white; background: rgba(255, 102, 0, 0.1); }
+        /* Barra superior */
+        .top-bar { background: #000; padding: 10px; text-align: center; font-size: 10px; letter-spacing: 3px; color: var(--accent); border-bottom: 1px solid #222; }
         
-        #contenedor-productos { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-            gap: 20px; padding: 20px; max-width: 1200px; margin: 0 auto;
+        /* Reloj y Dólar */
+        .stats { position: absolute; top: 60px; right: 5%; text-align: right; font-family: monospace; z-index: 10; }
+        .dolar-val { color: #00ff88; font-size: 14px; margin-bottom: 5px; }
+        .time-val { font-size: 22px; color: #fff; opacity: 0.9; }
+
+        /* Encabezado */
+        header { padding: 60px 20px; text-align: center; border-bottom: 1px solid #1a1a1a; position: relative; }
+        .logo-container img { width: 140px; filter: drop-shadow(0 0 15px rgba(255,102,0,0.4)); margin-bottom: 20px; }
+        .hero h1 { font-family: 'Cinzel'; font-size: 2.8rem; letter-spacing: 8px; margin: 10px 0; text-transform: uppercase; }
+        .hero h1 span { color: var(--accent); }
+        .hero p { font-size: 12px; letter-spacing: 4px; color: #666; text-transform: uppercase; margin-top: 10px; }
+
+        /* Botones de Filtro */
+        .filter-container { display: flex; justify-content: center; gap: 10px; margin: 40px 0; flex-wrap: wrap; padding: 0 10px; }
+        .filter-btn { 
+            background: transparent; border: 1px solid #333; color: #888; padding: 12px 25px;
+            cursor: pointer; font-family: 'Montserrat'; font-size: 11px; letter-spacing: 2px;
+            transition: all 0.4s ease; text-transform: uppercase;
         }
-        .card { background: #111; border: 1px solid #222; padding: 15px; border-radius: 10px; text-align: center; }
-        .card img { max-width: 100%; border-radius: 5px; height: 200px; object-fit: cover; }
-        .card h3 { color: #ff6600; margin: 15px 0 5px; }
-        .card p { font-size: 14px; color: #aaa; }
-        .status-msg { text-align: center; margin: 50px; color: #888; font-style: italic; }
+        .filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: #fff; background: rgba(255,102,0,0.1); box-shadow: 0 0 15px rgba(255,102,0,0.2); }
+
+        /* Grilla de Productos */
+        #container { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; padding: 0 5% 80px; max-width: 1400px; margin: 0 auto; 
+        }
+        
+        /* Tarjetas de Producto */
+        .product-card { 
+            background: var(--card-bg); border: 1px solid #1a1a1a; padding: 20px; 
+            border-radius: 4px; transition: 0.5s; position: relative; display: flex; flex-direction: column;
+        }
+        .product-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        .img-area { width: 100%; height: 220px; overflow: hidden; margin-bottom: 15px; position: relative; background: #000; }
+        .product-card img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.3); transition: 0.5s; }
+        .product-card:hover img { filter: grayscale(0); transform: scale(1.1); }
+        
+        .tag { position: absolute; top: 10px; left: 10px; background: var(--accent); color: #000; font-size: 10px; padding: 4px 10px; font-weight: bold; text-transform: uppercase; z-index: 2; }
+        
+        .product-card h3 { font-family: 'Cinzel'; font-size: 18px; margin: 10px 0; color: #fff; min-height: 40px; }
+        .product-card p { font-size: 13px; color: #888; line-height: 1.5; flex-grow: 1; margin-bottom: 20px; }
+
+        /* Botón WhatsApp */
+        .btn-ws { 
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 12px; border: 1px solid var(--accent); background: transparent;
+            color: var(--accent); text-decoration: none; font-size: 11px; font-weight: bold;
+            transition: 0.3s; letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+            box-sizing: border-box; 
+        }
+        .btn-ws:hover { background: var(--accent); color: #000; }
+
+        /* Mensaje de carga */
+        .loading-msg { grid-column: 1/-1; text-align: center; padding: 60px; color: #444; font-style: italic; letter-spacing: 2px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .stats { position: static; text-align: center; margin-top: 20px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>EXCELENCIA EN <span style="color:#ff6600">SEGURIDAD</span></h1>
-        <p>PROTECCIÓN AVANZADA PARA INFRAESTRUCTURAS CRÍTICAS</p>
+    <div class="top-bar">SISTEMAS PREMIUM | ENVIOS A TODO EL PAIS | BENTO SECURITY</div>
+
+    <header>
+        <div class="stats">
+            <div class="dolar-val">USD: $1485 <span style="font-size: 8px; vertical-align: middle; color:#00ff88;">● ONLINE</span></div>
+            <div class="time-val" id="reloj">00:00:00</div>
+        </div>
+
+        <div class="logo-container">
+            <img src="img/logo.png" alt="BENTO" onerror="this.style.display='none'">
+        </div>
+        <div class="hero">
+            <h1>EXCELENCIA EN <span>SEGURIDAD</span></h1>
+            <p>Protección avanzada para infraestructuras críticas</p>
+        </div>
+    </header>
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filtrar('todos', this)">Catálogo Completo</button>
+        <button class="filter-btn" onclick="filtrar('camaras', this)">Cámaras</button>
+        <button class="filter-btn" onclick="filtrar('alarmas', this)">Alarmas</button>
+        <button class="filter-btn" onclick="filtrar('grabacion', this)">DVR/NVR</button>
+        <button class="filter-btn" onclick="filtrar('Accesorios', this)">Accesorios</button>
+        <button class="filter-btn" onclick="filtrar('controlesdeacceso', this)">Control Acceso</button>
     </div>
 
-    <div class="filtros">
-        <button class="active" onclick="filtrar('todos', this)">Catálogo Completo</button>
-        <button onclick="filtrar('camaras', this)">Cámaras</button>
-        <button onclick="filtrar('alarmas', this)">Alarmas</button>
-        <button onclick="filtrar('grabacion', this)">DVR/NVR</button>
-        <button onclick="filtrar('Accesorios', this)">Accesorios</button>
-        <button onclick="filtrar('controlesdeacceso', this)">Controles de Acceso</button>
-    </div>
-
-    <div id="contenedor-productos">
-        <p class="status-msg">Iniciando conexión segura con BENTO DB...</p>
+    <div id="container">
+        <p class="loading-msg">Conectando con base de datos BENTO... (Puede tardar unos segundos)</p>
     </div>
 
     <script>
-        let productosData = []; 
+        // 1. RELOJ DIGITAL
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('reloj').innerText = now.toLocaleTimeString('es-AR');
+        }, 1000);
 
-     
-        async function obtenerProductos() {
-            const contenedor = document.getElementById('contenedor-productos');
+        // 2. LÓGICA DE PRODUCTOS
+        let productosGlobal = [];
+        const contenedor = document.getElementById('container');
+
+        // Descargar datos de Render
+        async function cargarCatalogo() {
             try {
                 const res = await fetch('https://bento-seguridad-prueba-1.onrender.com/api/productos');
-                productosData = await res.json();
+                productosGlobal = await res.json();
                 
-                if(productosData.length === 0) {
-                    contenedor.innerHTML = '<p class="status-msg">No hay productos disponibles por ahora.</p>';
+                if(productosGlobal.length === 0) {
+                    contenedor.innerHTML = '<p class="loading-msg">Aún no hay productos cargados en el sistema.</p>';
                 } else {
-                    mostrarProductos(productosData);
+                    mostrar(productosGlobal);
                 }
             } catch (error) {
-                contenedor.innerHTML = '<p class="status-msg">Error al conectar con la base de datos. Intentá refrescar.</p>';
+                console.error(error);
+                contenedor.innerHTML = '<p class="loading-msg" style="color:#ff6600">Iniciando servidor seguro... Por favor espere 30 segundos y recargue.</p>';
             }
         }
 
-  
-        function mostrarProductos(lista) {
-            const contenedor = document.getElementById('contenedor-productos');
-            contenedor.innerHTML = ''; 
-
+        // Dibujar tarjetas
+        function mostrar(lista) {
+            contenedor.innerHTML = ''; // Limpiar
             lista.forEach(prod => {
-                const card = `
-                    <div class="card">
-                        <img src="img/${prod.imagen}" alt="${prod.nombre}" onerror="this.src='img/placeholder.jpg'">
-                        <small style="color:#ff6600">${prod.etiqueta || 'Nuevo'}</small>
+                // Generar link de WhatsApp dinámico
+                const mensaje = `Hola BENTO, me interesa el producto: ${prod.nombre}`;
+                // ¡IMPORTANTE! CAMBIÁ EL NÚMERO DE ABAJO POR EL TUYO REAL
+                const linkWS = `https://wa.me/5491112345678?text=${encodeURIComponent(mensaje)}`; 
+
+                const html = `
+                    <div class="product-card">
+                        <div class="tag">${prod.etiqueta || 'Nuevo'}</div>
+                        <div class="img-area">
+                            <img src="img/${prod.imagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Sin+Imagen'">
+                        </div>
                         <h3>${prod.nombre}</h3>
-                        <p>${prod.descripcion}</p>
+                        <p>${prod.descripcion || 'Consultar especificaciones técnicas completas.'}</p>
+                        <a href="${linkWS}" target="_blank" class="btn-ws">CONSULTAR PRECIO</a>
                     </div>
                 `;
-                contenedor.innerHTML += card;
+                contenedor.innerHTML += html;
             });
         }
 
-        
-        function filtrar(categoria, btn) {
-            
-            document.querySelectorAll('.filtros button').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        // Filtrar categorías
+        function filtrar(categoria, boton) {
+            // Efecto visual en botones
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            boton.classList.add('active');
 
-            if (categoria === 'todos') {
-                mostrarProductos(productosData);
+            // Lógica de filtro (Case Insensitive)
+            if(categoria === 'todos') {
+                mostrar(productosGlobal);
             } else {
-                const filtrados = productosData.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase());
-                if(filtrados.length === 0) {
-                    document.getElementById('contenedor-productos').innerHTML = '<p class="status-msg">No hay productos en esta categoría todavía.</p>';
+                const filtrados = productosGlobal.filter(p => 
+                    p.categoria && p.categoria.toLowerCase() === categoria.toLowerCase()
+                );
+                
+                if(filtrados.length > 0) {
+                    mostrar(filtrados);
                 } else {
-                    mostrarProductos(filtrados);
+                    contenedor.innerHTML = '<p class="loading-msg">No hay productos en esta categoría por el momento.</p>';
                 }
             }
         }
 
-  
-        obtenerProductos();
+        // Iniciar todo
+        cargarCatalogo();
     </script>
 </body>
 </html>
