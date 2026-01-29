@@ -53,6 +53,12 @@ nav{
 #reloj-box { color: #fff; font-size: 22px; font-weight: 300; letter-spacing: 2px; text-align: right; }
 @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.2); } }
 
+/* BRANDS SECTION */
+.brands-section { padding: 30px 0; border-bottom: 1px solid #111; text-align: center; }
+.brands-intro { font-size: 10px; color: var(--naranja); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; font-weight: 700; }
+.brands-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.brand-tag { padding: 8px 15px; border: 1px solid #222; border-radius: 4px; color: #555; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; }
+
 /* FILTROS */
 .cat-btn {
     background: transparent; border: 1px solid #222; color: #555; padding: 10px 20px;
@@ -74,12 +80,11 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 .trust-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
 .trust-item { color: #555; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
 .trust-item i { font-size: 24px; color: var(--naranja); margin-bottom: 12px; display: block; }
-.copyright { font-size: 9px; color: #222; letter-spacing: 3px; border-top: 1px solid #111; padding-top: 20px; }
 
 /* WSP */
 .wsp-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; width: 60px; height: 60px; }
 .wsp-aura { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: rgba(37, 211, 102, 0.4); animation: pulseAura 2s infinite; pointer-events: none; }
-.wsp-link { position: relative; z-index: 10; display: block; cursor: pointer; }
+.wsp-link { position: relative; z-index: 10; display: block; }
 @keyframes pulseAura { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
 
 .loading-msg { grid-column: 1/-1; text-align: center; padding: 80px; color: #333; letter-spacing: 4px; font-size: 12px; text-transform: uppercase; }
@@ -93,9 +98,7 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 </div>
 
 <nav>
-    <div class="logo-box">
-        <img src="logo.jpg" alt="BENTO" onerror="this.src='logo.png'; this.onerror=null;">
-    </div>
+    <div class="logo-box"><img src="logo.jpg" alt="BENTO" onerror="this.src='logo.png'; this.onerror=null;"></div>
     <div class="status-container">
         <div class="status-label"><div id="dolar-box">USD: ...</div><div class="status-circle"></div> ONLINE</div>
         <div id="reloj-box"><span id="reloj">00:00:00</span></div>
@@ -107,7 +110,7 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
     <p style="color:#666; font-size:11px; letter-spacing:3px; text-transform: uppercase;">Protección avanzada para infraestructuras críticas</p>
 </section>
 
-    <div class="brands-section">
+<div class="brands-section">
     <div class="brands-intro">Marcas que trabajamos</div>
     <div class="brands-container">
         <span class="brand-tag">Dahua</span><span class="brand-tag">Hikvision</span><span class="brand-tag">Ajax</span><span class="brand-tag">Imou</span><span class="brand-tag">Seagate</span>
@@ -124,11 +127,11 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 </div>
 
 <div class="grid" id="main-grid">
-    <p class="loading-msg">Iniciando conexión segura con BENTO DB...</p>
+    <p class="loading-msg">Conectando con BENTO DB...</p>
 </div>
 
 <footer>
-    <img src="logo.jpg" alt="BENTO SECURITY" class="footer-logo" onerror="this.src='logo.png'; this.onerror=null;">
+    <img src="logo.jpg" alt="BENTO" class="footer-logo" onerror="this.src='logo.png'; this.onerror=null;">
     <div class="trust-bar">
         <div class="trust-item"><i class="fas fa-truck-moving"></i> Envíos a todo el país</div>
         <div class="trust-item"><i class="fas fa-shield-alt"></i> Garantía Oficial</div>
@@ -145,7 +148,6 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 </div>
 
 <script>
-// 1. RELOJ Y DOLAR
 function updateTime(){
     const el = document.getElementById("reloj");
     if(el) el.innerText = new Date().toLocaleTimeString("es-AR", {hour12: false});
@@ -161,7 +163,6 @@ async function getDolar() {
 }
 getDolar();
 
-// 2. CONEXIÓN A BASE DE DATOS
 let productosGlobal = [];
 const grid = document.getElementById('main-grid');
 
@@ -171,7 +172,7 @@ async function cargarDB() {
         productosGlobal = await res.json();
         renderizar(productosGlobal);
     } catch (e) {
-        grid.innerHTML = '<p class="loading-msg" style="color:var(--naranja)">El servidor está iniciando. Esperá 30 seg y recargá...</p>';
+        grid.innerHTML = '<p class="loading-msg" style="color:var(--naranja)">Servidor iniciando. Reintentá en 30s...</p>';
     }
 }
 
@@ -181,7 +182,6 @@ function renderizar(lista) {
         grid.innerHTML = '<p class="loading-msg">No hay productos disponibles.</p>';
         return;
     }
-
     lista.forEach(p => {
         const card = document.createElement('div');
         card.className = 'product-card';
@@ -204,12 +204,8 @@ function renderizar(lista) {
 function filtrar(cat, btn) {
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    if(cat === 'all') {
-        renderizar(productosGlobal);
-    } else {
-        const filtrados = productosGlobal.filter(p => p.categoria.toLowerCase() === cat.toLowerCase());
-        renderizar(filtrados);
-    }
+    if(cat === 'all') renderizar(productosGlobal);
+    else renderizar(productosGlobal.filter(p => p.categoria.toLowerCase() === cat.toLowerCase()));
 }
 
 function enviarConsulta(nombre) {
