@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BENTO | Security Excellence</title>
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://upload.wikimedia.org https://placehold.co data:; connect-src 'self' https://dolarapi.com https://bento-seguridad-prueba-1.onrender.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://upload.wikimedia.org https://placehold.co data:; connect-src 'self' https://dolarapi.com https://bento-seguridad-prueba-1.onrender.com;">
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -61,6 +62,7 @@ nav{
 .cat-btn.active { background: var(--naranja); color: #fff; border-color: var(--naranja); box-shadow: 0 0 15px rgba(255,102,0,0.3); }
 
 .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; padding:0 8% 100px; min-height: 400px; }
+
 .product-card{ 
     background: #0a0a0a; padding:20px; border:1px solid #151515; 
     border-radius:15px; position: relative; overflow: hidden; 
@@ -70,8 +72,16 @@ nav{
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-.img-container{ background:#fff; width:calc(100% + 40px); height:220px; margin:-20px -20px 20px -20px; display: flex; align-items: center; justify-content: center; position: relative; }
-.img-container img{ width:80%; height:80%; object-fit:contain; }
+
+.img-container{ 
+    background:#0a0a0a; 
+    width:calc(100% + 40px); height:220px; 
+    margin:-20px -20px 20px -20px; 
+    display: flex; align-items: center; 
+    justify-content: center; position: relative; 
+    border-bottom: 1px solid #1a1a1a;
+}
+.img-container img{ width:90%; height:90%; object-fit:contain; }
 .product-tag { position: absolute; top: 10px; left: 10px; background: var(--naranja); color: #fff; padding: 5px 12px; font-size: 9px; font-weight: 800; text-transform: uppercase; z-index: 10; }
 
 footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; text-align: center; }
@@ -147,7 +157,7 @@ footer { padding: 60px 8% 40px; background: #000; border-top: 1px solid #111; te
 </div>
 
 <script>
-// 1. RELOJ Y DÓLAR
+//  RELOJ Y DÓLAR
 function updateTime(){
     const el = document.getElementById("reloj");
     if(el) el.innerText = new Date().toLocaleTimeString("es-AR", {hour12: false});
@@ -163,40 +173,42 @@ async function getDolar() {
 }
 getDolar();
 
-// 2. CARGAR PRODUCTOS DESDE EL BACKEND
+
 const grid = document.getElementById('product-grid');
 
 async function cargarDesdeDB() {
     try {
-        // Nota: Cambiaremos esta URL cuando el servidor esté en la nube
         const res = await fetch('https://bento-seguridad-prueba-1.onrender.com/api/productos'); 
         const productos = await res.json();
         
         grid.innerHTML = ""; 
 
         productos.forEach(p => {
+            
+            const rutaImagen = p.imagen.startsWith('http') ? p.imagen : `img/${p.imagen}`;
+
             grid.innerHTML += `
                 <div class="product-card" data-category="${p.categoria}">
                     <div class="img-container">
                         <div class="product-tag">${p.etiqueta}</div>
-                        <img src="${p.imagen}" alt="${p.nombre}">
+                        <img src="${rutaImagen}" alt="${p.nombre}">
                     </div>
                     <h3 style="font-family:'Cinzel';">${p.nombre}</h3>
-                    <p style="color:#555; font-size:12px;">${p.descripcion}</p>
+                    <p style="color:#888; font-size:12px;">${p.descripcion}</p>
                     <div style="margin-top:auto; font-size:10px; color:var(--naranja); font-weight:700; cursor:pointer;" 
                          onclick="enviarConsulta('${p.nombre}')">CONSULTAR ASESOR</div>
                 </div>
             `;
         });
         
-        vincularFiltros(); // Activa los botones de categorías
+        vincularFiltros();
         
     } catch (e) {
-        grid.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>Iniciando conexión con BENTO DB...</p>";
+        grid.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>Iniciando conexión segura con BENTO DB...</p>";
     }
 }
 
-// 3. LOGICA DE FILTROS
+//FILTROS
 function vincularFiltros() {
     const btns = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.product-card');
@@ -225,7 +237,6 @@ function enviarConsulta(p) {
     window.open(`https://wa.me/5492216172384?text=${m}`, '_blank');
 }
 
-// Arrancamos la carga
 cargarDesdeDB();
 </script>
 </body>
