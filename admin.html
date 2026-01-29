@@ -2,97 +2,58 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENTO | Panel de Control</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>BENTO | Admin</title>
     <style>
-        body { background: #0a0a0a; color: white; font-family: 'Montserrat', sans-serif; padding: 40px 10%; }
-        h1, h2 { color: #ff6600; text-transform: uppercase; letter-spacing: 3px; }
-        
-   
-        .panel-carga { background: #111; padding: 30px; border-radius: 8px; border: 1px solid #222; margin-bottom: 50px; }
-        input, select, textarea { 
-            width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid #333; color: white; border-radius: 4px; 
-        }
-        button { 
-            width: 100%; padding: 15px; background: #ff6600; border: none; color: black; font-weight: bold; 
-            cursor: pointer; text-transform: uppercase; margin-top: 10px;
-        }
-        button:hover { background: #ff8800; }
-
-        /* Lista de Gestión */
-        .lista-productos { display: grid; gap: 15px; }
-        .item-producto { 
-            background: #111; padding: 15px; border-radius: 4px; display: flex; 
-            justify-content: space-between; align-items: center; border-left: 4px solid #ff6600;
-        }
-        .btn-borrar { 
-            background: #ff3333; color: white; width: auto; padding: 8px 15px; font-size: 11px; 
-        }
-        .btn-borrar:hover { background: #cc0000; }
-        .info-prod { font-size: 14px; }
-        .info-prod span { color: #666; font-size: 12px; display: block; }
+        body { background: #0a0a0a; color: white; font-family: sans-serif; padding: 30px; }
+        .box { background: #111; padding: 20px; border: 1px solid #222; border-radius: 8px; max-width: 500px; margin-bottom: 40px; }
+        input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; background: #000; border: 1px solid #333; color: white; }
+        button { width: 100%; padding: 10px; background: #ff6600; border: none; font-weight: bold; cursor: pointer; }
+        .item { display: flex; justify-content: space-between; background: #111; padding: 15px; margin-top: 10px; border-radius: 5px; border-left: 4px solid #ff6600; }
+        .btn-del { background: #cc0000; color: white; padding: 5px 10px; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <h1>Panel de Administración</h1>
-    
-    <div class="panel-carga">
-        <h2>Nuevo Producto</h2>
-        <input type="text" id="nombre" placeholder="Nombre del producto (Ej: Cámara Domo 4K)">
-        <textarea id="descripcion" placeholder="Descripción corta técnica"></textarea>
+    <div class="box">
+        <h2>Cargar Producto</h2>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <textarea id="descripcion" placeholder="Descripción"></textarea>
         <select id="categoria">
             <option value="camaras">Cámaras</option>
             <option value="alarmas">Alarmas</option>
-            <option value="grabacion">DVR / NVR</option>
+            <option value="grabacion">DVR/NVR</option>
             <option value="Accesorios">Accesorios</option>
-            <option value="controlesdeacceso">Control de Acceso</option>
+            <option value="controlesdeacceso">Acceso</option>
         </select>
-        <input type="text" id="etiqueta" placeholder="Etiqueta (Ej: Nuevo, 4K, Oferta)">
-        <input type="text" id="imagen" placeholder="Nombre de la imagen en GitHub (Ej: camara.jpg)">
-        <input type="password" id="password" placeholder="Clave Maestra">
-        <button onclick="subirProducto()">Subir a la Web</button>
+        <input type="text" id="etiqueta" placeholder="Etiqueta (Ej: Full HD)">
+        <input type="text" id="imagen" placeholder="Archivo imagen (ej: camara.jpg)">
+        <input type="password" id="password" placeholder="Contraseña Maestra">
+        <button onclick="subir()">PUBLICAR</button>
     </div>
 
-    <hr style="border-color: #222; margin: 40px 0;">
-
-    <h2>Gestión de Stock</h2>
-    <div id="listaItems" class="lista-productos">
-        <p>Cargando lista de productos...</p>
-    </div>
+    <h2>Productos en la Web</h2>
+    <div id="lista">Cargando...</div>
 
     <script>
-        const API_URL = 'https://bento-seguridad-prueba-1.onrender.com/api/productos';
+        const API = 'https://bento-seguridad-prueba-1.onrender.com/api/productos';
 
-
-        async function obtenerProductos() {
-            try {
-                const res = await fetch(API_URL);
-                const productos = await res.json();
-                const container = document.getElementById('listaItems');
-                container.innerHTML = '';
-
-                productos.forEach(p => {
-                    container.innerHTML += `
-                        <div class="item-producto">
-                            <div class="info-prod">
-                                <strong>${p.nombre}</strong>
-                                <span>Categoría: ${p.categoria}</span>
-                            </div>
-                            <button class="btn-borrar" onclick="eliminarProducto('${p._id}')">ELIMINAR</button>
-                        </div>
-                    `;
-                });
-            } catch (e) { console.error("Error cargando lista"); }
+        async function listar() {
+            const res = await fetch(API);
+            const data = await res.json();
+            const div = document.getElementById('lista');
+            div.innerHTML = '';
+            data.forEach(p => {
+                div.innerHTML += `
+                    <div class="item">
+                        <div><b>${p.nombre}</b><br><small>${p.categoria}</small></div>
+                        <button class="btn-del" onclick="borrar('${p._id}')">ELIMINAR</button>
+                    </div>`;
+            });
         }
 
-
-        async function subirProducto() {
-            const pass = document.getElementById('password').value;
-            if(pass !== 'bento2026') return alert('Clave incorrecta');
-
+        async function subir() {
             const datos = {
+                password: document.getElementById('password').value,
                 nombre: document.getElementById('nombre').value,
                 descripcion: document.getElementById('descripcion').value,
                 categoria: document.getElementById('categoria').value,
@@ -100,38 +61,23 @@
                 imagen: document.getElementById('imagen').value
             };
 
-            const res = await fetch(API_URL, {
+            const res = await fetch(API, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(datos)
             });
 
-            if(res.ok) {
-                alert('¡Cargado!');
-                location.reload();
-            } else {
-                alert('Error al guardar');
-            }
+            if(res.ok) { alert('Cargado'); location.reload(); }
+            else { alert('Error: Clave incorrecta o datos incompletos'); }
         }
 
-
-        async function eliminarProducto(id) {
-            const pass = prompt("Ingresá la clave maestra para eliminar:");
-            if(pass !== 'bento2026') return alert("Clave incorrecta");
-
-            if(confirm('¿Seguro que querés borrar este producto?')) {
-                const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-                if(res.ok) {
-                    alert('Eliminado');
-                    obtenerProductos(); 
-                } else {
-                    alert('Error al eliminar');
-                }
-            }
+        async function borrar(id) {
+            if(!confirm('¿Borrar producto?')) return;
+            const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+            if(res.ok) { alert('Eliminado'); listar(); }
         }
 
-
-        obtenerProductos();
+        listar();
     </script>
 </body>
 </html>
