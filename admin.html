@@ -4,30 +4,22 @@
     <meta charset="UTF-8">
     <title>BENTO | Panel de Carga</title>
     <style>
-        body { background: #0a0a0a; color: white; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; padding: 50px; }
-        .form-container { background: #111; padding: 30px; border-radius: 15px; border: 1px solid #222; width: 100%; max-width: 400px; }
-        h2 { color: #ff6600; text-align: center; font-family: 'Cinzel'; }
-        label { display: block; margin: 15px 0 5px; font-size: 12px; color: #888; text-transform: uppercase; }
-        input, select, textarea { 
-            width: 100%; padding: 10px; background: #000; border: 1px solid #333; 
-            color: white; border-radius: 5px; outline: none; 
-        }
-        input:focus { border-color: #ff6600; }
-        button { 
-            width: 100%; margin-top: 25px; padding: 15px; background: #ff6600; 
-            border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 5px;
-        }
-        button:hover { background: #ff8833; }
-        .msg { margin-top: 15px; text-align: center; font-size: 14px; display: none; }
+        body { background: #0a0a0a; color: white; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
+        .form-container { background: #111; padding: 25px; border-radius: 10px; border: 1px solid #333; width: 100%; max-width: 400px; }
+        h2 { color: #ff6600; text-align: center; }
+        label { display: block; margin-top: 10px; font-size: 12px; color: #aaa; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; background: #000; border: 1px solid #333; color: white; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; margin-top: 20px; padding: 12px; background: #ff6600; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        .pass-field { border: 1px solid #ff6600; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <h2>Cargar Producto</h2>
+    <h2>Panel de Carga</h2>
     
-    <label>Nombre del Producto</label>
-    <input type="text" id="nombre" placeholder="Ej: Cámara Domo 2MP">
+    <label>Nombre</label>
+    <input type="text" id="nombre">
 
     <label>Categoría</label>
     <select id="categoria">
@@ -39,59 +31,38 @@
     </select>
 
     <label>Descripción</label>
-    <textarea id="descripcion" rows="3" placeholder="Detalles técnicos..."></textarea>
+    <textarea id="descripcion" rows="2"></textarea>
 
-    <label>Etiqueta</label>
-    <input type="text" id="etiqueta" placeholder="Ej: Nuevo, Oferta, 20% OFF">
+    <label>Nombre de la imagen (ej: camara.jpg)</label>
+    <input type="text" id="imagen">
 
-    <label>Nombre de la imagen (debe estar en carpeta /img)</label>
-    <input type="text" id="imagen" placeholder="Ej: camara1.jpg">
+    <label style="color: #ff6600;">Contraseña de Seguridad</label>
+    <input type="password" id="password" class="pass-field" placeholder="Ingresá la clave">
 
-    <button onclick="enviarProducto()">SUBIR A LA WEB</button>
-    <div id="mensaje" class="msg"></div>
+    <button onclick="enviar()">SUBIR PRODUCTO</button>
 </div>
 
 <script>
-    async function enviarProducto() {
-        const btn = document.querySelector('button');
-        const msg = document.getElementById('mensaje');
-        
+    async function enviar() {
         const data = {
             nombre: document.getElementById('nombre').value,
             categoria: document.getElementById('categoria').value,
             descripcion: document.getElementById('descripcion').value,
-            etiqueta: document.getElementById('etiqueta').value || "Nuevo",
-            imagen: document.getElementById('imagen').value
+            imagen: document.getElementById('imagen').value,
+            password: document.getElementById('password').value // Enviamos la clave
         };
 
-        if(!data.nombre || !data.imagen) {
-            alert("Por favor completá Nombre e Imagen");
-            return;
-        }
+        const res = await fetch('https://bento-seguridad-prueba-1.onrender.com/api/productos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
 
-        btn.innerText = "Subiendo...";
-        btn.disabled = true;
-
-        try {
-            const res = await fetch('https://bento-seguridad-prueba-1.onrender.com/api/productos', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (res.ok) {
-                msg.style.display = "block";
-                msg.style.color = "#00ff88";
-                msg.innerText = "¡Producto cargado exitosamente!";
-                document.querySelectorAll('input, textarea').forEach(i => i.value = "");
-            } else {
-                throw new Error();
-            }
-        } catch (e) {
-            alert("Error al conectar con el servidor. Revisá si Render está activo.");
-        } finally {
-            btn.innerText = "SUBIR A LA WEB";
-            btn.disabled = false;
+        if (res.ok) {
+            alert("¡Cargado con éxito!");
+            location.reload();
+        } else {
+            alert("Error: Contraseña incorrecta o servidor caído.");
         }
     }
 </script>
