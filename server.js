@@ -6,7 +6,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
 const MONGO_URI = 'mongodb+srv://slak:barto1212@bento.dbh8xfu.mongodb.net/bento_db?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI)
@@ -21,7 +20,6 @@ const Producto = mongoose.model('productos', new mongoose.Schema({
   imagen: String
 }));
 
-
 app.get('/', (req, res) => {
   res.send('🚀 Servidor de BENTO funcionando correctamente');
 });
@@ -33,6 +31,17 @@ app.get('/api/productos', async (req, res) => {
     res.json(lista);
   } catch (err) {
     res.status(500).json({ error: "Error al obtener datos" });
+  }
+});
+
+
+app.post('/api/productos', async (req, res) => {
+  try {
+    const nuevo = new Producto(req.body);
+    await nuevo.save();
+    res.status(201).json({ mensaje: "Producto guardado con éxito" });
+  } catch (err) {
+    res.status(500).json({ error: "Error al guardar el producto" });
   }
 });
 
