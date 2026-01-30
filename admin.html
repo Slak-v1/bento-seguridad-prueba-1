@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BENTO | Admin</title>
+    <style>
+   
+        body { 
+            background: #0a0a0a; 
+            color: white; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+ 
+        .container {
+            width: 100%;
+            max-width: 600px; 
+        }
+
+        h2 { 
+            border-bottom: 2px solid #ff6600; 
+            padding-bottom: 10px; 
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .box { 
+            background: #111; 
+            padding: 25px; 
+            border: 1px solid #222; 
+            border-radius: 12px; 
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        input, select, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            background: #000; 
+            border: 1px solid #333; 
+            color: white; 
+            border-radius: 6px;
+            box-sizing: border-box; 
+        }
+
+        input:focus { border-color: #ff6600; outline: none; }
+
+        button { 
+            width: 100%; 
+            padding: 14px; 
+            background: #ff6600; 
+            border: none; 
+            color: #000;
+            font-weight: bold; 
+            cursor: pointer; 
+            border-radius: 6px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #ff8800; transform: translateY(-2px); }
+
+        
+        #lista { width: 100%; }
+
+        .item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            background: #111; 
+            padding: 15px 20px; 
+            margin-top: 15px; 
+            border-radius: 8px; 
+            border-left: 5px solid #ff6600;
+            border: 1px solid #222;
+            border-left: 5px solid #ff6600;
+        }
+
+        .info b { font-size: 1rem; display: block; }
+        .info small { color: #888; text-transform: uppercase; }
+
+        .btn-del { 
+            background: #cc0000; 
+            color: white; 
+            padding: 8px 15px; 
+            border: none; 
+            border-radius: 4px;
+            cursor: pointer; 
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .btn-del:hover { background: #ff0000; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box">
+            <h2>Cargar Nuevo Producto</h2>
+            <input type="text" id="nombre" placeholder="Nombre del producto">
+            <textarea id="descripcion" rows="3" placeholder="Descripción técnica"></textarea>
+            
+            <select id="categoria">
+                <option value="camaras">Cámaras</option>
+                <option value="alarmas">Alarmas</option>
+                <option value="grabacion">DVR/NVR</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="controlesdeacceso">Control de Acceso</option>
+            </select>
+            
+            <input type="text" id="etiqueta" placeholder="Etiqueta (Ej: Full HD, Nuevo)">
+            <input type="text" id="imagen" placeholder="Nombre de imagen (ej: camara1.jpg)">
+            <input type="password" id="password" placeholder="Contraseña Maestra">
+            
+            <button onclick="subir()">Publicar en la Web</button>
+        </div>
+
+        <h2>Gestión de Productos Online</h2>
+        <div id="lista">Cargando catálogo...</div>
+    </div>
+
+    <script>
+        const API = 'https://bento-seguridad-prueba-1.onrender.com/api/productos';
+
+        async function listar() {
+            try {
+                const res = await fetch(API);
+                const data = await res.json();
+                const div = document.getElementById('lista');
+                div.innerHTML = '';
+                if(data.length === 0) {
+                    div.innerHTML = '<p style="color:#555">No hay productos cargados.</p>';
+                    return;
+                }
+                data.forEach(p => {
+                    div.innerHTML += `
+                        <div class="item">
+                            <div class="info">
+                                <b>${p.nombre}</b>
+                                <small>${p.categoria}</small>
+                            </div>
+                            <button class="btn-del" onclick="borrar('${p._id}')">ELIMINAR</button>
+                        </div>`;
+                });
+            } catch (err) {
+                document.getElementById('lista').innerHTML = 'Error al cargar datos.';
+            }
+        }
+
+        async function subir() {
+            const passInput = document.getElementById('password').value;
+            const datos = {
+                password: passInput,
+                nombre: document.getElementById('nombre').value,
+                descripcion: document.getElementById('descripcion').value,
+                categoria: document.getElementById('categoria').value,
+                etiqueta: document.getElementById('etiqueta').value,
+                imagen: document.getElementById('imagen').value
+            };
+
+            if(!datos.nombre || !datos.password) {
+                alert("Nombre y Contraseña son obligatorios");
+                return;
+            }
+
+            const res = await fetch(API, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(datos)
+            });
+
+            if(res.ok) { 
+                alert('¡Cargado con éxito!'); 
+                location.reload(); 
+            } else { 
+                alert('Error: Clave incorrecta o error de servidor'); 
+            }
+        }
+
+        async function borrar(id) {
+            const pass = prompt("Ingresá la Clave Maestra para eliminar:");
+            if(pass !== 'bento2026') return alert("Clave incorrecta");
+
+            if(!confirm('¿Estás seguro de eliminar este producto?')) return;
+            
+            const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+            if(res.ok) { 
+                alert('Producto eliminado'); 
+                listar(); 
+            } else {
+                alert('No se pudo eliminar');
+            }
+        }
+
+        listar();
+    </script>
+</body>
+</html>
