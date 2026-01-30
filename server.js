@@ -32,7 +32,7 @@ app.get('/api/productos', async (req, res) => {
 });
 
 app.post('/api/productos', async (req, res) => {
-  // Aquí recibimos todo junto, incluida la contraseña
+  
   const { password, nombre, categoria, etiqueta, descripcion, imagen } = req.body;
 
   if (password !== 'bento2026') {
