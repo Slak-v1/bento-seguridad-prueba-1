@@ -2,160 +2,213 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENTO | Admin Panel</title>
+    <title>Panel Bento - Admin</title>
     <style>
-        body { background: #0a0a0a; color: white; font-family: sans-serif; margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { width: 100%; max-width: 600px; }
-        .box { background: #111; padding: 25px; border: 1px solid #222; border-radius: 12px; margin-bottom: 50px; transition: 0.3s; }
-        h2 { border-bottom: 2px solid #ff6600; padding-bottom: 10px; text-transform: uppercase; font-size: 1.2rem; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; }
         
-        button { width: 100%; padding: 14px; background: #ff6600; border: none; color: #000; font-weight: bold; cursor: pointer; border-radius: 6px; text-transform: uppercase; transition: 0.3s; margin-top: 10px; }
-        button:hover { background: #ff8800; }
-        
-        .btn-edit { background: #444; color: white; width: auto; padding: 8px 15px; font-size: 0.7rem; margin-right: 5px; }
-        .btn-del { background: #aa0000; color: white; width: auto; padding: 8px 15px; font-size: 0.7rem; }
-        
-        .item { display: flex; justify-content: space-between; align-items: center; background: #111; padding: 15px; margin-top: 10px; border-radius: 8px; border: 1px solid #222; }
-        .info b { display: block; font-size: 0.9rem; }
-        .info small { color: #ff6600; font-size: 0.7rem; text-transform: uppercase; }
+        body {
+            background: #0d0d0d;
+            color: #eee;
+            font-family: Arial, Helvetica, sans-serif; 
+            padding: 20px;
+        }
 
+        .contenedor-admin {
+            width: 95%;
+            max-width: 550px;
+            margin: auto;
+        }
+
+        .cabezal {
+            text-align: center;
+            border-bottom: 3px solid #ff6600;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+
+       
+        .box-carga {
+            background: #1a1a1a;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #000;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 3px;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        /* Botón naranja Bento */
+        .btn-principal {
+            background: #ff6600;
+            color: #000;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .btn-principal:hover { background: #e65c00; }
+
+        /* Lista de productos abajo */
+        .lista-web { margin-top: 40px; }
         
-        .editando { border: 1px solid #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.2); }
-        #btn-cancel { background: #333; color: white; display: none; }
+        .fila-producto {
+            background: #151515;
+            border: 1px solid #222;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .botones-accion { display: flex; gap: 5px; }
+
+        .btn-edit { background: #444; color: #fff; border: none; padding: 6px 12px; cursor: pointer; }
+        .btn-borrar { background: #800; color: #fff; border: none; padding: 6px 12px; cursor: pointer; }
+
+        /* Clase para cuando estás editando */
+        .modo-editando {
+            border: 2px solid #ff6600;
+            background: #1f1a15;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="box" id="formulario">
-            <h2 id="form-title">Cargar Producto</h2>
-            <input type="hidden" id="edit-id"> <input type="text" id="nombre" placeholder="Nombre del producto">
-            <textarea id="descripcion" rows="3" placeholder="Descripción técnica"></textarea>
-            
-            <select id="categoria">
-                <option value="camaras">Cámaras</option>
-                <option value="alarmas">Alarmas</option>
-                <option value="grabacion">DVR/NVR</option>
-                <option value="Accesorios">Accesorios</option>
-                <option value="controlesdeacceso">Control de Acceso</option>
-            </select>
-            
-            <input type="text" id="etiqueta" placeholder="Etiqueta (Ej: Full HD)">
-            <input type="text" id="imagen" placeholder="Imagen (ej: domo.jpg)">
-            <input type="password" id="password" placeholder="Contraseña Maestra">
-            
-            <button onclick="enviar()" id="btn-main">Publicar Ahora</button>
-            <button onclick="resetForm()" id="btn-cancel">Cancelar Edición</button>
-        </div>
-
-        <h2>Catálogo Activo</h2>
-        <div id="lista">Cargando...</div>
+<div class="contenedor-admin">
+    <div class="cabezal">
+        <h1 style="margin:0; letter-spacing: 2px;">BENTO ADMIN</h1>
+        <small style="color:#666">Carga y edición de productos</small>
     </div>
 
-    <script>
-        const API = 'https://bento-seguridad-prueba-1.onrender.com/api/productos';
-        let todosLosProductos = [];
+    <div class="box-carga" id="formBox">
+        <h3 id="txtEstado" style="margin-top:0">Subir nuevo equipo</h3>
+        <input type="hidden" id="id_producto"> <label style="font-size: 12px;">Nombre del equipo:</label>
+        <input type="text" id="nombre" placeholder="Ej: Cámara Domo IP">
+        
+        <textarea id="descripcion" rows="2" placeholder="Descripción breve..."></textarea>
+        
+        <select id="categoria">
+            <option value="camaras">Cámaras</option>
+            <option value="alarmas">Alarmas</option>
+            <option value="grabacion">DVR/NVR</option>
+            <option value="Accesorios">Accesorios</option>
+            <option value="controlesdeacceso">Acceso</option>
+        </select>
+        
+        <input type="text" id="etiqueta" placeholder="Etiqueta (Ej: Full HD)">
+        <input type="text" id="imagen" placeholder="Imagen (nombre del archivo)">
+        
+        <input type="password" id="pass" placeholder="Clave Maestra">
+        
+        <button class="btn-principal" id="btnAccion" onclick="mandarDatos()">Publicar Producto</button>
+        <button id="btnCancel" style="display:none; background:#333; color:#fff; margin-top:5px; border:none; padding:10px; width:100%; cursor:pointer;" onclick="cancelar()">Cancelar</button>
+    </div>
 
-    
-        async function listar() {
-            try {
-                const res = await fetch(API);
-                todosLosProductos = await res.json();
-                const div = document.getElementById('lista');
-                div.innerHTML = '';
-                todosLosProductos.forEach(p => {
-                    div.innerHTML += `
-                        <div class="item">
-                            <div class="info">
-                                <b>${p.nombre}</b>
-                                <small>${p.categoria}</small>
-                            </div>
-                            <div>
-                                <button class="btn-edit" onclick="cargarParaEditar('${p._id}')">EDITAR</button>
-                                <button class="btn-del" onclick="eliminar('${p._id}')">BORRAR</button>
-                            </div>
-                        </div>`;
-                });
-            } catch (e) { console.error("Error al listar"); }
+    <div class="lista-web">
+        <h3 style="border-bottom: 1px solid #333; padding-bottom:5px;">Equipos en la web</h3>
+        <div id="contenedor_lista">Cargando...</div>
+    </div>
+</div>
+
+<script>
+    const url_api = 'https://bento-seguridad-prueba-1.onrender.com/api/productos';
+    let temporal = [];
+
+    // Traer productos
+    async function cargarLista() {
+        const r = await fetch(url_api);
+        temporal = await r.json();
+        const listaDiv = document.getElementById('contenedor_lista');
+        listaDiv.innerHTML = '';
+        
+        temporal.forEach(p => {
+            listaDiv.innerHTML += `
+                <div class="fila-producto">
+                    <div>
+                        <b style="display:block">${p.nombre}</b>
+                        <small style="color:#ff6600">${p.categoria}</small>
+                    </div>
+                    <div class="botones-accion">
+                        <button class="btn-edit" onclick="editar('${p._id}')">Editar</button>
+                        <button class="btn-borrar" onclick="borrar('${p._id}')">X</button>
+                    </div>
+                </div>`;
+        });
+    }
+
+    async function mandarDatos() {
+        const id_edit = document.getElementById('id_producto').value;
+        const pass = document.getElementById('pass').value;
+
+        if(!pass) return alert("Falta la clave, che");
+
+        const info = {
+            password: pass,
+            nombre: document.getElementById('nombre').value,
+            descripcion: document.getElementById('descripcion').value,
+            categoria: document.getElementById('categoria').value,
+            etiqueta: document.getElementById('etiqueta').value,
+            imagen: document.getElementById('imagen').value
+        };
+
+        const config = {
+            method: id_edit ? 'PUT' : 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(info)
+        };
+
+        const link = id_edit ? `${url_api}/${id_edit}` : url_api;
+
+        const res = await fetch(link, config);
+        if(res.ok) {
+            alert("Listo, ya impactó en la web");
+            location.reload();
+        } else {
+            alert("Algo falló, fijate la clave");
         }
+    }
 
+    function editar(id) {
+        const prod = temporal.find(x => x._id === id);
+        document.getElementById('id_producto').value = prod._id;
+        document.getElementById('nombre').value = prod.nombre;
+        document.getElementById('descripcion').value = prod.descripcion;
+        document.getElementById('categoria').value = prod.categoria;
+        document.getElementById('etiqueta').value = prod.etiqueta;
+        document.getElementById('imagen').value = prod.imagen;
 
-        async function enviar() {
-            const id = document.getElementById('edit-id').value;
-            const payload = {
-                password: document.getElementById('password').value,
-                nombre: document.getElementById('nombre').value,
-                descripcion: document.getElementById('descripcion').value,
-                categoria: document.getElementById('categoria').value,
-                etiqueta: document.getElementById('etiqueta').value,
-                imagen: document.getElementById('imagen').value
-            };
+        
+        document.getElementById('txtEstado').innerText = "Corrigiendo equipo...";
+        document.getElementById('btnAccion').innerText = "Guardar Cambios";
+        document.getElementById('formBox').classList.add('modo-editando');
+        document.getElementById('btnCancel').style.display = "block";
+        window.scrollTo(0,0);
+    }
 
-            if(!payload.password) return alert("Poné la clave bento2026");
+    function cancelar() { location.reload(); }
 
-            const url = id ? `${API}/${id}` : API;
-            const metodo = id ? 'PUT' : 'POST';
-
-            try {
-                const res = await fetch(url, {
-                    method: metodo,
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(payload)
-                });
-
-                if(res.ok) {
-                    alert(id ? 'Actualizado correctamente' : 'Producto subido');
-                    resetForm();
-                    listar();
-                } else {
-                    alert('Error: Clave incorrecta');
-                }
-            } catch (e) { alert('Error de conexión'); }
+    async function borrar(id) {
+        if(confirm("¿Lo borramos de la web?")) {
+            await fetch(`${url_api}/${id}`, { method: 'DELETE' });
+            cargarLista();
         }
+    }
 
-      
-        function cargarParaEditar(id) {
-            const p = todosLosProductos.find(prod => prod._id === id);
-            document.getElementById('edit-id').value = p._id;
-            document.getElementById('nombre').value = p.nombre;
-            document.getElementById('descripcion').value = p.descripcion;
-            document.getElementById('categoria').value = p.categoria;
-            document.getElementById('etiqueta').value = p.etiqueta;
-            document.getElementById('imagen').value = p.imagen;
+    cargarLista();
+</script>
 
-          
-            document.getElementById('form-title').innerText = "Editando: " + p.nombre;
-            document.getElementById('btn-main').innerText = "Guardar Cambios";
-            document.getElementById('btn-main').style.background = "#00ff88";
-            document.getElementById('btn-cancel').style.display = "block";
-            document.getElementById('formulario').classList.add('editando');
-            window.scrollTo(0,0);
-        }
-
-        function resetForm() {
-            document.getElementById('edit-id').value = '';
-            document.getElementById('nombre').value = '';
-            document.getElementById('descripcion').value = '';
-            document.getElementById('etiqueta').value = '';
-            document.getElementById('imagen').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('form-title').innerText = "Cargar Producto";
-            document.getElementById('btn-main').innerText = "Publicar Ahora";
-            document.getElementById('btn-main').style.background = "#ff6600";
-            document.getElementById('btn-cancel').style.display = "none";
-            document.getElementById('formulario').classList.remove('editando');
-        }
-
-      
-        async function eliminar(id) {
-            if(!confirm('¿Seguro querés borrarlo?')) return;
-            const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
-            if(res.ok) listar();
-        }
-
-        listar();
-    </script>
 </body>
 </html>
