@@ -57,5 +57,18 @@ app.delete('/api/productos/:id', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 10000; // Render prefiere el 10000
+
+app.put('/api/productos/:id', async (req, res) => {
+    const { password, ...datosActualizados } = req.body;
+    if (password !== 'bento2026') return res.status(401).json({ error: "Clave incorrecta" });
+
+    try {
+        await Producto.findByIdAndUpdate(req.params.id, datosActualizados);
+        res.json({ mensaje: "Producto actualizado" });
+    } catch (err) {
+        res.status(500).json({ error: "Error al actualizar" });
+    }
+});
+
+const PORT = process.env.PORT || 10000; 
 app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
